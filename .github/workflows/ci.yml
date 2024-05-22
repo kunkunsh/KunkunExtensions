@@ -6,7 +6,7 @@ name: CI Build & Test
 # - apps/desktop
 on:
   push:
-    branches: ["main", "dev", "ci"]
+    branches: []
   pull_request:
     branches: ["main"]
   workflow_dispatch:
