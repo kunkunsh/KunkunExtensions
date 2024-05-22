@@ -7,8 +7,9 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Toaster />
-      <div className="h-screen pt-32 flex flex-col">
-        <DownloadForm className="grow" />
+      <div className="h-screen flex flex-col">
+        <div className="h-8" data-tauri-drag-region />
+        <DownloadForm className="grow mt-10" />
         <span className="flex space-x-2 items-center p-3">
           <SkillIconsTwitter />
           <span className="text-muted-foreground">Download Video</span>

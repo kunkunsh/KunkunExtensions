@@ -1,8 +1,8 @@
 {
-    "name": "download-twitter",
+    "name": "download-twitter-video",
     "version": "0.0.1",
     "description": "Download YouTube Video Extension",
-    "identifier": "tech.huakun.jarvis-twitter-download-ext",
+    "identifier": "tech.huakun.jarvis-twitter-download-video-ext",
     "demoImages": [],
     "icon": {
         "type": "iconify",
@@ -11,8 +11,13 @@
     "uiCmds": [
         {
             "main": "dist",
-            "name": "Download Twitter",
+            "name": "Download Twitter Video",
             "devMain": "http://localhost:5173",
+            "window": {
+                "titleBarStyle": "overlay",
+                "width": 700,
+                "height": 300
+            },
             "cmds": [
                 {
                     "type": "text",
