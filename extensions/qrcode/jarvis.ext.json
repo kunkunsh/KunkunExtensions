@@ -1,5 +1,5 @@
 {
-    "name": "qrcode",
+    "name": "QRCode",
     "version": "0.0.1",
     "description": "Jarvis QRCode Extension",
     "identifier": "tech.huakun.jarvis-qrcode-ext",
@@ -10,13 +10,30 @@
     },
     "uiCmds": [
         {
-            "main": "ui/dist",
-            "name": "QRCode",
+            "main": "dist",
+            "name": "Generate QRCode",
             "devMain": "http://localhost:5173",
+            "window": {
+                "titleBarStyle": "overlay"
+            },
             "cmds": [
                 {
                     "type": "text",
                     "value": "qrcode"
+                }
+            ]
+        },
+        {
+            "main": "dist/detect-qrcode.html",
+            "name": "Detect QRCode",
+            "devMain": "http://localhost:5173/detect-qrcode",
+            "window": {
+                "titleBarStyle": "overlay"
+            },
+            "cmds": [
+                {
+                    "type": "text",
+                    "value": "read detect qrcode"
                 }
             ]
         }
