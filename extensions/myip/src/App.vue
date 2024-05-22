@@ -78,7 +78,7 @@ function onSelect(content: any) {
         title: "Copied to Clipboard",
       });
     })
-    .catch((error) => {
+    .catch((error: unknown) => {
       console.error(error);
       return toast({
         title: "Failed to copy to Clipboard",
@@ -97,9 +97,11 @@ function onIpSearch(e: Event) {
 </script>
 <template>
   <Toaster />
-  <main class="h-screen bg-background text-foreground">
+  <main class="h-screen bg-background text-foreground flex flex-col">
+    <div class="h-8" data-tauri-drag-region />
+
     <!-- <ModeToggle /> -->
-    <Command class="rounded-lg border shadow-md text-xl">
+    <Command class="rounded-lg border-none shadow-md text-xl">
       <div class="flex gap-1.5 px-2">
         <span class="grow"><CommandInput placeholder="Type to search..." class="" /></span>
         <form class="flex w-full items-center gap-1.5 max-w-xs" @submit="onIpSearch">

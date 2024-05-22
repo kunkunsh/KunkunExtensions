@@ -10,9 +10,12 @@
     },
     "uiCmds": [
         {
-            "main": "ui/dist",
+            "main": "dist",
             "name": "My IP",
             "devMain": "http://localhost:5173",
+            "window": {
+                "titleBarStyle": "overlay"
+            },
             "cmds": [
                 {
                     "type": "text",
