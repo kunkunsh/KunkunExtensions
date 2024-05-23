@@ -22,7 +22,7 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
-    "@jarvis/api": "*",
+    "jarvis-api": "workspace:*",
     "bits-ui": "^0.21.7",
     "clsx": "^2.1.1",
     "mode-watcher": "^0.3.0",
