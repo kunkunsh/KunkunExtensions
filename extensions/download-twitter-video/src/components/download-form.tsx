@@ -1,6 +1,6 @@
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
-import { clipboard, updownload, path, open } from "@jarvis/api-ui";
+import { clipboard, updownload, path, open } from "@jarvis/api/ui";
 import Axios from "axios";
 import { z } from "zod";
 import { Label } from "@/components/ui/label";

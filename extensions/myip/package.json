@@ -22,7 +22,7 @@
     "tailwindcss-animate": "^1.0.7",
     "vue": "^3.4.21",
     "zod": "^3.23.7",
-    "@jarvis/api-ui": "workspace:*"
+    "@jarvis/api": "workspace:*"
   },
   "jarvis": {
     "ui": "index.html",

@@ -2,7 +2,7 @@
 import { onMounted, ref } from "vue";
 import axios from "axios";
 import { z } from "zod";
-import { clipboard } from "@jarvis/api-ui";
+import { clipboard } from "@jarvis/api/ui";
 import { useColorMode } from "@vueuse/core";
 import { Icon } from "@iconify/vue";
 import {

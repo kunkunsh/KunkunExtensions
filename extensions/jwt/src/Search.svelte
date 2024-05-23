@@ -4,7 +4,7 @@
   import * as Command from "$lib/components/ui/command/index.js";
   import { JwtToken, jwtIsValid, splitJwt, claimsDef } from "$lib/jwt";
   import { onMount } from "svelte";
-  import { clipboard } from "@jarvis/api-ui";
+  import { clipboard } from "@jarvis/api/ui";
   import { toast } from "svelte-sonner";
   import dayjs from "dayjs";
   import timezone from "dayjs/plugin/timezone";
