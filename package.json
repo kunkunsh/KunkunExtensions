@@ -1,0 +1,33 @@
+{
+  "name": "jarvis-extensions",
+  "version": "1.0.0",
+  "description": "Public repo containing all jarvis extensions",
+  "main": "index.js",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HuakunTech/JarvisExtensions.git"
+  },
+  "author": "Huakun",
+  "bugs": {
+    "url": "https://github.com/HuakunTech/JarvisExtensions/issues"
+  },
+  "homepage": "https://github.com/HuakunTech/JarvisExtensions#readme",
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "turbo": "latest"
+  },
+  "packageManager": "pnpm@8.9.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "workspaces": [
+    "extensions/*",
+    "extension-templates/*"
+  ]
+}
