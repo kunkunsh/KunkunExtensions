@@ -1,8 +1,8 @@
 {
-  "name": "jarvis-ext-myip",
+  "name": "@huakunshen/jarvis-ext-myip",
   "version": "0.0.1",
   "description": "Jarvis IP Extension",
-  "private": true,
+  "private": false,
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -64,5 +64,8 @@
     "typescript": "~5.4.0",
     "vite": "^5.2.8",
     "vue-tsc": "^2.0.11"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

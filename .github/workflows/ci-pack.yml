@@ -1,4 +1,4 @@
-name: CI Build & Test
+name: CI Build and Pack
 
 on:
   push:
@@ -26,5 +26,4 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
-      - run: pnpm i
-      - run: pnpm build
+      - run: npm run build:docker

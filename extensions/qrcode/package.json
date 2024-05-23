@@ -73,5 +73,8 @@
     "tailwind-merge": "^2.3.0",
     "tailwind-variants": "^0.2.1",
     "valibot": "^0.30.0"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

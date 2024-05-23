@@ -5,7 +5,7 @@ for ext in $(ls extensions); do
         continue
     fi
     echo "Building $ext"
-    docker run -v $(pwd)/entrypoint.sh:/entrypoint.sh \
+    docker run -v $(pwd)/scripts/docker/entrypoint.sh:/entrypoint.sh \
         -v $(pwd)/extensions/$ext:/workspace \
         -w /workspace --rm \
         --platform=linux/amd64 \
