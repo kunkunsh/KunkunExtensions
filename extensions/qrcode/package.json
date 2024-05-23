@@ -1,6 +1,7 @@
 {
-  "name": "jarvis-qrcode-ext",
-  "private": true,
+  "$schema": "https://jarvis-extensions.huakun.tech/jarvis-ext-package-json-schema.json",
+  "name": "@huakunshen/jarvis-ext-qrcode",
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "description": "Jarvis QRCode Extension",
