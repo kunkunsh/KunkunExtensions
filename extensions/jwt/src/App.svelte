@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Button } from "$lib/components/ui/button";
-  import { clipboard } from "@jarvis/api/ui";
+  import { clipboard } from "jarvis-api/ui";
   import { onMount } from "svelte";
   import * as jose from "jose";
   import * as Resizable from "$lib/components/ui/resizable/index.js";
