@@ -1,7 +1,7 @@
 {
-  "name": "myip",
-  "version": "0.0.0",
-  "description": "My IP Extension",
+  "name": "jarvis-ext-myip",
+  "version": "0.0.1",
+  "description": "Jarvis IP Extension",
   "private": true,
   "type": "module",
   "scripts": {
@@ -25,8 +25,29 @@
     "jarvis-api": "workspace:*"
   },
   "jarvis": {
-    "ui": "index.html",
-    "identifier": "myip.huakun.tech"
+    "identifier": "tech.huakun.jarvis-qrcode-ext",
+    "demoImages": [],
+    "icon": {
+      "type": "iconify",
+      "icon": "mdi:ip-network"
+    },
+    "uiCmds": [
+      {
+        "main": "dist",
+        "name": "My IP",
+        "devMain": "http://localhost:5173",
+        "window": {
+          "titleBarStyle": "overlay"
+        },
+        "cmds": [
+          {
+            "type": "text",
+            "value": "ip"
+          }
+        ]
+      }
+    ],
+    "inlineCmds": []
   },
   "devDependencies": {
     "@iconify-json/radix-icons": "^1.1.14",

@@ -3,6 +3,46 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "Jarvis QRCode Extension",
+  "jarvis": {
+    "identifier": "tech.huakun.jarvis-qrcode-ext",
+    "demoImages": [],
+    "icon": {
+      "type": "iconify",
+      "icon": "mingcute:qrcode-line"
+    },
+    "uiCmds": [
+      {
+        "main": "dist",
+        "name": "Generate QRCode",
+        "devMain": "http://localhost:5173",
+        "window": {
+          "titleBarStyle": "overlay"
+        },
+        "cmds": [
+          {
+            "type": "text",
+            "value": "qrcode"
+          }
+        ]
+      },
+      {
+        "main": "dist/detect-qrcode.html",
+        "name": "Detect QRCode",
+        "devMain": "http://localhost:5173/detect-qrcode",
+        "window": {
+          "titleBarStyle": "overlay"
+        },
+        "cmds": [
+          {
+            "type": "text",
+            "value": "read detect qrcode"
+          }
+        ]
+      }
+    ],
+    "inlineCmds": []
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
