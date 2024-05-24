@@ -29,8 +29,7 @@
                 }
             ]
         }
-    ],
-    "inlineCmds": []
+    ]
   },
   "scripts": {
     "dev": "vite",
