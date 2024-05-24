@@ -15,10 +15,9 @@
   "dependencies": {
     "@radix-icons/vue": "^1.0.0",
     "@vueuse/core": "^10.9.0",
-    "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "jarvis-api": "latest", 
+    "jarvis-api": "0.0.2-alpha.1",
     "radix-vue": "^1.8.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",

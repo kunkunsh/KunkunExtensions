@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import axios from "axios";
 import { z } from "zod";
 import { clipboard } from "jarvis-api/ui";
-import { BaseJarvisExtension } from "jarvis-api";
+import { http } from "jarvis-api/ui";
 import { useColorMode } from "@vueuse/core";
 import { Icon } from "@iconify/vue";
 import {
@@ -13,8 +12,6 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
 import Toaster from "@/components/ui/toast/Toaster.vue";
 import { Input } from "@/components/ui/input";
@@ -23,7 +20,7 @@ import { useToast } from "@/components/ui/toast/use-toast";
 
 const { toast } = useToast();
 
-const IpInfo = z.object({
+const IpApiJsonSchema = z.object({
   status: z.string(),
   continent: z.string(),
   country: z.string(),
@@ -48,7 +45,31 @@ const IpInfo = z.object({
   query: z.string(),
 });
 
-const ip = ref<z.infer<typeof IpInfo> | undefined>();
+const IfconfigCoJsonSchema = z.object({
+  ip: z.string(),
+  ip_decimal: z.number(),
+  country: z.string(),
+  country_iso: z.string(),
+  country_eu: z.boolean(),
+  region_name: z.string(),
+  region_code: z.string(),
+  zip_code: z.string(),
+  city: z.string(),
+  latitude: z.number(),
+  longitude: z.number(),
+  time_zone: z.string(),
+  asn: z.string(),
+  asn_org: z.string(),
+  hostname: z.string(),
+  user_agent: z.object({
+    product: z.string(),
+    version: z.string(),
+    comment: z.string(),
+    raw_value: z.string(),
+  }),
+});
+
+const ip = ref<z.infer<typeof IpApiJsonSchema> | undefined>();
 const ipSearchTerm = ref<string>("");
 const mode = useColorMode();
 
@@ -56,14 +77,20 @@ function searchIp(ipv4?: string) {
   const apiUrl = `http://ip-api.com/json${
     ipv4 ? "/" + ipv4 : ""
   }?fields=status,message,continent,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,proxy,hosting,query`;
-  return axios
-    .get(apiUrl)
-    .then((response) => {
-      ip.value = IpInfo.parse(response.data);
+  http
+    .fetch(apiUrl, {
+      method: "GET",
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      ip.value = IpApiJsonSchema.parse(data);
       ipSearchTerm.value = ip.value.query;
     })
     .catch((error) => {
-      console.error(error);
+      toast({
+        title: error,
+        variant: "destructive",
+      });
     });
 }
 
@@ -93,11 +120,7 @@ function onSelect(content: any) {
 function onIpSearch(e: Event) {
   e.preventDefault();
   // check regex of ipSearchTerm must be IPv4
-  if (
-    /^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$/.test(
-      ipSearchTerm.value
-    )
-  ) {
+  if (/^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$/.test(ipSearchTerm.value)) {
     return searchIp(ipSearchTerm.value);
   }
 }
@@ -110,48 +133,26 @@ function onIpSearch(e: Event) {
     <!-- <ModeToggle /> -->
     <Command class="rounded-lg border-none shadow-md text-xl">
       <div class="flex gap-1.5 px-2">
-        <span class="grow"
-          ><CommandInput placeholder="Type to search..." class=""
-        /></span>
-        <form
-          class="flex w-full items-center gap-1.5 max-w-xs"
-          @submit="onIpSearch"
-        >
-          <Input
-            id="IP Address"
-            type="text"
-            placeholder="IP Address"
-            v-model="ipSearchTerm"
-          />
+        <span class="grow"><CommandInput placeholder="Type to search..." class="" /></span>
+        <form class="flex w-full items-center gap-1.5 max-w-xs" @submit="onIpSearch">
+          <Input id="IP Address" type="text" placeholder="IP Address" v-model="ipSearchTerm" />
           <Button type="submit" variant="outline">Search</Button>
         </form>
       </div>
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup v-if="ip" heading="IP Info">
-          <CommandItem
-            value="Public IP"
-            class="space-x-3"
-            @select="() => onSelect(ip!.query)"
-          >
+          <CommandItem value="Public IP" class="space-x-3" @select="() => onSelect(ip!.query)">
             <Icon icon="mdi:web" class="w-4 h-4" />
             <span class="font-bold">Public IPv4</span>
             <span class="text-muted-foreground">{{ ip.query }}</span>
           </CommandItem>
-          <CommandItem
-            value="continent"
-            class="space-x-3"
-            @select="() => onSelect(ip!.continent)"
-          >
+          <CommandItem value="continent" class="space-x-3" @select="() => onSelect(ip!.continent)">
             <Icon icon="mdi:earth" class="w-4 h-4" />
             <span class="font-bold">Continent</span>
             <span class="text-muted-foreground">{{ ip.continent }}</span>
           </CommandItem>
-          <CommandItem
-            value="country"
-            class="space-x-3"
-            @select="() => onSelect(ip!.country)"
-          >
+          <CommandItem value="country" class="space-x-3" @select="() => onSelect(ip!.country)">
             <Icon icon="gis:search-country" class="w-4 h-4" />
             <span class="font-bold">Country</span>
             <span class="text-muted-foreground">{{ ip.country }}</span>
@@ -165,11 +166,7 @@ function onIpSearch(e: Event) {
             <span class="font-bold">Country Code</span>
             <span class="text-muted-foreground">{{ ip.countryCode }}</span>
           </CommandItem>
-          <CommandItem
-            value="region"
-            class="space-x-3"
-            @select="() => onSelect(ip!.region)"
-          >
+          <CommandItem value="region" class="space-x-3" @select="() => onSelect(ip!.region)">
             <Icon icon="mdi:web" class="w-4 h-4" />
             <span class="font-bold">Region</span>
             <span class="text-muted-foreground">{{ ip.region }}</span>
@@ -183,29 +180,17 @@ function onIpSearch(e: Event) {
             <span class="font-bold">Region Name</span>
             <span class="text-muted-foreground">{{ ip.regionName }}</span>
           </CommandItem>
-          <CommandItem
-            value="city"
-            class="space-x-3"
-            @select="() => onSelect(ip!.city)"
-          >
+          <CommandItem value="city" class="space-x-3" @select="() => onSelect(ip!.city)">
             <Icon icon="solar:city-bold" class="w-4 h-4" />
             <span class="font-bold">City</span>
             <span class="text-muted-foreground">{{ ip.city }}</span>
           </CommandItem>
-          <CommandItem
-            value="district"
-            class="space-x-3"
-            @select="() => onSelect(ip!.district)"
-          >
+          <CommandItem value="district" class="space-x-3" @select="() => onSelect(ip!.district)">
             <Icon icon="oui:vis-map-region" class="w-4 h-4" />
             <span class="font-bold">District</span>
             <span class="text-muted-foreground">{{ ip.district }}</span>
           </CommandItem>
-          <CommandItem
-            value="zip"
-            class="space-x-3"
-            @select="() => onSelect(ip!.zip)"
-          >
+          <CommandItem value="zip" class="space-x-3" @select="() => onSelect(ip!.zip)">
             <Icon icon="tabler:zip" class="w-4 h-4" />
             <span class="font-bold">ZIP</span>
             <span class="text-muted-foreground">{{ ip.zip }}</span>
@@ -217,15 +202,9 @@ function onIpSearch(e: Event) {
           >
             <Icon icon="pepicons-pop:map" class="w-4 h-4" />
             <span class="font-bold">GeoCoordinates</span>
-            <span class="text-muted-foreground"
-              >{{ ip.lat }}, {{ ip.lon }}</span
-            >
+            <span class="text-muted-foreground">{{ ip.lat }}, {{ ip.lon }}</span>
           </CommandItem>
-          <CommandItem
-            value="timezone"
-            class="space-x-3"
-            @select="() => onSelect(ip!.timezone)"
-          >
+          <CommandItem value="timezone" class="space-x-3" @select="() => onSelect(ip!.timezone)">
             <Icon icon="mdi:timezone" class="w-4 h-4" />
             <span class="font-bold">Timezone</span>
             <span class="text-muted-foreground">{{ ip.timezone }}</span>
@@ -237,78 +216,44 @@ function onIpSearch(e: Event) {
           >
             <Icon icon="mdi:clock" class="w-4 h-4" />
             <span class="font-bold">Offset</span>
-            <span class="text-muted-foreground"
-              >{{ ip.offset / 3600 }} hrs</span
-            >
+            <span class="text-muted-foreground">{{ ip.offset / 3600 }} hrs</span>
           </CommandItem>
-          <CommandItem
-            value="currency"
-            class="space-x-3"
-            @select="() => onSelect(ip!.currency)"
-          >
+          <CommandItem value="currency" class="space-x-3" @select="() => onSelect(ip!.currency)">
             <Icon icon="simple-icons:bitcoinsv" class="w-4 h-4" />
             <span class="font-bold">Currency</span>
             <span class="text-muted-foreground">{{ ip.currency }}</span>
           </CommandItem>
-          <CommandItem
-            value="isp"
-            class="space-x-3"
-            @select="() => onSelect(ip!.isp)"
-          >
+          <CommandItem value="isp" class="space-x-3" @select="() => onSelect(ip!.isp)">
             <Icon icon="carbon:container-services" class="w-4 h-4" />
             <span class="font-bold">ISP</span>
             <span class="text-muted-foreground">{{ ip.isp }}</span>
           </CommandItem>
-          <CommandItem
-            value="org"
-            class="space-x-3"
-            @select="() => onSelect(ip!.org)"
-          >
+          <CommandItem value="org" class="space-x-3" @select="() => onSelect(ip!.org)">
             <Icon icon="clarity:organization-solid" class="w-4 h-4" />
             <span class="font-bold">Org</span>
             <span class="text-muted-foreground">{{ ip.org }}</span>
           </CommandItem>
-          <CommandItem
-            value="as"
-            class="space-x-3"
-            @select="() => onSelect(ip!.as)"
-          >
+          <CommandItem value="as" class="space-x-3" @select="() => onSelect(ip!.as)">
             <Icon icon="carbon:container-services" class="w-4 h-4" />
             <span class="font-bold">AS Number</span>
             <span class="text-muted-foreground">{{ ip.as }}</span>
           </CommandItem>
-          <CommandItem
-            value="asname"
-            class="space-x-3"
-            @select="() => onSelect(ip!.asname)"
-          >
+          <CommandItem value="asname" class="space-x-3" @select="() => onSelect(ip!.asname)">
             <Icon icon="carbon:container-services" class="w-4 h-4" />
             <span class="font-bold">AS Name</span>
             <span class="text-muted-foreground">{{ ip.asname }}</span>
           </CommandItem>
-          <CommandItem
-            value="reverse"
-            class="space-x-3"
-            @select="() => onSelect(ip!.reverse)"
-          >
+          <CommandItem value="reverse" class="space-x-3" @select="() => onSelect(ip!.reverse)">
             <Icon icon="material-symbols:dns" class="w-4 h-4" />
             <span class="font-bold">Reverse DNS</span>
             <span class="text-muted-foreground">{{ ip.reverse }}</span>
           </CommandItem>
-          <CommandItem
-            value="proxy"
-            class="space-x-3"
-            @select="() => onSelect(ip!.proxy)"
-          >
+          <CommandItem value="proxy" class="space-x-3" @select="() => onSelect(ip!.proxy)">
             <Icon icon="mdi:proxy" class="w-4 h-4" />
             <span class="font-bold">Proxy, VPN or Tor exit Address</span>
             <span class="text-muted-foreground">{{ ip.proxy }}</span>
           </CommandItem>
-          <CommandItem
-            value="hosting"
-            class="space-x-3"
-            @select="() => onSelect(ip!.hosting)"
-          >
+          <CommandItem value="hosting" class="space-x-3" @select="() => onSelect(ip!.hosting)">
             <Icon icon="clarity:host-solid" class="w-4 h-4" />
             <span class="font-bold">Hosting, colocated or data center</span>
             <span class="text-muted-foreground">{{ ip.hosting }}</span>
