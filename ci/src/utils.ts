@@ -20,7 +20,7 @@ import { supabase } from "./supabase";
  */
 export function computeTarballName(
   packageName: string,
-  version: string
+  version: string,
 ): string {
   const scoped = packageName.startsWith("@");
   if (scoped) {
@@ -33,7 +33,7 @@ export function computeTarballName(
 
 export function parsePackageJson(pkgJsonPath: string) {
   const parse = ExtPackageJson.safeParse(
-    JSON.parse(fs.readFileSync(pkgJsonPath, "utf8"))
+    JSON.parse(fs.readFileSync(pkgJsonPath, "utf8")),
   );
   if (parse.error) {
     console.error(`Error parsing ${pkgJsonPath}: ${parse.error}`);
@@ -46,7 +46,7 @@ export function parsePackageJson(pkgJsonPath: string) {
 export function checkPackagesValidity(extPaths: string[]) {
   /* ------------------- make sure package.json is parseable ------------------ */
   const pkgs = extPaths.map((ext) =>
-    parsePackageJson(join(ext, "package.json"))
+    parsePackageJson(join(ext, "package.json")),
   );
 
   /* --------------------- make sure identifier is unique --------------------- */
@@ -56,7 +56,7 @@ export function checkPackagesValidity(extPaths: string[]) {
     console.error("Identifiers are not unique");
     // find the duplicates
     const duplicates = identifiers.filter(
-      (item, index) => identifiers.indexOf(item) !== index
+      (item, index) => identifiers.indexOf(item) !== index,
     );
     console.error("duplicates", duplicates);
     process.exit(1);
@@ -67,10 +67,10 @@ export function checkPackagesValidity(extPaths: string[]) {
     const tgzFiles = files.filter((file) => file.endsWith(".tgz"));
     if (tgzFiles.length > 0) {
       console.error(
-        `Extension ${extPath} contains tarball files: ${tgzFiles.join(", ")}`
+        `Extension ${extPath} contains tarball files: ${tgzFiles.join(", ")}`,
       );
       console.error(
-        "If you are developing, run scripts/clean.sh to remove all .tgz file in the top level of each extension"
+        "If you are developing, run scripts/clean.sh to remove all .tgz file in the top level of each extension",
       );
       process.exit(1);
     }
@@ -121,11 +121,11 @@ export function buildWithDocker(extPath: string): Promise<{
 }> {
   return new Promise((resolve, reject) => {
     const pkg = parsePackageJson(join(extPath, "package.json"));
-    console.log(pkg);
-    console.log(REPO_ROOT);
+    // console.log(pkg);
+    // console.log(REPO_ROOT);
     const dockerCmd = `
     run -v ${DOCKER_BUILD_ENTRYPOINT}:/entrypoint.sh -v ${extPath}:/workspace -w /workspace --rm --platform=linux/amd64 node:20 /entrypoint.sh`;
-    console.log(dockerCmd);
+    // console.log(dockerCmd);
     const args = dockerCmd
       .split(" ")
       .filter((arg) => arg.length > 0)
@@ -151,7 +151,7 @@ export function buildWithDocker(extPath: string): Promise<{
       }
       if (dataStr.includes("npm notice filename:")) {
         const tarballFilename = dataStr.match(
-          /npm notice filename:\s+([^\s]+)/
+          /npm notice filename:\s+([^\s]+)/,
         );
         if (tarballFilename) {
           stderrTarballFilename = tarballFilename[1];
@@ -194,7 +194,7 @@ export type BuildResult = {
  * @returns
  */
 export function buildWithDockerAndValidate(
-  extPath: string
+  extPath: string,
 ): Promise<BuildResult> {
   return buildWithDocker(extPath)
     .then((res) => {
@@ -206,7 +206,7 @@ export function buildWithDockerAndValidate(
       return computeShasum1(parsedTarballPath).then((computedShasum) => {
         if (computedShasum !== res.stderrShasum) {
           console.error(
-            `Shasum mismatch: Computed(${computedShasum}) !== Output from docker(${res.stderrShasum})`
+            `Shasum mismatch: Computed(${computedShasum}) !== Output from docker(${res.stderrShasum})`,
           );
           process.exit(1);
         } else {
@@ -239,7 +239,7 @@ export function uploadTarballToS3(
   tarballPath: string,
   identifier: string,
   version: string,
-  tarballName: string
+  tarballName: string,
 ) {
   const s3Client = new S3Client({
     endpoint: z.string().parse(process.env.S3_ENDPOINT),
@@ -257,7 +257,7 @@ export function uploadTarballToS3(
         Key: key,
         Body: tarball,
         ContentType: "application/gzip",
-      })
+      }),
     )
     .then((res) => {
       return key;
@@ -281,7 +281,7 @@ export async function uploadTarballToSupabaseStorage(
   tarballPath: string,
   identifier: string,
   version: string,
-  tarballName: string
+  tarballName: string,
 ) {
   const key = `extensions/${identifier}/${version}/${path.basename(tarballName)}`;
   const tarball = fs.readFileSync(tarballPath);
