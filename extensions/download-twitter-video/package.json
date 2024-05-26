@@ -1,5 +1,5 @@
 {
-  "$schema": "https://jarvis-extensions.huakun.tech/jarvis-ext-package-json-schema.json",
+  "$schema": "https://extensions.jarvis.huakun.tech/schema.json",
   "name": "jarvis-ext-download-twitter",
   "private": true,
   "version": "0.0.1",
