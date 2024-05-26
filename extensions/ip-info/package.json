@@ -1,6 +1,6 @@
 {
   "$schema": "https://extensions.jarvis.huakun.tech/schema.json",
-  "name": "@huakunshen/jarvis-ext-myip",
+  "name": "@huakunshen/jarvis-ext-ip-info",
   "version": "0.0.1",
   "description": "Jarvis IP Extension",
   "private": false,
@@ -25,7 +25,7 @@
     "zod": "^3.23.8"
   },
   "jarvis": {
-    "identifier": "tech.huakun.jarvis-ext-myip",
+    "identifier": "tech.huakun.jarvis-ext-ip-info",
     "demoImages": [],
     "icon": {
       "type": "iconify",
@@ -34,7 +34,7 @@
     "uiCmds": [
       {
         "main": "dist",
-        "name": "My IP",
+        "name": "IP Info",
         "devMain": "http://localhost:5173",
         "window": {
           "titleBarStyle": "overlay"
