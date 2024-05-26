@@ -430,6 +430,82 @@ importers:
         specifier: ^5.2.0
         version: 5.2.11(@types/node@20.12.12)
 
+  extensions/ip-info:
+    dependencies:
+      '@radix-icons/vue':
+        specifier: ^1.0.0
+        version: 1.0.0(vue@3.4.27)
+      '@vueuse/core':
+        specifier: ^10.9.0
+        version: 10.9.0(vue@3.4.27)
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      jarvis-api:
+        specifier: 0.0.2-alpha.1
+        version: 0.0.2-alpha.1(typescript@5.4.5)
+      radix-vue:
+        specifier: ^1.8.0
+        version: 1.8.1(vue@3.4.27)
+      tailwind-merge:
+        specifier: ^2.3.0
+        version: 2.3.0
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.4.3)
+      vue:
+        specifier: ^3.4.21
+        version: 3.4.27(typescript@5.4.5)
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
+    devDependencies:
+      '@iconify-json/radix-icons':
+        specifier: ^1.1.14
+        version: 1.1.14
+      '@iconify/vue':
+        specifier: ^4.1.2
+        version: 4.1.2(vue@3.4.27)
+      '@tsconfig/node20':
+        specifier: ^20.1.4
+        version: 20.1.4
+      '@types/node':
+        specifier: ^20.12.11
+        version: 20.12.12
+      '@vitejs/plugin-vue':
+        specifier: ^5.0.4
+        version: 5.0.4(vite@5.2.11)(vue@3.4.27)
+      '@vue/tsconfig':
+        specifier: ^0.5.1
+        version: 0.5.1
+      autoprefixer:
+        specifier: ^10.4.19
+        version: 10.4.19(postcss@8.4.38)
+      npm-run-all2:
+        specifier: ^6.1.2
+        version: 6.2.0
+      postcss:
+        specifier: ^8.4.38
+        version: 8.4.38
+      run-p:
+        specifier: ^0.0.0
+        version: 0.0.0
+      tailwindcss:
+        specifier: ^3.4.3
+        version: 3.4.3
+      typescript:
+        specifier: ~5.4.0
+        version: 5.4.5
+      vite:
+        specifier: ^5.2.8
+        version: 5.2.11(@types/node@20.12.12)
+      vue-tsc:
+        specifier: ^2.0.11
+        version: 2.0.19(typescript@5.4.5)
+
   extensions/jwt:
     dependencies:
       bits-ui:
@@ -505,82 +581,6 @@ importers:
       vite:
         specifier: ^5.2.0
         version: 5.2.11(@types/node@20.12.12)
-
-  extensions/myip:
-    dependencies:
-      '@radix-icons/vue':
-        specifier: ^1.0.0
-        version: 1.0.0(vue@3.4.27)
-      '@vueuse/core':
-        specifier: ^10.9.0
-        version: 10.9.0(vue@3.4.27)
-      class-variance-authority:
-        specifier: ^0.7.0
-        version: 0.7.0
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
-      jarvis-api:
-        specifier: 0.0.2-alpha.1
-        version: 0.0.2-alpha.1(typescript@5.4.5)
-      radix-vue:
-        specifier: ^1.8.0
-        version: 1.8.1(vue@3.4.27)
-      tailwind-merge:
-        specifier: ^2.3.0
-        version: 2.3.0
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.3)
-      vue:
-        specifier: ^3.4.21
-        version: 3.4.27(typescript@5.4.5)
-      zod:
-        specifier: ^3.23.8
-        version: 3.23.8
-    devDependencies:
-      '@iconify-json/radix-icons':
-        specifier: ^1.1.14
-        version: 1.1.14
-      '@iconify/vue':
-        specifier: ^4.1.2
-        version: 4.1.2(vue@3.4.27)
-      '@tsconfig/node20':
-        specifier: ^20.1.4
-        version: 20.1.4
-      '@types/node':
-        specifier: ^20.12.11
-        version: 20.12.12
-      '@vitejs/plugin-vue':
-        specifier: ^5.0.4
-        version: 5.0.4(vite@5.2.11)(vue@3.4.27)
-      '@vue/tsconfig':
-        specifier: ^0.5.1
-        version: 0.5.1
-      autoprefixer:
-        specifier: ^10.4.19
-        version: 10.4.19(postcss@8.4.38)
-      npm-run-all2:
-        specifier: ^6.1.2
-        version: 6.2.0
-      postcss:
-        specifier: ^8.4.38
-        version: 8.4.38
-      run-p:
-        specifier: ^0.0.0
-        version: 0.0.0
-      tailwindcss:
-        specifier: ^3.4.3
-        version: 3.4.3
-      typescript:
-        specifier: ~5.4.0
-        version: 5.4.5
-      vite:
-        specifier: ^5.2.8
-        version: 5.2.11(@types/node@20.12.12)
-      vue-tsc:
-        specifier: ^2.0.11
-        version: 2.0.19(typescript@5.4.5)
 
   extensions/qrcode:
     dependencies:
