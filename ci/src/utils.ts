@@ -179,19 +179,23 @@ export function buildWithDocker(extPath: string): Promise<{
   });
 }
 
+export type BuildResult = {
+  shasum: string;
+  tarballFilename: string;
+  tarballPath: string;
+  extPath: string;
+  pkg: ExtPackageJson;
+};
+
 /**
  * Use this function to build an extension with docker and validate the tarball
  * If this passes, the tarball is ready to be inserted into the database
  * @param extPath Extension Path
  * @returns
  */
-export function buildWithDockerAndValidate(extPath: string): Promise<{
-  shasum: string;
-  tarballFilename: string;
-  tarballPath: string;
-  extPath: string;
-  pkg: ExtPackageJson;
-}> {
+export function buildWithDockerAndValidate(
+  extPath: string
+): Promise<BuildResult> {
   return buildWithDocker(extPath)
     .then((res) => {
       const parsedTarballPath = join(extPath, res.stderrTarballFilename);

@@ -9,6 +9,7 @@ import {
   computeTarballName,
   uploadTarballToS3,
   uploadTarballToSupabaseStorage,
+  type BuildResult,
 } from "./src/utils";
 import { supabase } from "./src/supabase";
 
@@ -28,14 +29,16 @@ checkPackagesValidity(extensionsCandidateFolders);
 const dockerBuildAllPromises = Promise.all(
   extensionsCandidateFolders
     // .slice(0, 1) // this line is commented out for dev, upload a single extension
-    .map((extPath) => buildWithDockerAndValidate(extPath)),
+    .map((extPath) => buildWithDockerAndValidate(extPath))
 );
 
 dockerBuildAllPromises.then(async (results) => {
   /* -------------------------------------------------------------------------- */
   /*            Get Existing Extensions from Supabase for Validation            */
   /* -------------------------------------------------------------------------- */
-  let dbExt = new Set<{ identifier: string; version: string }>();
+  // This set contains all the extensions that are already in the database
+  let dbExtSet = new Set<{ identifier: string; version: string }>();
+  const resultsToUpload: BuildResult[] = [];
   for (const buildResult of results) {
     const dbRes = await supabase
       .from("extensions")
@@ -43,27 +46,28 @@ dockerBuildAllPromises.then(async (results) => {
       .eq("identifier", buildResult.pkg.jarvis.identifier)
       .eq("version", buildResult.pkg.version);
     console.log("dbRes", dbRes);
-    if (dbRes.count && dbRes.count > 0) {
+    if (dbRes.data && dbRes.data.length > 0) {
       console.log("Extension already exists in the database");
       // compare shasum
       const dbShasum = dbRes.data[0].shasum;
       if (dbShasum !== buildResult.shasum) {
         console.error(
-          `Unexpected Error: Shasum mismatch: \n\tDB: ${dbShasum}\n\tNew: ${buildResult.shasum}`,
+          `Unexpected Error: Shasum mismatch: \n\tDB: ${dbShasum}\n\tNew: ${buildResult.shasum}`
         );
         process.exit(1);
       }
+      console.log("Skip Upload");
       continue;
     }
 
-    if (dbRes.count && dbRes.count > 1) {
+    if (dbRes.data && dbRes.data.length > 1) {
       console.error(
-        "Unexpected Error: More than one extension with the same identifier and version",
+        "Unexpected Error: More than one extension with the same identifier and version"
       );
       process.exit(1);
     }
-
-    dbExt.add({
+    resultsToUpload.push(buildResult);
+    dbExtSet.add({
       identifier: buildResult.pkg.jarvis.identifier,
       version: buildResult.pkg.version,
     });
@@ -72,12 +76,12 @@ dockerBuildAllPromises.then(async (results) => {
   /* -------------------------------------------------------------------------- */
   /*         Upload Newly Built Extensions to File Storage and Supabase         */
   /* -------------------------------------------------------------------------- */
-  for (const buildResult of results) {
+  for (const buildResult of resultsToUpload) {
     const _ext = {
       identifier: buildResult.pkg.jarvis.identifier,
       version: buildResult.pkg.version,
     };
-    if (dbExt.has(_ext)) {
+    if (dbExtSet.has(_ext)) {
       console.log(`Extension ${_ext} already exists in the database`);
       continue;
     }
@@ -87,13 +91,13 @@ dockerBuildAllPromises.then(async (results) => {
       buildResult.tarballPath,
       buildResult.pkg.jarvis.identifier,
       buildResult.pkg.version,
-      buildResult.tarballFilename,
+      buildResult.tarballFilename
     );
     const s3Path = await uploadTarballToS3(
       buildResult.tarballPath,
       buildResult.pkg.jarvis.identifier,
       buildResult.pkg.version,
-      buildResult.tarballFilename,
+      buildResult.tarballFilename
     );
 
     const { data, error } = await supabase.from("extensions").insert([
