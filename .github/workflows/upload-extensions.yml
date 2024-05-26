@@ -21,6 +21,7 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: 1.1.10
+      - run: pnpm i
       - name: Docker Build and Uplad Extensions
         env:
           SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
