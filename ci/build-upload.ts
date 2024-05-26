@@ -27,7 +27,7 @@ checkPackagesValidity(extensionsCandidateFolders);
 /* -------------------------------------------------------------------------- */
 const dockerBuildAllPromises = Promise.all(
   extensionsCandidateFolders
-    .slice(0, 1)
+    // .slice(0, 1) // this line is commented out for dev, upload a single extension
     .map((extPath) => buildWithDockerAndValidate(extPath)),
 );
 

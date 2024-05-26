@@ -1,0 +1,23 @@
+name: CI Build & Test
+
+on:
+  push:
+    branches: ["main", "dev"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: "true"
+      - uses: pnpm/action-setup@v4
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: 1.1.10
+      - name: Docker Build and Uplad Extensions
+        run: |
+          pnpm --filter ci build-upload
