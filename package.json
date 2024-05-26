@@ -30,6 +30,7 @@
   },
   "workspaces": [
     "extensions/*",
-    "extension-templates/*"
+    "extension-templates/*",
+    "ci"
   ]
 }
