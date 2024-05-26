@@ -48,7 +48,7 @@ for (const extPath of extensionsCandidateFolders) {
 /* -------------------------------------------------------------------------- */
 /*                      Build All Extensions With Docker                      */
 /* -------------------------------------------------------------------------- */
-const PoolSize = 5;
+const PoolSize = 1;
 // split toBuildExt into chunks of PoolSize, run multiple docker builds in parallel
 const toBuildExtChunks = [];
 for (let i = 0; i < toBuildExt.length; i += PoolSize) {

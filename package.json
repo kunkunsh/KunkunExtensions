@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "turbo build",
+    "build-upload": "pnpm --filter ci build-upload",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

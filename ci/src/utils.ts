@@ -119,6 +119,7 @@ export function buildWithDocker(extPath: string): Promise<{
   stderrTarballFilename: string;
   pkg: ExtPackageJson;
 }> {
+  console.log(`Building ${extPath}`);
   return new Promise((resolve, reject) => {
     const pkg = parsePackageJson(join(extPath, "package.json"));
     // console.log(pkg);
@@ -149,9 +150,18 @@ export function buildWithDocker(extPath: string): Promise<{
           console.log("Parsed shasum:", stderrShasum);
         }
       }
+
       if (dataStr.includes("npm notice filename:")) {
         const tarballFilename = dataStr.match(
           /npm notice filename:\s+([^\s]+)/,
+        );
+        if (tarballFilename) {
+          stderrTarballFilename = tarballFilename[1];
+          console.log("Parsed tarball:", stderrTarballFilename);
+        }
+      } else if (dataStr.includes("filename:")) {
+        const tarballFilename = dataStr.match(
+          /filename:\s+([^\s]+)/,
         );
         if (tarballFilename) {
           stderrTarballFilename = tarballFilename[1];
@@ -243,6 +253,7 @@ export function uploadTarballToS3(
 ) {
   const s3Client = new S3Client({
     endpoint: z.string().parse(process.env.S3_ENDPOINT),
+    region: "auto",
     credentials: {
       accessKeyId: z.string().parse(process.env.S3_ACCESS_KEY_ID),
       secretAccessKey: z.string().parse(process.env.S3_SECRET_ACCESS_KEY),
@@ -263,7 +274,7 @@ export function uploadTarballToS3(
       return key;
     })
     .catch((err) => {
-      console.error("Failed to upload schema.json");
+      console.error("Failed to upload tarball");
       console.error(err);
       process.exit(1);
     });
