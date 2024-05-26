@@ -160,9 +160,7 @@ export function buildWithDocker(extPath: string): Promise<{
           console.log("Parsed tarball:", stderrTarballFilename);
         }
       } else if (dataStr.includes("filename:")) {
-        const tarballFilename = dataStr.match(
-          /filename:\s+([^\s]+)/,
-        );
+        const tarballFilename = dataStr.match(/filename:\s+([^\s]+)/);
         if (tarballFilename) {
           stderrTarballFilename = tarballFilename[1];
           console.log("Parsed tarball:", stderrTarballFilename);

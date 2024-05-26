@@ -6,10 +6,9 @@ import {
   parsePackageJson,
   uploadTarballToS3,
   uploadTarballToSupabaseStorage,
-  type BuildResult,
 } from "./src/utils";
 import { supabase } from "./src/supabase";
-import { type Database, type Tables } from "./supabase/types/supabase";
+import { type Tables } from "./supabase/types/supabase";
 
 type SupabaseExtensionTable = Tables<"extensions">;
 // iterate over all files in extensions directory
@@ -48,7 +47,7 @@ for (const extPath of extensionsCandidateFolders) {
 /* -------------------------------------------------------------------------- */
 /*                      Build All Extensions With Docker                      */
 /* -------------------------------------------------------------------------- */
-const PoolSize = 1;
+const PoolSize = 4;
 // split toBuildExt into chunks of PoolSize, run multiple docker builds in parallel
 const toBuildExtChunks = [];
 for (let i = 0; i < toBuildExt.length; i += PoolSize) {
