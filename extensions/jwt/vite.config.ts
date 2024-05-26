@@ -16,7 +16,7 @@ export default defineConfig({
       input: {
         search: path.resolve(__dirname, "search.html"),
         main: path.resolve(__dirname, "index.html"),
-      }
-    }
-  }
+      },
+    },
+  },
 });

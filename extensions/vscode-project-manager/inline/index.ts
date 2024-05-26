@@ -1,5 +1,9 @@
 import fs from "fs";
-import { BaseJarvisExtension, TListItem, type IJarvisAPIContext } from "jarvis-api";
+import {
+  BaseJarvisExtension,
+  TListItem,
+  type IJarvisAPIContext,
+} from "jarvis-api";
 import { z } from "zod";
 
 export const Project = z.object({
@@ -69,6 +73,9 @@ export default class VSCodeProjectManagerExt extends BaseJarvisExtension {
   }
 
   onItemSelected(item: TListItem) {
-    this.ctx.apps.openWithApp(item.value, `"/Applications/Visual Studio Code.app"`);
+    this.ctx.apps.openWithApp(
+      item.value,
+      `"/Applications/Visual Studio Code.app"`,
+    );
   }
 }

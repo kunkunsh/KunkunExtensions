@@ -28,7 +28,7 @@ checkPackagesValidity(extensionsCandidateFolders);
 const dockerBuildAllPromises = Promise.all(
   extensionsCandidateFolders
     .slice(0, 1)
-    .map((extPath) => buildWithDockerAndValidate(extPath))
+    .map((extPath) => buildWithDockerAndValidate(extPath)),
 );
 
 dockerBuildAllPromises.then(async (results) => {
@@ -49,7 +49,7 @@ dockerBuildAllPromises.then(async (results) => {
       const dbShasum = dbRes.data[0].shasum;
       if (dbShasum !== buildResult.shasum) {
         console.error(
-          `Unexpected Error: Shasum mismatch: \n\tDB: ${dbShasum}\n\tNew: ${buildResult.shasum}`
+          `Unexpected Error: Shasum mismatch: \n\tDB: ${dbShasum}\n\tNew: ${buildResult.shasum}`,
         );
         process.exit(1);
       }
@@ -58,7 +58,7 @@ dockerBuildAllPromises.then(async (results) => {
 
     if (dbRes.count && dbRes.count > 1) {
       console.error(
-        "Unexpected Error: More than one extension with the same identifier and version"
+        "Unexpected Error: More than one extension with the same identifier and version",
       );
       process.exit(1);
     }
@@ -87,13 +87,13 @@ dockerBuildAllPromises.then(async (results) => {
       buildResult.tarballPath,
       buildResult.pkg.jarvis.identifier,
       buildResult.pkg.version,
-      buildResult.tarballFilename
+      buildResult.tarballFilename,
     );
     const s3Path = await uploadTarballToS3(
       buildResult.tarballPath,
       buildResult.pkg.jarvis.identifier,
       buildResult.pkg.version,
-      buildResult.tarballFilename
+      buildResult.tarballFilename,
     );
 
     const { data, error } = await supabase.from("extensions").insert([

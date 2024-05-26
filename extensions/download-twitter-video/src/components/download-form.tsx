@@ -25,7 +25,8 @@ export default function DownloadForm({ className }: { className: string }) {
     if (
       // TODO: Improve URL validation
       clipboardText &&
-      (clipboardText.includes("twitter.com") || clipboardText.includes("x.com")) &&
+      (clipboardText.includes("twitter.com") ||
+        clipboardText.includes("x.com")) &&
       clipboardText.split("/").length > 4
     )
       setUrl(clipboardText);
@@ -33,7 +34,9 @@ export default function DownloadForm({ className }: { className: string }) {
 
   async function handleDownload(username: string, tweetID: string) {
     // const Writer = createWriteStream(`${DOWNLOADS_DIR}/${tweetID}.mp4`);
-    const APIResponse = await Axios(`https://api.vxtwitter.com/${username}/status/${tweetID}`);
+    const APIResponse = await Axios(
+      `https://api.vxtwitter.com/${username}/status/${tweetID}`,
+    );
     const directURL = APIResponse.data.media_extended[0]?.url;
     if (!directURL)
       return toast({
@@ -42,7 +45,10 @@ export default function DownloadForm({ className }: { className: string }) {
         variant: "destructive",
       });
     setDownloadUrl(directURL);
-    const targetPath = await path.join(await path.downloadDir(), `${tweetID}.mp4`);
+    const targetPath = await path.join(
+      await path.downloadDir(),
+      `${tweetID}.mp4`,
+    );
 
     updownload.download(directURL, targetPath);
     return toast({
