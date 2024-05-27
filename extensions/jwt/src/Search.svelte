@@ -43,8 +43,6 @@
 
   function pasteJwt() {
     clipboard.readText().then((text) => {
-      //   text =
-      // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNzE2MjU0MDM4fQ.YC6NH4A3Tu0CegOQu5hCVV-6QubWzSqo7QQ-dusyTYY";
       if (jwtIsValid(text)) {
         jwtToken = JwtToken.parse(splitJwt(text));
       } else {
