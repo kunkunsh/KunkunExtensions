@@ -127,8 +127,8 @@ for (const buildResult of buildResults) {
       .insert([
         {
           name: buildResult.pkg.name,
-          short_description: buildResult.pkg.jarvis.short_description,
-          long_description: buildResult.pkg.jarvis.long_description,
+          short_description: buildResult.pkg.jarvis.shortDescription,
+          long_description: buildResult.pkg.jarvis.longDescription,
           identifier: buildResult.pkg.jarvis.identifier,
           readme: readme,
           downloads: 0,
@@ -156,8 +156,8 @@ for (const buildResult of buildResults) {
     .from("extensions")
     .update({
       name: buildResult.pkg.jarvis.name,
-      short_description: buildResult.pkg.jarvis.short_description,
-      long_description: buildResult.pkg.jarvis.long_description,
+      short_description: buildResult.pkg.jarvis.shortDescription,
+      long_description: buildResult.pkg.jarvis.longDescription,
       icon: iconClone,
       readme,
     })

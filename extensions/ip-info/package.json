@@ -1,7 +1,7 @@
 {
   "$schema": "https://extensions.jarvis.huakun.tech/schema.json",
   "name": "@huakunshen/jarvis-ext-ip-info",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Jarvis IP Extension",
   "private": false,
   "type": "module",
