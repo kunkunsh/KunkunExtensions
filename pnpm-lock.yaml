@@ -24,8 +24,8 @@ importers:
         specifier: ^2.43.4
         version: 2.43.4
       jarvis-api:
-        specifier: 0.0.2-alpha.3
-        version: 0.0.2-alpha.3(typescript@5.4.5)
+        specifier: 0.0.2-alpha.4
+        version: 0.0.2-alpha.4(typescript@5.4.5)
       sharp:
         specifier: ^0.33.4
         version: 0.33.4
@@ -8700,8 +8700,8 @@ packages:
       zod: 3.23.8
     dev: false
 
-  /jarvis-api@0.0.2-alpha.3(typescript@5.4.5):
-    resolution: {integrity: sha512-dxJPnzrhdc4ZQKrEMDr3DAqALIXnGJtP9WfYq5wrNNdtToRwRtQs0sPFBYdYCinl7eI7ig07UVfXZlDv+Ta9bw==}
+  /jarvis-api@0.0.2-alpha.4(typescript@5.4.5):
+    resolution: {integrity: sha512-8saMMFMoD/aB6P+4tlE+sQK8/Jwg4DCUYlaugxiqcv4Dy0k1lf30psGKFENySfy+e83OkdZSViK5xMRW9X6jEA==}
     peerDependencies:
       typescript: ^5.0.0
     dependencies:

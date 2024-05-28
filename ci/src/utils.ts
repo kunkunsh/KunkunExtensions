@@ -335,7 +335,7 @@ export async function uploadImage(imagePath: string) {
       : await sharp(imagePath).jpeg().toBuffer();
   const imgSha512 = computeHash(img, "sha512");
   /* ----------------------- Check if image exists in db ---------------------- */
-  const dbRes = await supabase.from("ext_demo_images").select("*").eq("sha512", imgSha512);
+  const dbRes = await supabase.from("ext_images").select("*").eq("sha512", imgSha512);
   const exists = dbRes.data && dbRes.data.length > 0;
   if (exists) {
     return dbRes.data[0].image_path;
@@ -380,7 +380,7 @@ export async function uploadImage(imagePath: string) {
 
   /* ------------------------- Insert into database -------------------------- */
   const { data: insertData, error: insertError } = await supabase
-    .from("ext_demo_images")
+    .from("ext_images")
     .insert([{ sha512: imgSha512, image_path: data.path }]);
   if (insertError) {
     console.error(insertError);

@@ -9,63 +9,104 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      ext_demo_images: {
+      ext_images: {
         Row: {
           created_at: string
-          id: number
           image_path: string
           sha512: string
         }
         Insert: {
           created_at?: string
-          id?: number
           image_path: string
           sha512: string
         }
         Update: {
           created_at?: string
-          id?: number
           image_path?: string
           sha512?: string
         }
         Relationships: []
       }
-      extensions: {
+      ext_publish: {
         Row: {
+          cmd_count: number
           created_at: string
-          demo_images_paths: string[] | null
+          demo_images: string[]
+          downloads: number
           id: number
           identifier: string
+          manifest: Json
           name: string
-          packagejson: Json
           shasum: string
           size: number
           tarball_path: string
           version: string
         }
         Insert: {
+          cmd_count: number
           created_at?: string
-          demo_images_paths?: string[] | null
+          demo_images: string[]
+          downloads: number
           id?: number
           identifier: string
+          manifest: Json
           name: string
-          packagejson: Json
           shasum: string
           size: number
           tarball_path: string
           version: string
         }
         Update: {
+          cmd_count?: number
           created_at?: string
-          demo_images_paths?: string[] | null
+          demo_images?: string[]
+          downloads?: number
           id?: number
           identifier?: string
+          manifest?: Json
           name?: string
-          packagejson?: Json
           shasum?: string
           size?: number
           tarball_path?: string
           version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ext_publish_identifier_fkey"
+            columns: ["identifier"]
+            isOneToOne: false
+            referencedRelation: "extensions"
+            referencedColumns: ["identifier"]
+          },
+        ]
+      }
+      extensions: {
+        Row: {
+          created_at: string
+          description: string
+          downloads: number
+          icon: string | null
+          identifier: string
+          name: string
+          readme: string | null
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          downloads: number
+          icon?: string | null
+          identifier: string
+          name: string
+          readme?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          downloads?: number
+          icon?: string | null
+          identifier?: string
+          name?: string
+          readme?: string | null
         }
         Relationships: []
       }

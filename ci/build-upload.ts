@@ -7,11 +7,12 @@ import {
   uploadImage,
   uploadTarballToS3,
   uploadTarballToSupabaseStorage,
+  type BuildResult,
 } from "./src/utils";
 import { supabase } from "./src/supabase";
 import { type Tables } from "./supabase/types/supabase";
 
-type SupabaseExtensionTable = Tables<"extensions">;
+// type SupabaseExtensionTable = Tables<"extensions">;
 // iterate over all files in extensions directory
 const extensionsDir = join(__dirname, "..", "extensions");
 const extensionsCandidateFolders = fs
@@ -26,11 +27,11 @@ checkPackagesValidity(extensionsCandidateFolders);
 /*           Filter Out Extensions that are Already in the Database           */
 /* -------------------------------------------------------------------------- */
 let toBuildExt: string[] = [];
-const existingExtMap = new Map<string, SupabaseExtensionTable>(); // store db existing extensions, later used for shasum validation
+// const existingExtMap = new Map<string, SupabaseExtensionTable>(); // store db existing extensions, later used for shasum validation
 for (const extPath of extensionsCandidateFolders) {
   const pkg = parsePackageJson(join(extPath, "package.json"));
   const dbExt = await supabase
-    .from("extensions")
+    .from("ext_publish")
     .select("*")
     .eq("identifier", pkg.jarvis.identifier)
     .eq("version", pkg.version);
@@ -38,7 +39,7 @@ for (const extPath of extensionsCandidateFolders) {
     console.log(
       `Extension ${pkg.jarvis.identifier}@${pkg.version} already exists in the database. Skip Building.`,
     );
-    existingExtMap.set(extPath, dbExt.data[0]);
+    // existingExtMap.set(extPath, dbExt.data[0]);
     continue;
   } else {
     toBuildExt.push(extPath); // not in db, build it
@@ -55,7 +56,7 @@ for (let i = 0; i < toBuildExt.length; i += PoolSize) {
   toBuildExtChunks.push(toBuildExt.slice(i, i + PoolSize));
 }
 
-const buildResults = [];
+const buildResults: BuildResult[] = [];
 for (const chunk of toBuildExtChunks) {
   const chunkBuildResults = await Promise.all(
     chunk
@@ -112,20 +113,57 @@ for (const chunk of toBuildExtChunks) {
 /*         Upload Newly Built Extensions to File Storage and Supabase         */
 /* -------------------------------------------------------------------------- */
 for (const buildResult of buildResults) {
-  // const _ext = {
-  //   identifier: buildResult.pkg.jarvis.identifier,
-  //   version: buildResult.pkg.version,
-  // };
-  // if (dbExtSet.has(_ext)) {
-  //   console.log(`Extension ${_ext} already exists in the database`);
-  //   continue;
-  // }
-  const filesize = fs.statSync(buildResult.tarballPath).size;
+  const readmePath = join(buildResult.extPath, "README.md");
+  const readme = fs.existsSync(readmePath) ? fs.readFileSync(readmePath, "utf-8") : null;
+  /* -------------- Create Extension in extensions if not exists -------------- */
+  const extFetchDBResult = await supabase
+    .from("extensions")
+    .select("*")
+    .eq("identifier", buildResult.pkg.jarvis.identifier);
+  if (!extFetchDBResult.data || extFetchDBResult.data.length === 0) {
+    await supabase
+      .from("extensions")
+      .insert([
+        {
+          name: buildResult.pkg.name,
+          description: buildResult.pkg.jarvis.description,
+          identifier: buildResult.pkg.jarvis.identifier,
+          readme: readme,
+          downloads: 0,
+        },
+      ])
+      .select();
+  }
+
   const demoImgPaths = buildResult.pkg.jarvis.demoImages
     .map((p) => join(buildResult.extPath, p))
-    .filter((p) => fs.existsSync);
-  const imgStoragePaths = await Promise.all(demoImgPaths.map((p) => uploadImage(p))); // file storage paths
+    .filter((p) => fs.existsSync(p));
+  const demoImgsDBPaths = await Promise.all(demoImgPaths.map((p) => uploadImage(p))); // file storage paths
+  const icon = buildResult.pkg.jarvis.icon;
+  let iconUrl: string | null = null;
+  if (buildResult.pkg.jarvis.icon.type === "asset") {
+    const iconPath = join(buildResult.extPath, icon.icon);
+    if (fs.existsSync(iconPath)) {
+    } else {
+      console.error(`Icon file not found: ${iconPath}`);
+    }
 
+    iconUrl = await uploadImage(iconPath);
+  } else if (icon.type === "remote-url") {
+    iconUrl = icon.icon;
+  }
+  /* ---------- Update README, icon, description in extensions table ---------- */
+  await supabase
+    .from("extensions")
+    .update({
+      description: buildResult.pkg.jarvis.description,
+      icon: iconUrl,
+      readme,
+    })
+    .eq("identifier", buildResult.pkg.jarvis.identifier)
+    .select();
+
+  /* ----------------------------- Upload Tarball ----------------------------- */
   const supabasePath = await uploadTarballToSupabaseStorage(
     buildResult.tarballPath,
     buildResult.pkg.jarvis.identifier,
@@ -138,17 +176,19 @@ for (const buildResult of buildResults) {
     buildResult.pkg.version,
     buildResult.tarballFilename,
   );
-
-  const { data, error } = await supabase.from("extensions").insert([
+  const cmdCount = buildResult.pkg.jarvis.uiCmds.length + buildResult.pkg.jarvis.inlineCmds.length;
+  const { data, error } = await supabase.from("ext_publish").insert([
     {
       name: buildResult.pkg.name,
-      identifier: buildResult.pkg.jarvis.identifier,
       version: buildResult.pkg.version,
+      manifest: buildResult.pkg.jarvis,
       shasum: buildResult.shasum,
-      packagejson: buildResult.pkg,
-      size: filesize,
+      size: fs.statSync(buildResult.tarballPath).size,
       tarball_path: supabasePath,
-      demo_images_paths: imgStoragePaths,
+      cmd_count: cmdCount,
+      identifier: buildResult.pkg.jarvis.identifier,
+      downloads: 0,
+      demo_images: demoImgsDBPaths,
     },
   ]);
   if (error) {
