@@ -1,7 +1,9 @@
 {
+  "$schema": "https://extensions.jarvis.huakun.tech/schema.json",
   "name": "jarvis-ext-astro",
   "type": "module",
   "version": "0.0.1",
+  "jarvis": {},
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

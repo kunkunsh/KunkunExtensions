@@ -1,7 +1,9 @@
 {
+  "$schema": "https://extensions.jarvis.huakun.tech/schema.json",
   "name": "jarvis-ext-nuxt",
   "private": true,
   "type": "module",
+  "jarvis": {},
   "scripts": {
     "build": "nuxt generate",
     "dev": "nuxt dev",

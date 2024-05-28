@@ -1,8 +1,10 @@
 {
+  "$schema": "https://extensions.jarvis.huakun.tech/schema.json",
   "name": "jarvis-ext-react",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "jarvis": {},
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
