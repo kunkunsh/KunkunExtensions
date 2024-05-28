@@ -6,7 +6,9 @@
   "description": "Download YouTube Video Extension",
   "type": "module",
   "jarvis": {
-    "identifier": "tech.huakun.jarvis-twitter-download-video-ext",
+    "name": "Download Twitter Video",
+    "description": "Download Twitter Video",
+    "identifier": "tech.huakun.jarvis-ext-twitter-download-video",
     "demoImages": [
       "./demo/download-twitter.png"
     ],

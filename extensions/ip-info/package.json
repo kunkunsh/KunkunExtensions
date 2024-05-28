@@ -25,6 +25,8 @@
     "zod": "^3.23.8"
   },
   "jarvis": {
+    "name": "IP Info",
+    "description": "Show your current IP Info and Search for IP Address",
     "identifier": "tech.huakun.jarvis-ext-ip-info",
     "demoImages": [
       "./demo/ip-info.png"

@@ -6,6 +6,8 @@
   "type": "module",
   "description": "Jarvis QRCode Extension",
   "jarvis": {
+    "name": "QRCode",
+    "description": "Generate QRCode from text and Detect QRCode from Screenshot",
     "identifier": "tech.huakun.jarvis-qrcode-ext",
     "demoImages": [
       "./demo/gen-qrcode.png"
