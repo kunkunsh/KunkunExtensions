@@ -7,8 +7,8 @@
   "type": "module",
   "jarvis": {
     "name": "Download Twitter Video",
-    "short_description": "Download Twitter Video",
-    "long_description": "Prodivde a Tweet URL, the video in the given tweet will be downloaded for you",
+    "shortDescription": "Download Twitter Video",
+    "longDescription": "Prodivde a Tweet URL, the video in the given tweet will be downloaded for you",
     "identifier": "tech.huakun.jarvis-ext-twitter-download-video",
     "demoImages": [
       "./demo/download-twitter.png"

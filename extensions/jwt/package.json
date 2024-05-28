@@ -7,8 +7,8 @@
   "description": "JWT Inspector",
   "jarvis": {
     "name": "JWT Inspector",
-    "short_description": "Inspect JWT Token",
-    "long_description": "Same as jwt.io; Display decoded JWT Token.",
+    "shortDescription": "Inspect JWT Token",
+    "longDescription": "Same as jwt.io; Display decoded JWT Token.",
     "identifier": "tech.huakun.jarvis-jwt-inspector",
     "demoImages": [
       "./demo/jwt-view.png",
