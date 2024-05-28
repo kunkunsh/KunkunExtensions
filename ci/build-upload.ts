@@ -4,6 +4,7 @@ import {
   buildWithDockerAndValidate,
   checkPackagesValidity,
   parsePackageJson,
+  uploadImage,
   uploadTarballToS3,
   uploadTarballToSupabaseStorage,
 } from "./src/utils";
@@ -120,6 +121,10 @@ for (const buildResult of buildResults) {
   //   continue;
   // }
   const filesize = fs.statSync(buildResult.tarballPath).size;
+  const demoImgPaths = buildResult.pkg.jarvis.demoImages
+    .map((p) => join(buildResult.extPath, p))
+    .filter((p) => fs.existsSync);
+  const imgStoragePaths = await Promise.all(demoImgPaths.map((p) => uploadImage(p))); // file storage paths
 
   const supabasePath = await uploadTarballToSupabaseStorage(
     buildResult.tarballPath,
@@ -143,6 +148,7 @@ for (const buildResult of buildResults) {
       packagejson: buildResult.pkg,
       size: filesize,
       tarball_path: supabasePath,
+      demo_images_paths: imgStoragePaths,
     },
   ]);
   if (error) {

@@ -7,7 +7,9 @@
   "description": "Jarvis QRCode Extension",
   "jarvis": {
     "identifier": "tech.huakun.jarvis-qrcode-ext",
-    "demoImages": [],
+    "demoImages": [
+      "./demo/gen-qrcode.png"
+    ],
     "icon": {
       "type": "iconify",
       "icon": "mingcute:qrcode-line"

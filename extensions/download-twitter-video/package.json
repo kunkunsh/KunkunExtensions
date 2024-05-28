@@ -7,7 +7,9 @@
   "type": "module",
   "jarvis": {
     "identifier": "tech.huakun.jarvis-twitter-download-video-ext",
-    "demoImages": [],
+    "demoImages": [
+      "./demo/download-twitter.png"
+    ],
     "icon": {
         "type": "iconify",
         "icon": "skill-icons:twitter"

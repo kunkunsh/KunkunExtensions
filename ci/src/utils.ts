@@ -12,16 +12,15 @@ import path, { join } from "path";
 import { DOCKER_BUILD_ENTRYPOINT, REPO_ROOT } from "./constant";
 import { spawn, exec } from "node:child_process";
 import { supabase } from "./supabase";
+import sharp from "sharp";
+
 /**
  * Package Name can be scoped or not
  * Use regex to extract package name
  * @param packageName
  * @param version
  */
-export function computeTarballName(
-  packageName: string,
-  version: string,
-): string {
+export function computeTarballName(packageName: string, version: string): string {
   const scoped = packageName.startsWith("@");
   if (scoped) {
     const [scope, name] = packageName.split("/");
@@ -32,9 +31,7 @@ export function computeTarballName(
 }
 
 export function parsePackageJson(pkgJsonPath: string) {
-  const parse = ExtPackageJson.safeParse(
-    JSON.parse(fs.readFileSync(pkgJsonPath, "utf8")),
-  );
+  const parse = ExtPackageJson.safeParse(JSON.parse(fs.readFileSync(pkgJsonPath, "utf8")));
   if (parse.error) {
     console.error(`Error parsing ${pkgJsonPath}: ${parse.error}`);
     process.exit(1);
@@ -45,9 +42,7 @@ export function parsePackageJson(pkgJsonPath: string) {
 
 export function checkPackagesValidity(extPaths: string[]) {
   /* ------------------- make sure package.json is parseable ------------------ */
-  const pkgs = extPaths.map((ext) =>
-    parsePackageJson(join(ext, "package.json")),
-  );
+  const pkgs = extPaths.map((ext) => parsePackageJson(join(ext, "package.json")));
 
   /* --------------------- make sure identifier is unique --------------------- */
   const identifiers = pkgs.map((pkg) => pkg.jarvis.identifier);
@@ -55,20 +50,29 @@ export function checkPackagesValidity(extPaths: string[]) {
   if (identifiers.length !== uniqueIdentifiers.size) {
     console.error("Identifiers are not unique");
     // find the duplicates
-    const duplicates = identifiers.filter(
-      (item, index) => identifiers.indexOf(item) !== index,
-    );
+    const duplicates = identifiers.filter((item, index) => identifiers.indexOf(item) !== index);
     console.error("duplicates", duplicates);
     process.exit(1);
   }
+
+  /* ----------------------- Check Demo Images Existence ---------------------- */
+  for (const extPath of extPaths) {
+    const pkg = parsePackageJson(join(extPath, "package.json"));
+    for (const imgPath of pkg.jarvis.demoImages) {
+      const imgFullPath = join(extPath, imgPath);
+      if (!fs.existsSync(imgFullPath)) {
+        console.error(`Demo Image not found: ${imgFullPath} in ${extPath}`);
+        process.exit(1);
+      }
+    }
+  }
+
   /* ------ make sure there is no tarball .tgz file in the each extension ----- */
   for (const extPath of extPaths) {
     const files = fs.readdirSync(extPath);
     const tgzFiles = files.filter((file) => file.endsWith(".tgz"));
     if (tgzFiles.length > 0) {
-      console.error(
-        `Extension ${extPath} contains tarball files: ${tgzFiles.join(", ")}`,
-      );
+      console.error(`Extension ${extPath} contains tarball files: ${tgzFiles.join(", ")}`);
       console.error(
         "If you are developing, run scripts/clean.sh to remove all .tgz file in the top level of each extension",
       );
@@ -77,14 +81,9 @@ export function checkPackagesValidity(extPaths: string[]) {
   }
 }
 
-/**
- * Compute SHA-1 checksum of a file
- * @param filePath
- * @returns
- */
-export function computeShasum1(filePath: string): Promise<string> {
+export function computeFileHash(filePath: string, algorithm: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    const hash = crypto.createHash("sha1");
+    const hash = crypto.createHash(algorithm);
     const stream = fs.createReadStream(filePath);
 
     stream.on("data", (data) => {
@@ -100,6 +99,14 @@ export function computeShasum1(filePath: string): Promise<string> {
       reject(err);
     });
   });
+}
+
+export function computeFileSha1(filePath: string): Promise<string> {
+  return computeFileHash(filePath, "sha1");
+}
+
+export function computeFileSha512(filePath: string): Promise<string> {
+  return computeFileHash(filePath, "sha512");
 }
 
 /**
@@ -152,9 +159,7 @@ export function buildWithDocker(extPath: string): Promise<{
       }
 
       if (dataStr.includes("npm notice filename:")) {
-        const tarballFilename = dataStr.match(
-          /npm notice filename:\s+([^\s]+)/,
-        );
+        const tarballFilename = dataStr.match(/npm notice filename:\s+([^\s]+)/);
         if (tarballFilename) {
           stderrTarballFilename = tarballFilename[1];
           console.log("Parsed tarball:", stderrTarballFilename);
@@ -172,10 +177,7 @@ export function buildWithDocker(extPath: string): Promise<{
     });
     subprocess.on("close", (code) => {
       console.log(`child process exited with code ${code}`);
-      if (
-        stderrShasum.trim().length === 0 ||
-        stderrTarballFilename.trim().length === 0
-      ) {
+      if (stderrShasum.trim().length === 0 || stderrTarballFilename.trim().length === 0) {
         return reject("shasum or tarball filename not found");
       }
       if (code !== 0) {
@@ -201,9 +203,7 @@ export type BuildResult = {
  * @param extPath Extension Path
  * @returns
  */
-export function buildWithDockerAndValidate(
-  extPath: string,
-): Promise<BuildResult> {
+export function buildWithDockerAndValidate(extPath: string): Promise<BuildResult> {
   return buildWithDocker(extPath)
     .then((res) => {
       const parsedTarballPath = join(extPath, res.stderrTarballFilename);
@@ -211,7 +211,7 @@ export function buildWithDockerAndValidate(
         console.error(`Tarball not found: ${parsedTarballPath}`);
         process.exit(1);
       }
-      return computeShasum1(parsedTarballPath).then((computedShasum) => {
+      return computeFileSha1(parsedTarballPath).then((computedShasum) => {
         if (computedShasum !== res.stderrShasum) {
           console.error(
             `Shasum mismatch: Computed(${computedShasum}) !== Output from docker(${res.stderrShasum})`,
@@ -296,12 +296,10 @@ export async function uploadTarballToSupabaseStorage(
   const tarball = fs.readFileSync(tarballPath);
   console.log("uploading to supabase storage");
 
-  const { data, error } = await supabase.storage
-    .from("extensions")
-    .upload(key, tarball, {
-      cacheControl: "3600",
-      upsert: true,
-    });
+  const { data, error } = await supabase.storage.from("extensions").upload(key, tarball, {
+    cacheControl: "3600",
+    upsert: true,
+  });
   if (error) {
     console.error("Failed to upload tarball to supabase storage");
     console.error(error);
@@ -309,4 +307,85 @@ export async function uploadTarballToSupabaseStorage(
   }
   console.log("Tarball uploaded to supabase storage");
   return data.path;
+}
+
+export function computeHash(buffer: Buffer, algorithm: "sha1" | "sha256" | "sha512") {
+  const hash = crypto.createHash(algorithm);
+  hash.update(buffer);
+  return hash.digest("hex");
+}
+
+export async function uploadImage(imagePath: string) {
+  // make sure imagePath exists and is a file
+  if (!fs.existsSync(imagePath)) {
+    console.error(`Image not found: ${imagePath}`);
+    process.exit(1);
+  }
+  const imageSize = fs.statSync(imagePath).size;
+  const img =
+    imageSize > 200 * 1024
+      ? await sharp(imagePath)
+          .resize({
+            height: 720,
+            fit: sharp.fit.inside,
+            withoutEnlargement: true,
+          })
+          .jpeg()
+          .toBuffer()
+      : await sharp(imagePath).jpeg().toBuffer();
+  const imgSha512 = computeHash(img, "sha512");
+  /* ----------------------- Check if image exists in db ---------------------- */
+  const dbRes = await supabase.from("ext_demo_images").select("*").eq("sha512", imgSha512);
+  const exists = dbRes.data && dbRes.data.length > 0;
+  if (exists) {
+    return dbRes.data[0].image_path;
+  }
+
+  /* --------------------- Upload to supabase file storage -------------------- */
+  const key = `ext-images/${imgSha512}.jpeg`;
+
+  const { data, error } = await supabase.storage.from("extensions").upload(key, img, {
+    cacheControl: "3600",
+    upsert: true,
+  });
+  if (error) {
+    console.error(error);
+    throw new Error("Failed to upload image to supabase storage.");
+  }
+  /* ------------------------------ Upload to S3 ------------------------------ */
+  const s3Client = new S3Client({
+    endpoint: z.string().parse(process.env.S3_ENDPOINT),
+    region: "auto",
+    credentials: {
+      accessKeyId: z.string().parse(process.env.S3_ACCESS_KEY_ID),
+      secretAccessKey: z.string().parse(process.env.S3_SECRET_ACCESS_KEY),
+    },
+  });
+  await s3Client
+    .send(
+      new PutObjectCommand({
+        Bucket: "jarvis-extensions",
+        Key: key,
+        Body: img,
+        ContentType: "application/jpeg",
+      }),
+    )
+    .then((res) => {
+      return key;
+    })
+    .catch((err) => {
+      console.error("Failed to upload tarball");
+      console.error(err);
+    });
+
+  /* ------------------------- Insert into database -------------------------- */
+  const { data: insertData, error: insertError } = await supabase
+    .from("ext_demo_images")
+    .insert([{ sha512: imgSha512, image_path: data.path }]);
+  if (insertError) {
+    console.error(insertError);
+    throw new Error("Failed to insert image into database");
+  }
+
+  return data?.path;
 }

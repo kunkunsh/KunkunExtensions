@@ -7,7 +7,10 @@
   "description": "JWT Inspector",
   "jarvis": {
     "identifier": "tech.huakun.jarvis-jwt-inspector",
-    "demoImages": [],
+    "demoImages": [
+      "./demo/jwt-view.png",
+      "./demo/jwt-search.png"
+    ],
     "icon": {
       "type": "iconify",
       "icon": "logos:jwt-icon"
