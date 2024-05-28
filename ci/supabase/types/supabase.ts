@@ -83,30 +83,33 @@ export type Database = {
       extensions: {
         Row: {
           created_at: string
-          description: string
           downloads: number
-          icon: string | null
+          icon: Json | null
           identifier: string
+          long_description: string | null
           name: string
           readme: string | null
+          short_description: string
         }
         Insert: {
           created_at?: string
-          description: string
           downloads: number
-          icon?: string | null
+          icon?: Json | null
           identifier: string
+          long_description?: string | null
           name: string
           readme?: string | null
+          short_description: string
         }
         Update: {
           created_at?: string
-          description?: string
           downloads?: number
-          icon?: string | null
+          icon?: Json | null
           identifier?: string
+          long_description?: string | null
           name?: string
           readme?: string | null
+          short_description?: string
         }
         Relationships: []
       }

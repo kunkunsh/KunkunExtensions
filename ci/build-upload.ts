@@ -120,13 +120,15 @@ for (const buildResult of buildResults) {
     .from("extensions")
     .select("*")
     .eq("identifier", buildResult.pkg.jarvis.identifier);
+
   if (!extFetchDBResult.data || extFetchDBResult.data.length === 0) {
     await supabase
       .from("extensions")
       .insert([
         {
           name: buildResult.pkg.name,
-          description: buildResult.pkg.jarvis.description,
+          short_description: buildResult.pkg.jarvis.short_description,
+          long_description: buildResult.pkg.jarvis.long_description,
           identifier: buildResult.pkg.jarvis.identifier,
           readme: readme,
           downloads: 0,
@@ -139,25 +141,24 @@ for (const buildResult of buildResults) {
     .map((p) => join(buildResult.extPath, p))
     .filter((p) => fs.existsSync(p));
   const demoImgsDBPaths = await Promise.all(demoImgPaths.map((p) => uploadImage(p))); // file storage paths
-  const icon = buildResult.pkg.jarvis.icon;
-  let iconUrl: string | null = null;
+  const pkgIcon = buildResult.pkg.jarvis.icon;
+  const iconClone = { ...pkgIcon };
   if (buildResult.pkg.jarvis.icon.type === "asset") {
-    const iconPath = join(buildResult.extPath, icon.icon);
+    const iconPath = join(buildResult.extPath, pkgIcon.icon);
     if (fs.existsSync(iconPath)) {
     } else {
       console.error(`Icon file not found: ${iconPath}`);
     }
-
-    iconUrl = await uploadImage(iconPath);
-  } else if (icon.type === "remote-url") {
-    iconUrl = icon.icon;
+    iconClone.icon = await uploadImage(iconPath);
   }
   /* ---------- Update README, icon, description in extensions table ---------- */
   await supabase
     .from("extensions")
     .update({
-      description: buildResult.pkg.jarvis.description,
-      icon: iconUrl,
+      name: buildResult.pkg.jarvis.name,
+      short_description: buildResult.pkg.jarvis.short_description,
+      long_description: buildResult.pkg.jarvis.long_description,
+      icon: iconClone,
       readme,
     })
     .eq("identifier", buildResult.pkg.jarvis.identifier)

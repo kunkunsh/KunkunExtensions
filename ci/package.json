@@ -17,7 +17,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.583.0",
     "@supabase/supabase-js": "^2.43.4",
-    "jarvis-api": "0.0.2-alpha.4",
+    "jarvis-api": "0.0.2-alpha.5",
     "sharp": "^0.33.4",
     "zod": "^3.23.8"
   }

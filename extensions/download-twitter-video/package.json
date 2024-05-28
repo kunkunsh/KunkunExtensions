@@ -7,32 +7,33 @@
   "type": "module",
   "jarvis": {
     "name": "Download Twitter Video",
-    "description": "Download Twitter Video",
+    "short_description": "Download Twitter Video",
+    "long_description": "Prodivde a Tweet URL, the video in the given tweet will be downloaded for you",
     "identifier": "tech.huakun.jarvis-ext-twitter-download-video",
     "demoImages": [
       "./demo/download-twitter.png"
     ],
     "icon": {
-        "type": "iconify",
-        "icon": "skill-icons:twitter"
+      "type": "iconify",
+      "icon": "skill-icons:twitter"
     },
     "uiCmds": [
-        {
-            "main": "dist",
-            "name": "Download Twitter Video",
-            "devMain": "http://localhost:5173",
-            "window": {
-                "titleBarStyle": "overlay",
-                "width": 700,
-                "height": 300
-            },
-            "cmds": [
-                {
-                    "type": "text",
-                    "value": "twitter"
-                }
-            ]
-        }
+      {
+        "main": "dist",
+        "name": "Download Twitter Video",
+        "devMain": "http://localhost:5173",
+        "window": {
+          "titleBarStyle": "overlay",
+          "width": 700,
+          "height": 300
+        },
+        "cmds": [
+          {
+            "type": "text",
+            "value": "twitter"
+          }
+        ]
+      }
     ]
   },
   "scripts": {

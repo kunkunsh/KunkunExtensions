@@ -7,7 +7,8 @@
   "description": "Jarvis QRCode Extension",
   "jarvis": {
     "name": "QRCode",
-    "description": "Generate QRCode from text and Detect QRCode from Screenshot",
+    "short_description": "Generate QRCode from text and Detect QRCode",
+    "long_description": "Copy a url or any text and open the QRCode generation command, a QRCode will be displayed. Also supports detecting QRCode from screenshot.",
     "identifier": "tech.huakun.jarvis-qrcode-ext",
     "demoImages": [
       "./demo/gen-qrcode.png"

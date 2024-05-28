@@ -7,7 +7,8 @@
   "description": "JWT Inspector",
   "jarvis": {
     "name": "JWT Inspector",
-    "description": "Inspect JWT Token",
+    "short_description": "Inspect JWT Token",
+    "long_description": "Same as jwt.io; Display decoded JWT Token.",
     "identifier": "tech.huakun.jarvis-jwt-inspector",
     "demoImages": [
       "./demo/jwt-view.png",
@@ -37,6 +38,7 @@
       {
         "main": "dist/search.html",
         "name": "Search Decoded JWT",
+        "description": "Decode JWT and display in a list.",
         "devMain": "http://localhost:5173/search",
         "window": {
           "width": 800,
