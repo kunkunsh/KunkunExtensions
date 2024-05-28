@@ -1,9 +1,10 @@
 <script lang="ts">
   import jsQR from "jsqr";
-  import { clipboard } from "jarvis-api/ui";
+  import { clipboard, open } from "jarvis-api/ui";
   import { Button } from "$lib/components/ui/button";
   import { ModeWatcher } from "mode-watcher";
   import { onMount } from "svelte";
+  import { LinkIcon } from "lucide-svelte/icons";
 
   let imgSrc = "";
   let detectedCode = "";
@@ -51,10 +52,16 @@
     <div class="flex space-x-3">
       <Button on:click={readScreenshot}>Read QRCode Screenshot From Clipboard</Button>
       <a href="./">
-        <Button>Generate QRCode</Button>
+        <Button>Generate QRCode <LinkIcon class="w-4 ml-2" /></Button>
       </a>
     </div>
     <img width="300" src={imgSrc} alt="" />
-    <a href={detectedCode}>{detectedCode}</a>
+    <a
+      href={detectedCode}
+      on:click={(e) => {
+        e.preventDefault();
+        open(detectedCode);
+      }}>{detectedCode}</a
+    >
   </div>
 </main>

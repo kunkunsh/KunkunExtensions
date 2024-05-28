@@ -5,9 +5,15 @@
   import QR from "$lib/components/QR.svelte";
   import QRCode from "easyqrcodejs";
   import { onMount } from "svelte";
-  import { clipboard, fs, dialog } from "jarvis-api/ui";
+  import { clipboard, fs, dialog, open } from "jarvis-api/ui";
   import * as v from "valibot";
-  import { ClipboardCopyIcon, DownloadIcon, RefreshCcwIcon, SearchIcon } from "lucide-svelte/icons";
+  import {
+    ClipboardCopyIcon,
+    LinkIcon,
+    DownloadIcon,
+    RefreshCcwIcon,
+    SearchIcon,
+  } from "lucide-svelte/icons";
   import { ModeWatcher } from "mode-watcher";
 
   let url: string;
@@ -98,13 +104,19 @@
     </div>
     {#if url}
       <div class="prose mt-3">
-        <pre>{url}</pre>
+        <pre
+          on:click={() => {
+            if (url.startsWith("http")) {
+              open(url);
+            }
+          }}
+          class="text-wrap px-3 cursor-pointer">{url}</pre>
       </div>
     {/if}
-    <a href="./detect-qrcode">
+    <a href="./detect-qrcode.html">
       <Button size="sm">
         <SearchIcon class="mr-1 h-4 w-4" />
-        Detect QRCode From Screenshot</Button
+        Detect QRCode From Screenshot <LinkIcon class="w-4 ml-2" /></Button
       >
     </a>
   </div>
