@@ -10,6 +10,9 @@
     "shortDescription": "Download Twitter Video",
     "longDescription": "Prodivde a Tweet URL, the video in the given tweet will be downloaded for you",
     "identifier": "tech.huakun.jarvis-ext-twitter-download-video",
+    "permissions": [
+      "clipboard-read"
+    ],
     "demoImages": [
       "./demo/download-twitter.png"
     ],

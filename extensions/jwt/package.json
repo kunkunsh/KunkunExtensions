@@ -10,6 +10,9 @@
     "shortDescription": "Inspect JWT Token",
     "longDescription": "Same as jwt.io; Display decoded JWT Token.",
     "identifier": "tech.huakun.jarvis-jwt-inspector",
+    "permissions": [
+      "clipboard-read"
+    ],
     "demoImages": [
       "./demo/jwt-view.png",
       "./demo/jwt-search.png"

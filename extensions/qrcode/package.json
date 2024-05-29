@@ -10,6 +10,10 @@
     "shortDescription": "Generate QRCode from text and Detect QRCode",
     "longDescription": "Copy a url or any text and open the QRCode generation command, a QRCode will be displayed. Also supports detecting QRCode from screenshot.",
     "identifier": "tech.huakun.jarvis-qrcode-ext",
+    "permissions": [
+      "clipboard-read",
+      "clipboard-write"
+    ],
     "demoImages": [
       "./demo/gen-qrcode.png"
     ],
