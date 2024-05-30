@@ -55,13 +55,20 @@ export function checkPackagesValidity(extPaths: string[]) {
     process.exit(1);
   }
 
-  /* ----------------------- Check Demo Images Existence ---------------------- */
+  /* ------------------ Check Demo Images and files Existence ----------------- */
   for (const extPath of extPaths) {
     const pkg = parsePackageJson(join(extPath, "package.json"));
     for (const imgPath of pkg.jarvis.demoImages) {
       const imgFullPath = join(extPath, imgPath);
       if (!fs.existsSync(imgFullPath)) {
         console.error(`Demo Image not found: ${imgFullPath} in ${extPath}`);
+        process.exit(1);
+      }
+    }
+    for (const file of pkg.files) {
+      const fileFullPath = join(extPath, file);
+      if (!fs.existsSync) {
+        console.error(`File not found: ${fileFullPath} in ${extPath}`);
         process.exit(1);
       }
     }

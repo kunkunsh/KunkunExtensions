@@ -67,5 +67,8 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vue-tsc": "^2.0.6"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
