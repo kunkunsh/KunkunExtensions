@@ -34,7 +34,7 @@
     ],
     "icon": {
       "type": "iconify",
-      "icon": "mdi:ip-network"
+      "value": "mdi:ip-network"
     },
     "uiCmds": [
       {

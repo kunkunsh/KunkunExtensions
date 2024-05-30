@@ -19,7 +19,7 @@
     ],
     "icon": {
       "type": "iconify",
-      "icon": "mingcute:qrcode-line"
+      "value": "mingcute:qrcode-line"
     },
     "uiCmds": [
       {

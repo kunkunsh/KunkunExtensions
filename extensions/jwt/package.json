@@ -19,7 +19,7 @@
     ],
     "icon": {
       "type": "iconify",
-      "icon": "logos:jwt-icon"
+      "value": "logos:jwt-icon"
     },
     "uiCmds": [
       {

@@ -10,8 +10,8 @@
     "shortDescription": "Git Skyline 3D Model",
     "longDescription": "Display Git Skyline 3D Model",
     "icon": {
-      "icon": "tabler:building-skyscraper",
-      "type": "iconify"
+      "type": "iconify",
+      "value": "tabler:building-skyscraper"
     },
     "demoImages": [],
     "uiCmds": [

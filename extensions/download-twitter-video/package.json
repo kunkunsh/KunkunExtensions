@@ -18,7 +18,7 @@
     ],
     "icon": {
       "type": "iconify",
-      "icon": "skill-icons:twitter"
+      "value": "skill-icons:twitter"
     },
     "uiCmds": [
       {
