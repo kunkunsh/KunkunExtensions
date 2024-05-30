@@ -144,12 +144,12 @@ for (const buildResult of buildResults) {
   const pkgIcon = buildResult.pkg.jarvis.icon;
   const iconClone = { ...pkgIcon };
   if (buildResult.pkg.jarvis.icon.type === "asset") {
-    const iconPath = join(buildResult.extPath, pkgIcon.icon);
+    const iconPath = join(buildResult.extPath, pkgIcon.value);
     if (fs.existsSync(iconPath)) {
     } else {
       console.error(`Icon file not found: ${iconPath}`);
     }
-    iconClone.icon = await uploadImage(iconPath);
+    iconClone.value = await uploadImage(iconPath);
   }
   /* ---------- Update README, icon, description in extensions table ---------- */
   await supabase

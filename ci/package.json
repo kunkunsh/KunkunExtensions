@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build-upload": "bun build-upload.ts",
+    "validate": "bun validate.ts",
     "build-upload:watch": "bun --watch build-upload.ts",
     "gen:supabase-types": "pnpm dlx supabase gen types typescript --project-id \"$SUPABASE_PROJECT_REF\" --schema public > supabase/types/supabase.ts"
   },
