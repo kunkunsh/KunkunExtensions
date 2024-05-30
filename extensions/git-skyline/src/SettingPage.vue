@@ -84,6 +84,9 @@ function updateUrl() {
                     enter your Username. A 3D model will be generated. Click on
                     <strong>Embed Page</strong> button in the top right corner to generate a embed
                     URL, and paste it here.
+
+                    Or use this url with your GitHub username: `https://git-skyline.huakun.tech/contribution/github/{githubUsername}/embed?enableZoom=true&autoRotate=true`
+                  
                   </span>
                 </PopoverContent>
               </Popover>

@@ -84,7 +84,7 @@ export default function DownloadForm({ className }: { className: string }) {
   }
 
   return (
-    <div className={cn("container max-w-2xl", className)}>
+    <div className={cn("container max-w-2xl overflow-x-hidden", className)}>
       <Label className="text-md">Tweet Url</Label>
       <form
         onSubmit={(e: FormEvent<HTMLFormElement>) => {
@@ -106,8 +106,8 @@ export default function DownloadForm({ className }: { className: string }) {
       </form>
       <br />
       {downloadUrl && (
-        <span className="flex">
-          <small>{downloadUrl}</small>
+        <span className="flex space-x-2">
+          <small className="break-all">{downloadUrl}</small>
           <Button
             variant="outline"
             size="icon"

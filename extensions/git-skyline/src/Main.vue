@@ -31,19 +31,17 @@ onMounted(() => {
   </div>
   <div class="h-screen flex flex-col">
     <div :class="cn('h-32 z-50')" data-tauri-drag-region>
-      <Card v-if="showInstructions" class="w-full h-full flex justify-center items-center">
+      <div v-if="showInstructions" class="w-full h-full flex justify-center items-center border border-red-400">
         <h1 class="text-3xl z-0 select-none">
           Left Click and Drag this region to move this window
         </h1>
-      </Card>
+      </div>
     </div>
     <div class="grow"></div>
     <div :class="cn('h-32 z-50')" data-tauri-drag-region>
-      <Card v-if="showInstructions" class="w-full h-full flex flex-col justify-center items-center">
-        <h1 class="text-3xl z-0 select-none">Right Click on This Region to Go To Settings</h1>
-        <h1 class="text-3xl z-0 select-none">Press Escape To Close Window</h1>
-        <ContextMenu />
-      </Card>
+      <div class="w-full h-full">
+        <ContextMenu :showInstructions="showInstructions" />
+      </div>
     </div>
   </div>
 </template>
