@@ -1,0 +1,25 @@
+{
+  "name": "ci",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build-upload": "bun build-upload.ts",
+    "validate": "bun validate.ts",
+    "build-upload:watch": "bun --watch build-upload.ts",
+    "gen:supabase-types": "pnpm dlx supabase gen types typescript --project-id \"$SUPABASE_PROJECT_REF\" --schema public > supabase/types/supabase.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "supabase": ">=1.8.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.583.0",
+    "@supabase/supabase-js": "^2.43.4",
+    "jarvis-api": "0.0.2-alpha.8",
+    "sharp": "^0.33.4",
+    "zod": "^3.23.8"
+  }
+}

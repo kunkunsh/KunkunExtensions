@@ -1,0 +1,89 @@
+{
+  "$schema": "https://extensions.jarvis.huakun.tech/schema.json",
+  "name": "@huakunshen/jarvis-ext-qrcode",
+  "private": false,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Jarvis QRCode Extension",
+  "jarvis": {
+    "name": "QRCode",
+    "shortDescription": "Generate QRCode from text and Detect QRCode",
+    "longDescription": "Copy a url or any text and open the QRCode generation command, a QRCode will be displayed. Also supports detecting QRCode from screenshot.",
+    "identifier": "tech.huakun.jarvis-qrcode-ext",
+    "permissions": [
+      "clipboard-read",
+      "clipboard-write"
+    ],
+    "demoImages": [
+      "./demo/gen-qrcode.png"
+    ],
+    "icon": {
+      "type": "iconify",
+      "value": "mingcute:qrcode-line"
+    },
+    "uiCmds": [
+      {
+        "main": "dist",
+        "name": "Generate QRCode",
+        "devMain": "http://localhost:5173",
+        "window": {
+          "titleBarStyle": "overlay"
+        },
+        "cmds": [
+          {
+            "type": "text",
+            "value": "qrcode"
+          }
+        ]
+      },
+      {
+        "main": "dist/detect-qrcode.html",
+        "name": "Detect QRCode",
+        "devMain": "http://localhost:5173/detect-qrcode",
+        "window": {
+          "titleBarStyle": "overlay"
+        },
+        "cmds": [
+          {
+            "type": "text",
+            "value": "read detect qrcode"
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^3.0.2",
+    "@tsconfig/svelte": "^5.0.2",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.33",
+    "svelte": "^4.2.12",
+    "svelte-check": "^3.6.7",
+    "tailwindcss": "^3.4.1",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0"
+  },
+  "dependencies": {
+    "jarvis-api": "latest",
+    "bits-ui": "^0.21.7",
+    "clsx": "^2.1.1",
+    "easyqrcodejs": "^4.6.1",
+    "jsqr": "^1.4.0",
+    "lucide-svelte": "^0.378.0",
+    "mode-watcher": "^0.3.0",
+    "svelte-radix": "^1.1.0",
+    "tailwind-merge": "^2.3.0",
+    "tailwind-variants": "^0.2.1",
+    "valibot": "^0.30.0"
+  },
+  "files": [
+    "dist"
+  ]
+}
