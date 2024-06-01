@@ -14,5 +14,4 @@ export const useAppState = defineStore("jarvisExtGitSkylineAppState", {
       this.settingOpen = open;
     },
   },
-  persist: true,
 });

@@ -454,8 +454,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       jarvis-api:
-        specifier: 0.0.2-alpha.6
-        version: 0.0.2-alpha.6(typescript@5.4.5)
+        specifier: 0.0.2-alpha.11
+        version: 0.0.2-alpha.11(typescript@5.4.5)
       lucide-vue-next:
         specifier: ^0.378.0
         version: 0.378.0(vue@3.4.27)
@@ -530,8 +530,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       jarvis-api:
-        specifier: 0.0.2-alpha.1
-        version: 0.0.2-alpha.1(typescript@5.4.5)
+        specifier: 0.0.2-alpha.11
+        version: 0.0.2-alpha.11(typescript@5.4.5)
       radix-vue:
         specifier: ^1.8.0
         version: 1.8.1(vue@3.4.27)
@@ -4217,6 +4217,25 @@ packages:
       serialize-javascript: 6.0.2
       smob: 1.5.0
       terser: 5.31.0
+    dev: false
+
+  /@rollup/plugin-typescript@11.1.6(rollup@4.18.0)(typescript@5.4.5):
+    resolution: {integrity: sha512-R92yOmIACgYdJ7dJ97p4K69I8gg6IEHt8M7dUBxN3W6nrO8uUxX5ixl0yU/N3aZTi8WhPuICvOHXQvF6FaykAA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.14.0||^3.0.0||^4.0.0
+      tslib: '*'
+      typescript: '>=3.7.0'
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+      tslib:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 5.1.0(rollup@4.18.0)
+      resolve: 1.22.8
+      rollup: 4.18.0
+      typescript: 5.4.5
     dev: false
 
   /@rollup/pluginutils@4.2.1:
@@ -8770,11 +8789,12 @@ packages:
       zod: 3.23.8
     dev: false
 
-  /jarvis-api@0.0.2-alpha.1(typescript@5.4.5):
-    resolution: {integrity: sha512-XgSGa6FBYI9RtZ0fmR1RbKjTDhl/csRRbRHROTXk6Ffbl1SeEzYxcC0sZQRBnbTnBJsIM9EYowpIxSY72I6CsA==}
+  /jarvis-api@0.0.2-alpha.11(typescript@5.4.5):
+    resolution: {integrity: sha512-xDRFU/SEb4h4mKzTYKexWR7sPwhzA2C2aCEAkGQcfNmgzbP3gGA1Ka1wjmv5ti0EvBPmjBa9IY8b+XRAE2cDkQ==}
     peerDependencies:
       typescript: ^5.0.0
     dependencies:
+      '@rollup/plugin-typescript': 11.1.6(rollup@4.18.0)(typescript@5.4.5)
       '@tauri-apps/api': 2.0.0-beta.11
       '@tauri-apps/plugin-dialog': 2.0.0-beta.3
       '@tauri-apps/plugin-fs': 2.0.0-beta.3
@@ -8787,31 +8807,13 @@ packages:
       '@tauri-apps/plugin-store': 2.0.0-beta.3
       '@tauri-apps/plugin-updater': 2.0.0-beta.3
       '@tauri-apps/plugin-upload': 2.0.0-beta.4
+      rollup: 4.18.0
       tauri-plugin-clipboard-api: 0.7.0-beta.0
+      tauri-plugin-jarvis-api: 0.0.1-alpha.0
       typescript: 5.4.5
       zod: 3.23.8
-    dev: false
-
-  /jarvis-api@0.0.2-alpha.6(typescript@5.4.5):
-    resolution: {integrity: sha512-sb2p+v/KeVQXWOocIpECQ4OKglntAEmcCShXEPtX3uVYadV59zfZoDl6p7qQJdRBiqudiLrJllhIdXv6Osn2gg==}
-    peerDependencies:
-      typescript: ^5.0.0
-    dependencies:
-      '@tauri-apps/api': 2.0.0-beta.11
-      '@tauri-apps/plugin-dialog': 2.0.0-beta.3
-      '@tauri-apps/plugin-fs': 2.0.0-beta.3
-      '@tauri-apps/plugin-global-shortcut': 2.0.0-beta.3
-      '@tauri-apps/plugin-http': 2.0.0-beta.3
-      '@tauri-apps/plugin-log': 2.0.0-beta.4
-      '@tauri-apps/plugin-notification': 2.0.0-beta.3
-      '@tauri-apps/plugin-os': 2.0.0-beta.3
-      '@tauri-apps/plugin-shell': 2.0.0-beta.4
-      '@tauri-apps/plugin-store': 2.0.0-beta.3
-      '@tauri-apps/plugin-updater': 2.0.0-beta.3
-      '@tauri-apps/plugin-upload': 2.0.0-beta.4
-      tauri-plugin-clipboard-api: 0.7.0-beta.0
-      typescript: 5.4.5
-      zod: 3.23.8
+    transitivePeerDependencies:
+      - tslib
     dev: false
 
   /jarvis-api@0.0.2-alpha.8(typescript@5.4.5):
@@ -12467,6 +12469,14 @@ packages:
     resolution: {integrity: sha512-CzkkI/T7RHe9Jw0OmkDLoko7pFFwLKV5QqMAXgXjP43W/U5Nec0GtXKCyxkHgFcb3fbMYQ6wrajK47PTrERGcg==}
     dependencies:
       '@tauri-apps/api': 2.0.0-beta.11
+      zod: 3.23.8
+    dev: false
+
+  /tauri-plugin-jarvis-api@0.0.1-alpha.0:
+    resolution: {integrity: sha512-FUdKuvfY5E0UGauE6AhCvMrHDBZkFytjstAh/TwGjVE+HY45BYzY9p9z9uGKm62UzPO+0vJdHGBM7QvWXQkt1Q==}
+    dependencies:
+      '@tauri-apps/api': 2.0.0-beta.11
+      '@tauri-apps/plugin-os': 2.0.0-beta.3
       zod: 3.23.8
     dev: false
 

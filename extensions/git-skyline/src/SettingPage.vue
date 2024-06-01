@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import * as z from "zod";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
 import { InfoIcon } from "lucide-vue-next";
-import { window } from "jarvis-api/ui";
+import { window, JarvisStore } from "jarvis-api/ui";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Card,
@@ -19,7 +19,14 @@ import {
 import { useAppState } from "./lib/store";
 import { router } from "./lib/router";
 
-onMounted(() => {
+const store = new JarvisStore();
+
+onMounted(async () => {
+  await store.load();
+  const url = await store.get("gitSkylineUrl");
+  if (url && typeof url === "string") {
+    appState.setUrl(url);
+  }
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       window.destroyWindow();
@@ -32,7 +39,7 @@ function onSubmit(e: Event) {
   e.preventDefault();
 }
 const url = ref("");
-function updateUrl() {
+async function updateUrl() {
   const parse = z.string().url().safeParse(url.value);
   if (parse.error) {
     toast({
@@ -42,6 +49,8 @@ function updateUrl() {
     });
   } else {
     appState.setUrl(url.value);
+    await store.set("gitSkylineUrl", url.value);
+    await store.save();
     toast({
       title: "URL Set",
     });
@@ -83,10 +92,8 @@ function updateUrl() {
                     <Button class="px-1" variant="link">https://git-skyline.huakun.tech</Button>,
                     enter your Username. A 3D model will be generated. Click on
                     <strong>Embed Page</strong> button in the top right corner to generate a embed
-                    URL, and paste it here.
-
-                    Or use this url with your GitHub username: `https://git-skyline.huakun.tech/contribution/github/{githubUsername}/embed?enableZoom=true&autoRotate=true`
-                  
+                    URL, and paste it here. Or use this url with your GitHub username:
+                    `https://git-skyline.huakun.tech/contribution/github/{githubUsername}/embed?enableZoom=true&autoRotate=true`
                   </span>
                 </PopoverContent>
               </Popover>
