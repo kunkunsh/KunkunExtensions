@@ -17,7 +17,7 @@
     "@vueuse/core": "^10.9.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "jarvis-api": "0.0.2-alpha.1",
+    "jarvis-api": "0.0.2-alpha.11",
     "radix-vue": "^1.8.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
@@ -29,6 +29,9 @@
     "shortDescription": "Show your current IP Info and Search for IP Address",
     "longDescription": "Will display you IP Address and more information about this IP address, including Geo Location, ASN, ISP. You can also search for a specific IP.",
     "identifier": "tech.huakun.jarvis-ext-ip-info",
+    "permissions": [
+      "clipboard-write"
+    ],
     "demoImages": [
       "./demo/ip-info.png"
     ],
