@@ -48,7 +48,6 @@
     "jarvis-api": "0.0.2-alpha.11",
     "lucide-vue-next": "^0.378.0",
     "pinia": "^2.1.7",
-    "pinia-plugin-persistedstate": "^3.2.1",
     "radix-vue": "^1.7.4",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
