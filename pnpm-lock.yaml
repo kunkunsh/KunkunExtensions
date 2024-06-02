@@ -751,6 +751,9 @@ importers:
       jarvis-api:
         specifier: 0.0.2-alpha.13
         version: 0.0.2-alpha.13(typescript@5.4.5)
+      pretty-bytes:
+        specifier: ^6.1.1
+        version: 6.1.1
       radix-vue:
         specifier: ^1.7.4
         version: 1.8.1(vue@3.4.27)

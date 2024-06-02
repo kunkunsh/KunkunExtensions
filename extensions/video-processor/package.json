@@ -49,6 +49,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "jarvis-api": "0.0.2-alpha.13",
+    "pretty-bytes": "^6.1.1",
     "radix-vue": "^1.7.4",
     "shlex": "^2.1.2",
     "tailwind-merge": "^2.3.0",

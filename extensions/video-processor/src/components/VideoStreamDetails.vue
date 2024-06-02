@@ -29,7 +29,7 @@ function computeFrameRate(frameRateStr: string) {
   </p>
   <p v-if="stream.codec_long_name" class="flex justify-between">
     <span class="text-muted-foreground font-semibold">Encoding</span>
-    <span>{{ stream.codec_long_name }}s</span>
+    <span>{{ stream.codec_long_name }}</span>
   </p>
   <p v-if="stream.width && stream.height" class="flex justify-between">
     <span class="text-muted-foreground font-semibold">Resolution</span>
