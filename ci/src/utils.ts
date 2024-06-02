@@ -7,7 +7,7 @@ import {
   GetObjectCommand,
   PutObjectCommand,
 } from "@aws-sdk/client-s3";
-import { ExtPackageJson } from "jarvis-api";
+import { ExtPackageJson } from "jarvis-api/models";
 import path, { join } from "path";
 import { DOCKER_BUILD_ENTRYPOINT, REPO_ROOT } from "./constant";
 import { spawn, exec } from "node:child_process";
@@ -31,7 +31,6 @@ export function computeTarballName(packageName: string, version: string): string
 }
 
 export function parsePackageJson(pkgJsonPath: string) {
-  
   const parse = ExtPackageJson.safeParse(JSON.parse(fs.readFileSync(pkgJsonPath, "utf8")));
   if (parse.error) {
     console.error(`Error parsing ${pkgJsonPath}: ${parse.error}`);
