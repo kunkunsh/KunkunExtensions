@@ -32,6 +32,8 @@ export function computeTarballName(packageName: string, version: string): string
 
 export function parsePackageJson(pkgJsonPath: string) {
   const parse = ExtPackageJson.safeParse(JSON.parse(fs.readFileSync(pkgJsonPath, "utf8")));
+  console.log("checkPackagesValidity");
+  
   if (parse.error) {
     console.error(`Error parsing ${pkgJsonPath}: ${parse.error}`);
     process.exit(1);
@@ -41,6 +43,7 @@ export function parsePackageJson(pkgJsonPath: string) {
 }
 
 export function checkPackagesValidity(extPaths: string[]) {
+  
   /* ------------------- make sure package.json is parseable ------------------ */
   const pkgs = extPaths.map((ext) => parsePackageJson(join(ext, "package.json")));
 

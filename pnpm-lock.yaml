@@ -24,8 +24,8 @@ importers:
         specifier: ^2.43.4
         version: 2.43.4
       jarvis-api:
-        specifier: 0.0.2-alpha.15
-        version: 0.0.2-alpha.15(typescript@5.4.5)
+        specifier: 0.0.2-alpha.16
+        version: 0.0.2-alpha.16(typescript@5.4.5)
       sharp:
         specifier: ^0.33.4
         version: 0.33.4
@@ -8915,8 +8915,8 @@ packages:
       - tslib
     dev: false
 
-  /jarvis-api@0.0.2-alpha.15(typescript@5.4.5):
-    resolution: {integrity: sha512-YIUegO4Vt5haOtv/R8cpOSsWNj2N3zaKy1aGDrXqan5TNOE6+hDKr1PIOEB8ZvUgt8X500oRNUnsA7MrzFHeyA==}
+  /jarvis-api@0.0.2-alpha.16(typescript@5.4.5):
+    resolution: {integrity: sha512-daBZBowdbsS0Qmmvpu2Naboqrzac8/kTrUXOVwI6qP3tGFzaQJls4ZjO+Kco4vbjs96sHJJOzOuvBKJk5TeCFg==}
     peerDependencies:
       typescript: ^5.0.0
     dependencies:
@@ -8935,7 +8935,7 @@ packages:
       '@tauri-apps/plugin-upload': 2.0.0-beta.4
       rollup: 4.18.0
       tauri-plugin-clipboard-api: 0.7.0-beta.0
-      tauri-plugin-jarvis-api: 0.0.1-alpha.1
+      tauri-plugin-jarvis-api: 0.0.1-alpha.2
       typescript: 5.4.5
       zod: 3.23.8
     transitivePeerDependencies:
@@ -12584,6 +12584,15 @@ packages:
     resolution: {integrity: sha512-HW5FqLoGmJClgRvxoMgz2V60be3lC0ywcvn/s1eEiTXrdWTvriVa7foWqyWcfq0Xoj9ykSmBrfoT7s/ge1lnZQ==}
     dependencies:
       '@tauri-apps/api': 2.0.0-beta.13
+      '@tauri-apps/plugin-os': 2.0.0-beta.3
+      zod: 3.23.8
+    dev: false
+
+  /tauri-plugin-jarvis-api@0.0.1-alpha.2:
+    resolution: {integrity: sha512-TS2fs9nxU9A3A2mL236dK+FZiZDIiC8wIRznQXuu20ZpcFt0kWVf5AjrsDG1ASfn4AenW6ruL2ithWXZwM0KEg==}
+    dependencies:
+      '@tauri-apps/api': 2.0.0-beta.13
+      '@tauri-apps/plugin-log': 2.0.0-beta.4
       '@tauri-apps/plugin-os': 2.0.0-beta.3
       zod: 3.23.8
     dev: false
