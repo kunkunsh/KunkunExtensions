@@ -4,7 +4,32 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "jarvis": {},
+  "jarvis": {
+    "name": "Jarvis Extension React Template",
+    "icon": {
+      "type": "iconify",
+      "value": "carbon:app"
+    },
+    "identifier": "jarvis-ext-vue-template",
+    "shortDescription": "Jarvis Extension React Template",
+    "longDescription": "Jarvis Extension React Template",
+    "demoImages": [],
+    "permissions": [],
+    "uiCmds": [
+      {
+        "name": "A Command",
+        "main": "dist",
+        "devMain": "http://localhost:5173",
+        "description": "Entrypoint",
+        "cmds": [
+          {
+            "type": "text",
+            "value": "Command"
+          }
+        ]
+      }
+    ]
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -39,5 +64,8 @@
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

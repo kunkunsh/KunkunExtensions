@@ -3,7 +3,32 @@
   "name": "jarvis-ext-nuxt",
   "private": true,
   "type": "module",
-  "jarvis": {},
+  "jarvis": {
+    "name": "Jarvis Extension Nuxt Template",
+    "icon": {
+      "type": "iconify",
+      "value": "carbon:app"
+    },
+    "identifier": "jarvis-ext-vue-template",
+    "shortDescription": "Jarvis Extension Nuxt Template",
+    "longDescription": "Jarvis Extension Nuxt Template",
+    "demoImages": [],
+    "permissions": [],
+    "uiCmds": [
+      {
+        "name": "A Command",
+        "main": "dist",
+        "devMain": "http://localhost:5173",
+        "description": "Entrypoint",
+        "cmds": [
+          {
+            "type": "text",
+            "value": "Command"
+          }
+        ]
+      }
+    ]
+  },
   "scripts": {
     "build": "nuxt generate",
     "dev": "nuxt dev",
@@ -30,5 +55,8 @@
     "@nuxtjs/color-mode": "^3.4.1",
     "@nuxtjs/tailwindcss": "^6.12.0",
     "typescript": "^5.4.5"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

@@ -1,30 +1,37 @@
 {
   "$schema": "https://extensions.jarvis.huakun.tech/schema.json",
-  "name": "jarvis-ext-vue",
+  "name": "jarvis-ext-video-processor",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "jarvis": {
-    "name": "Jarvis Extension Vue Template",
+    "name": "Video Processor",
     "icon": {
       "type": "iconify",
       "value": "carbon:app"
     },
-    "identifier": "jarvis-ext-vue-template",
-    "shortDescription": "Jarvis Extension Vue Template",
-    "longDescription": "Jarvis Extension Vue Template",
+    "identifier": "jarvis-ext-video-processor",
+    "shortDescription": "Video Processor",
+    "longDescription": "Video Processing. Get video info. Convert video format. Compress video. ",
     "demoImages": [],
-    "permissions": [],
+    "permissions": [
+      "shell"
+    ],
     "uiCmds": [
       {
-        "name": "A Command",
+        "name": "Video Info",
         "main": "dist",
         "devMain": "http://localhost:5173",
-        "description": "Entrypoint",
+        "description": "Get video information",
+        "window": {
+          "titleBarStyle": "overlay",
+          "width": 1000,
+          "height": 800
+        },
         "cmds": [
           {
             "type": "text",
-            "value": "Command"
+            "value": "info"
           }
         ]
       }
@@ -36,15 +43,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "jarvis-api": "latest",
     "@radix-icons/vue": "^1.0.0",
+    "@tauri-apps/api": "2.0.0-beta.13",
     "@vueuse/core": "^10.9.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "jarvis-api": "0.0.2-alpha.13",
+    "pretty-bytes": "^6.1.1",
     "radix-vue": "^1.7.4",
+    "shlex": "^2.1.2",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@iconify-json/radix-icons": "^1.1.14",
