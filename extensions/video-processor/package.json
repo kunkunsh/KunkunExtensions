@@ -23,6 +23,11 @@
         "main": "dist",
         "devMain": "http://localhost:5173",
         "description": "Get video information",
+        "window": {
+          "titleBarStyle": "overlay",
+          "width": 1000,
+          "height": 800
+        },
         "cmds": [
           {
             "type": "text",
@@ -39,11 +44,13 @@
   },
   "dependencies": {
     "@radix-icons/vue": "^1.0.0",
+    "@tauri-apps/api": "2.0.0-beta.13",
     "@vueuse/core": "^10.9.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "jarvis-api": "0.0.2-alpha.13",
     "radix-vue": "^1.7.4",
+    "shlex": "^2.1.2",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "vue": "^3.4.21",

@@ -736,6 +736,9 @@ importers:
       '@radix-icons/vue':
         specifier: ^1.0.0
         version: 1.0.0(vue@3.4.27)
+      '@tauri-apps/api':
+        specifier: 2.0.0-beta.13
+        version: 2.0.0-beta.13
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.27)
@@ -751,6 +754,9 @@ importers:
       radix-vue:
         specifier: ^1.7.4
         version: 1.8.1(vue@3.4.27)
+      shlex:
+        specifier: ^2.1.2
+        version: 2.1.2
       tailwind-merge:
         specifier: ^2.3.0
         version: 2.3.0
@@ -5061,6 +5067,11 @@ packages:
 
   /@tauri-apps/api@2.0.0-beta.11:
     resolution: {integrity: sha512-wJRY+fBUm3KpqZDHMIz5HRv+1vlnvRJ/dFxiyY3NlINTx2qXqDou5qWYcP1CuZXsd39InWVPV3FAZvno/kGCkA==}
+    engines: {node: '>= 18', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
+    dev: false
+
+  /@tauri-apps/api@2.0.0-beta.13:
+    resolution: {integrity: sha512-Np1opKANzRMF3lgJ9gDquBCB9SxlE2lRmNpVx1+L6RyzAmigkuh0ZulT5jMnDA3JLsuSDU135r/s4t/Pmx4atg==}
     engines: {node: '>= 18', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
     dev: false
 
@@ -11920,6 +11931,10 @@ packages:
       '@shikijs/core': 1.6.0
     dev: false
 
+  /shlex@2.1.2:
+    resolution: {integrity: sha512-Nz6gtibMVgYeMEhUjp2KuwAgqaJA1K155dU/HuDaEJUGgnmYfVtVZah+uerVWdH8UGnyahhDCgABbYTbs254+w==}
+    dev: false
+
   /signal-exit@3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
     dev: false
@@ -12560,7 +12575,7 @@ packages:
   /tauri-plugin-jarvis-api@0.0.1-alpha.1:
     resolution: {integrity: sha512-HW5FqLoGmJClgRvxoMgz2V60be3lC0ywcvn/s1eEiTXrdWTvriVa7foWqyWcfq0Xoj9ykSmBrfoT7s/ge1lnZQ==}
     dependencies:
-      '@tauri-apps/api': 2.0.0-beta.11
+      '@tauri-apps/api': 2.0.0-beta.13
       '@tauri-apps/plugin-os': 2.0.0-beta.3
       zod: 3.23.8
     dev: false
