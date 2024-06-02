@@ -14,7 +14,9 @@
     "shortDescription": "Video Processor",
     "longDescription": "Video Processing. Get video info. Convert video format. Compress video. ",
     "demoImages": [],
-    "permissions": [],
+    "permissions": [
+      "shell"
+    ],
     "uiCmds": [
       {
         "name": "Video Info",
@@ -36,15 +38,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "jarvis-api": "latest",
     "@radix-icons/vue": "^1.0.0",
     "@vueuse/core": "^10.9.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "jarvis-api": "0.0.2-alpha.13",
     "radix-vue": "^1.7.4",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@iconify-json/radix-icons": "^1.1.14",

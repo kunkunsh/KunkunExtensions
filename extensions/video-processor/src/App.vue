@@ -1,32 +1,124 @@
 <script setup lang="ts">
 import { useColorMode } from "@vueuse/core";
+import {
+  CalendarIcon,
+  EnvelopeClosedIcon,
+  FaceIcon,
+  GearIcon,
+  PersonIcon,
+  RocketIcon,
+} from "@radix-icons/vue";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command";
+
 useColorMode();
 </script>
 
 <template>
-  <div class="border h-screen flex flex-col justify-center">
-    <div class="flex justify-center">
-      <a href="https://vitejs.dev" target="_blank">
-        <img src="/vite.svg" class="logo" alt="Vite logo" />
-      </a>
-      <a href="https://vuejs.org/" target="_blank">
-        <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-      </a>
-    </div>
-  </div>
+  <Command class="rounded-lg border shadow-md">
+    <CommandInput placeholder="Type a command or search..." class="" />
+    <CommandList>
+      <CommandEmpty>No results found.</CommandEmpty>
+      <CommandGroup heading="Suggestions">
+        <CommandItem value="Calendar">
+          <CalendarIcon class="mr-2 h-4 w-4" />
+          <span>Calendar</span>
+        </CommandItem>
+        <CommandItem value="Search Emoji">
+          <FaceIcon class="mr-2 h-4 w-4" />
+          <span>Search Emoji</span>
+        </CommandItem>
+        <CommandItem value="Launch">
+          <RocketIcon class="mr-2 h-4 w-4" />
+          <span>Launch</span>
+        </CommandItem>
+      </CommandGroup>
+      <CommandSeparator />
+      <CommandGroup heading="Settings">
+        <CommandItem value="Profile">
+          <PersonIcon class="mr-2 h-4 w-4" />
+          <span>Profile</span>
+          <CommandShortcut>⌘P</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Mail">
+          <EnvelopeClosedIcon class="mr-2 h-4 w-4" />
+          <span>Mail</span>
+          <CommandShortcut>⌘B</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Settings">
+          <GearIcon class="mr-2 h-4 w-4" />
+          <span>Settings</span>
+          <CommandShortcut>⌘S</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Profile">
+          <PersonIcon class="mr-2 h-4 w-4" />
+          <span>Profile</span>
+          <CommandShortcut>⌘P</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Mail">
+          <EnvelopeClosedIcon class="mr-2 h-4 w-4" />
+          <span>Mail</span>
+          <CommandShortcut>⌘B</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Settings">
+          <GearIcon class="mr-2 h-4 w-4" />
+          <span>Settings</span>
+          <CommandShortcut>⌘S</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Profile">
+          <PersonIcon class="mr-2 h-4 w-4" />
+          <span>Profile</span>
+          <CommandShortcut>⌘P</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Mail">
+          <EnvelopeClosedIcon class="mr-2 h-4 w-4" />
+          <span>Mail</span>
+          <CommandShortcut>⌘B</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Settings">
+          <GearIcon class="mr-2 h-4 w-4" />
+          <span>Settings</span>
+          <CommandShortcut>⌘S</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Profile">
+          <PersonIcon class="mr-2 h-4 w-4" />
+          <span>Profile</span>
+          <CommandShortcut>⌘P</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Mail">
+          <EnvelopeClosedIcon class="mr-2 h-4 w-4" />
+          <span>Mail</span>
+          <CommandShortcut>⌘B</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Settings">
+          <GearIcon class="mr-2 h-4 w-4" />
+          <span>Settings</span>
+          <CommandShortcut>⌘S</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Profile">
+          <PersonIcon class="mr-2 h-4 w-4" />
+          <span>Profile</span>
+          <CommandShortcut>⌘P</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Mail">
+          <EnvelopeClosedIcon class="mr-2 h-4 w-4" />
+          <span>Mail</span>
+          <CommandShortcut>⌘B</CommandShortcut>
+        </CommandItem>
+        <CommandItem value="Settings">
+          <GearIcon class="mr-2 h-4 w-4" />
+          <span>Settings</span>
+          <CommandShortcut>⌘S</CommandShortcut>
+        </CommandItem>
+      </CommandGroup>
+    </CommandList>
+  </Command>
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
