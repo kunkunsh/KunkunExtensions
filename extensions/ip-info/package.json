@@ -17,7 +17,7 @@
     "@vueuse/core": "^10.9.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "jarvis-api": "0.0.2-alpha.11",
+    "jarvis-api": "0.0.2-alpha.13",
     "radix-vue": "^1.8.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
