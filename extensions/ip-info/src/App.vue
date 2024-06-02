@@ -263,3 +263,8 @@ function onIpSearch(e: Event) {
     </Command>
   </main>
 </template>
+<style>
+.dark {
+  color-scheme: dark;
+}
+</style>
