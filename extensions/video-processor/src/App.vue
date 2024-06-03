@@ -23,22 +23,33 @@ import {
 import { onMounted, ref, watch } from "vue";
 import VideoDetail from "./components/VideoDetail.vue";
 import { getFirstFrameOfVideo } from "./lib/utils";
+import { useToast } from "@/components/ui/toast/use-toast";
 
+const { toast } = useToast();
 useColorMode();
 
 const selectedFiles = ref<string[]>([]);
 
+function refreshList() {
+  selectedFiles.value = [];
+  getSelectedFilesInFileExplorer()
+    .then((files) => {
+      selectedFiles.value = files;
+      if (files.length > 0) {
+        selectedVideo.value = files[0];
+      }
+      // return getFirstFrameOfVideo(files[0]);
+    })
+    .catch((err) => {
+      toast({
+        title: "No selected files found",
+        variant: "destructive",
+      });
+    });
+}
+
 onMounted(() => {
-  getSelectedFilesInFileExplorer().then((files) => {
-    selectedFiles.value = files;
-    if (files.length > 0) {
-      selectedVideo.value = files[0];
-    }
-    // return getFirstFrameOfVideo(files[0]);
-  });
-  // .then((data) => {
-  //   console.log(data);
-  // });
+  refreshList();
 });
 
 let selectedVideo = ref<string | undefined>();
@@ -50,7 +61,12 @@ let selectedVideo = ref<string | undefined>();
     <div class="h-8" data-tauri-drag-region />
     <div class="grow overflow-auto flex">
       <Command class="flex flex-col h-full" v-model="selectedVideo" :always-focus="true">
-        <CommandInput placeholder="Type a command or search..." class="" />
+        <CommandInput
+          placeholder="Type a command or search..."
+          class="w-full"
+          @refresh="refreshList"
+        />
+
         <div class="grow flex overflow-auto">
           <CommandList class="w-64 max-h-full h-full overflow-auto">
             <CommandEmpty>No results found.</CommandEmpty>

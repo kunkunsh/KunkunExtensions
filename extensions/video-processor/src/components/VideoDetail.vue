@@ -19,9 +19,9 @@ function refreshVideoInfo() {
   getFFProbeVideoInfo(props.selectedVideo).then((res) => {
     videoDetail.value = res;
   });
-  getFirstFrameOfVideo(props.selectedVideo).then((res) => {
-    videoPreviewPng.value = res;
-  });
+  // getFirstFrameOfVideo(props.selectedVideo).then((res) => {
+  //   videoPreviewPng.value = res;
+  // });
 }
 
 watch(

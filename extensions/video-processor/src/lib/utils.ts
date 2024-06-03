@@ -38,7 +38,10 @@ export function getFFProbeVideoInfo(videoPath: string) {
     "-show_streams",
     videoPath,
   ]);
-  return execute(command).then(({ stdout }) => {
+  return execute(command).then(({ stdout, stderr }) => {
+    console.log(stdout);
+    console.log(stderr);
+
     const json = JSON.parse(stdout);
     const parseRes = FFProbeSchema.safeParse(json);
     if (parseRes.success) {
@@ -54,13 +57,6 @@ export function getFFProbeVideoInfo(videoPath: string) {
       return parseRes.data;
     }
     return Promise.reject(parseRes.error.toString());
-    // try {
-    //   return FfprobeSchema.parse(JSON.parse(stdout));
-    // } catch (e) {
-    //   console.error(e);
-
-    //   return Promise.reject("Failed to parse ffprobe output");
-    // }
   });
 }
 
