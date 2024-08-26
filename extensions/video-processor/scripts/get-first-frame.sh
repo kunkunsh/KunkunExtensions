@@ -1,1 +1,0 @@
-ffmpeg -i /Users/hacker/Desktop/kxzp.mp4 -vf "select=eq(n\,0)" -vframes 1 -f image2pipe - | base64
