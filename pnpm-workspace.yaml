@@ -1,4 +1,0 @@
-packages:
-  - "extensions/*"
-  - "extension-templates/*"
-  - "ci"

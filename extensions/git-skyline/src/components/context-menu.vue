@@ -1,38 +1,41 @@
 <script setup lang="ts">
+import { cn } from "@/lib/utils"
+import { ui } from "@kksh/api/ui/iframe"
 import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuTrigger,
-} from "@/components/ui/context-menu";
-import { HTMLAttributes } from "vue";
-import { cn } from "@/lib/utils";
-import { router } from "@/lib/router";
-import { window } from "jarvis-api/ui";
+	ContextMenu,
+	ContextMenuContent,
+	ContextMenuItem,
+	ContextMenuTrigger
+} from "@kksh/vue/context-menu"
+import { HTMLAttributes } from "vue"
 
-const props = defineProps<{ class?: HTMLAttributes["class"]; showInstructions: boolean }>();
+const displayPreference = defineModel<boolean>("displayPreference", { required: true })
+const props = defineProps<{ class?: HTMLAttributes["class"]; showInstructions: boolean }>()
 function selectSetting() {
-  router.push({ path: "/setting" });
+	displayPreference.value = true
 }
 
 function close() {
-  window.closeWindow();
+	ui.goBack()
 }
 </script>
 
 <template>
-  <ContextMenu :class="cn(props.class, '')" data-tauri-drag-region>
-    <ContextMenuTrigger class="w-full h-full">
-      <div :class="cn('h-full w-full', showInstructions ? 'border border-red-400' : '')">
-        <div v-if="showInstructions" class="flex flex-col h-full w-full justify-center items-center">
-          <h1 class="text-3xl z-0 select-none">Right Click on This Region to Go To Settings</h1>
-          <h1 class="text-3xl z-0 select-none">Press Escape To Close Window</h1>
-        </div>
-      </div>
-    </ContextMenuTrigger>
-    <ContextMenuContent>
-      <ContextMenuItem @select="selectSetting"> Setting </ContextMenuItem>
-      <ContextMenuItem @select="close"> Close </ContextMenuItem>
-    </ContextMenuContent>
-  </ContextMenu>
+	<ContextMenu :class="cn(props.class, '')" data-tauri-drag-region>
+		<ContextMenuTrigger class="h-full w-full">
+			<div :class="cn('h-full w-full', showInstructions ? 'border border-green-400' : '')">
+				<div
+					v-if="showInstructions"
+					class="flex h-full w-full flex-col items-center justify-center"
+				>
+					<h1 class="z-0 select-none text-3xl">Right Click on This Region to Go To Settings</h1>
+					<h1 class="z-0 select-none text-3xl">Press Escape To Close Window</h1>
+				</div>
+			</div>
+		</ContextMenuTrigger>
+		<ContextMenuContent>
+			<ContextMenuItem @select="selectSetting"> Setting </ContextMenuItem>
+			<ContextMenuItem @select="close"> Close </ContextMenuItem>
+		</ContextMenuContent>
+	</ContextMenu>
 </template>

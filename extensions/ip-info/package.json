@@ -1,36 +1,17 @@
 {
-  "$schema": "https://extensions.jarvis.huakun.tech/schema.json",
-  "name": "@huakunshen/jarvis-ext-ip-info",
-  "version": "0.0.2",
-  "description": "Jarvis IP Extension",
-  "private": false,
+  "$schema": "https://schema.kunkun.sh/",
+  "name": "ip-info",
+  "version": "0.0.3",
+  "module": "index.ts",
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --build --force"
-  },
-  "dependencies": {
-    "@radix-icons/vue": "^1.0.0",
-    "@vueuse/core": "^10.9.0",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.1",
-    "jarvis-api": "0.0.2-alpha.11",
-    "radix-vue": "^1.8.0",
-    "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7",
-    "vue": "^3.4.21",
-    "zod": "^3.23.8"
-  },
-  "jarvis": {
+  "kunkun": {
     "name": "IP Info",
     "shortDescription": "Show your current IP Info and Search for IP Address",
     "longDescription": "Will display you IP Address and more information about this IP address, including Geo Location, ASN, ISP. You can also search for a specific IP.",
-    "identifier": "tech.huakun.jarvis-ext-ip-info",
+    "identifier": "ip-info",
     "permissions": [
-      "clipboard-write"
+      "clipboard:write-text",
+      "fetch:all"
     ],
     "demoImages": [
       "./demo/ip-info.png"
@@ -39,41 +20,38 @@
       "type": "iconify",
       "value": "mdi:ip-network"
     },
-    "uiCmds": [
+    "templateUiCmds": [
       {
-        "main": "dist",
         "name": "IP Info",
+        "main": "dist/index.js",
         "description": "Display your current IP addres and detailed information. Search for other IP address.",
-        "devMain": "http://localhost:5173",
-        "window": {
-          "titleBarStyle": "overlay"
-        },
-        "cmds": [
-          {
-            "type": "text",
-            "value": "ip"
-          }
-        ]
+        "cmds": []
       }
-    ]
+    ],
+    "customUiCmds": []
   },
-  "devDependencies": {
-    "@iconify-json/radix-icons": "^1.1.14",
-    "@iconify/vue": "^4.1.2",
-    "@tsconfig/node20": "^20.1.4",
-    "@types/node": "^20.12.11",
-    "@vitejs/plugin-vue": "^5.0.4",
-    "@vue/tsconfig": "^0.5.1",
-    "autoprefixer": "^10.4.19",
-    "npm-run-all2": "^6.1.2",
-    "postcss": "^8.4.38",
-    "run-p": "^0.0.0",
-    "tailwindcss": "^3.4.3",
-    "typescript": "~5.4.0",
-    "vite": "^5.2.8",
-    "vue-tsc": "^2.0.11"
+  "scripts": {
+    "dev": "rollup -c --watch",
+    "build": "rimraf dist && rollup -c"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "@kksh/api": "0.0.4-beta.0",
+    "valibot": "^0.36.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.18.1",
+    "rollup-plugin-visualizer": "^5.12.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
 }
