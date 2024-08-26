@@ -7,12 +7,13 @@ import {
   GetObjectCommand,
   PutObjectCommand,
 } from "@aws-sdk/client-s3";
-import { ExtPackageJson } from "jarvis-api/models";
+import { ExtPackageJson } from "@kksh/api/models";
 import path, { join } from "path";
 import { DOCKER_BUILD_ENTRYPOINT, REPO_ROOT } from "./constant";
 import { spawn, exec } from "node:child_process";
 import { supabase } from "./supabase";
 import sharp from "sharp";
+import * as v from 'valibot'
 
 /**
  * Package Name can be scoped or not
@@ -31,14 +32,12 @@ export function computeTarballName(packageName: string, version: string): string
 }
 
 export function parsePackageJson(pkgJsonPath: string) {
-  const parse = ExtPackageJson.safeParse(JSON.parse(fs.readFileSync(pkgJsonPath, "utf8")));
-  console.log("checkPackagesValidity");
-  
-  if (parse.error) {
-    console.error(`Error parsing ${pkgJsonPath}: ${parse.error}`);
+  const parse = v.safeParse(ExtPackageJson, JSON.parse(fs.readFileSync(pkgJsonPath, "utf8")));
+  if (parse.issues) {
+    console.error(`Error parsing ${pkgJsonPath}: ${v.flatten(parse.issues)}`);
     process.exit(1);
   }
-  const pkgJson = parse.data;
+  const pkgJson = parse.output;
   return pkgJson;
 }
 
@@ -48,7 +47,7 @@ export function checkPackagesValidity(extPaths: string[]) {
   const pkgs = extPaths.map((ext) => parsePackageJson(join(ext, "package.json")));
 
   /* --------------------- make sure identifier is unique --------------------- */
-  const identifiers = pkgs.map((pkg) => pkg.jarvis.identifier);
+  const identifiers = pkgs.map((pkg) => pkg.kunkun.identifier);
   const uniqueIdentifiers = new Set(identifiers);
   if (identifiers.length !== uniqueIdentifiers.size) {
     console.error("Identifiers are not unique");
@@ -61,7 +60,7 @@ export function checkPackagesValidity(extPaths: string[]) {
   /* ------------------ Check Demo Images and files Existence ----------------- */
   for (const extPath of extPaths) {
     const pkg = parsePackageJson(join(extPath, "package.json"));
-    for (const imgPath of pkg.jarvis.demoImages) {
+    for (const imgPath of pkg.kunkun.demoImages) {
       const imgFullPath = join(extPath, imgPath);
       if (!fs.existsSync(imgFullPath)) {
         console.error(`Demo Image not found: ${imgFullPath} in ${extPath}`);
@@ -97,6 +96,7 @@ export function computeFileHash(filePath: string, algorithm: string): Promise<st
     const stream = fs.createReadStream(filePath);
 
     stream.on("data", (data) => {
+      // @ts-ignore
       hash.update(data);
     });
 
@@ -321,6 +321,7 @@ export async function uploadTarballToSupabaseStorage(
 
 export function computeHash(buffer: Buffer, algorithm: "sha1" | "sha256" | "sha512") {
   const hash = crypto.createHash(algorithm);
+  // @ts-ignore
   hash.update(buffer);
   return hash.digest("hex");
 }

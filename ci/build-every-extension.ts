@@ -1,4 +1,4 @@
-import { $, fileURLToPath } from "bun";
+import { $ } from "bun";
 import path from "path";
 import { ExtensionsDir } from "./src/constant";
 import fs from "fs";

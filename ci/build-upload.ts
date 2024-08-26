@@ -33,11 +33,11 @@ for (const extPath of extensionsCandidateFolders) {
   const dbExt = await supabase
     .from("ext_publish")
     .select("*")
-    .eq("identifier", pkg.jarvis.identifier)
+    .eq("identifier", pkg.kunkun.identifier)
     .eq("version", pkg.version);
   if (dbExt.data && dbExt.data.length > 0) {
     console.log(
-      `Extension ${pkg.jarvis.identifier}@${pkg.version} already exists in the database. Skip Building.`,
+      `Extension ${pkg.kunkun.identifier}@${pkg.version} already exists in the database. Skip Building.`,
     );
     // existingExtMap.set(extPath, dbExt.data[0]);
     continue;
@@ -79,7 +79,7 @@ for (const chunk of toBuildExtChunks) {
 //   const dbRes = await supabase
 //     .from("extensions")
 //     .select("*")
-//     .eq("identifier", buildResult.pkg.jarvis.identifier)
+//     .eq("identifier", buildResult.pkg.kunkun.identifier)
 //     .eq("version", buildResult.pkg.version);
 //   console.log("dbRes", dbRes);
 //   if (dbRes.data && dbRes.data.length > 0) {
@@ -104,7 +104,7 @@ for (const chunk of toBuildExtChunks) {
 //   }
 //   resultsToUpload.push(buildResult);
 //   dbExtSet.add({
-//     identifier: buildResult.pkg.jarvis.identifier,
+//     identifier: buildResult.pkg.kunkun.identifier,
 //     version: buildResult.pkg.version,
 //   });
 // }
@@ -119,7 +119,7 @@ for (const buildResult of buildResults) {
   const extFetchDBResult = await supabase
     .from("extensions")
     .select("*")
-    .eq("identifier", buildResult.pkg.jarvis.identifier);
+    .eq("identifier", buildResult.pkg.kunkun.identifier);
 
   if (!extFetchDBResult.data || extFetchDBResult.data.length === 0) {
     await supabase
@@ -127,9 +127,9 @@ for (const buildResult of buildResults) {
       .insert([
         {
           name: buildResult.pkg.name,
-          short_description: buildResult.pkg.jarvis.shortDescription,
-          long_description: buildResult.pkg.jarvis.longDescription,
-          identifier: buildResult.pkg.jarvis.identifier,
+          short_description: buildResult.pkg.kunkun.shortDescription,
+          long_description: buildResult.pkg.kunkun.longDescription,
+          identifier: buildResult.pkg.kunkun.identifier,
           readme: readme,
           downloads: 0,
         },
@@ -137,57 +137,58 @@ for (const buildResult of buildResults) {
       .select();
   }
 
-  const demoImgPaths = buildResult.pkg.jarvis.demoImages
+  const demoImgPaths = buildResult.pkg.kunkun.demoImages
     .map((p) => join(buildResult.extPath, p))
     .filter((p) => fs.existsSync(p));
   const demoImgsDBPaths = await Promise.all(demoImgPaths.map((p) => uploadImage(p))); // file storage paths
-  const pkgIcon = buildResult.pkg.jarvis.icon;
+  const pkgIcon = buildResult.pkg.kunkun.icon;
   const iconClone = { ...pkgIcon };
-  if (buildResult.pkg.jarvis.icon.type === "asset") {
-    const iconPath = join(buildResult.extPath, pkgIcon.value);
-    if (fs.existsSync(iconPath)) {
-    } else {
-      console.error(`Icon file not found: ${iconPath}`);
-    }
-    iconClone.value = await uploadImage(iconPath);
-  }
+  // TODO: handle icon type
+  // if (buildResult.pkg.kunkun.icon.type === "asset") {
+  //   const iconPath = join(buildResult.extPath, pkgIcon.value);
+  //   if (fs.existsSync(iconPath)) {
+  //   } else {
+  //     console.error(`Icon file not found: ${iconPath}`);
+  //   }
+  //   iconClone.value = await uploadImage(iconPath);
+  // }
   /* ---------- Update README, icon, description in extensions table ---------- */
   await supabase
     .from("extensions")
     .update({
-      name: buildResult.pkg.jarvis.name,
-      short_description: buildResult.pkg.jarvis.shortDescription,
-      long_description: buildResult.pkg.jarvis.longDescription,
+      name: buildResult.pkg.kunkun.name,
+      short_description: buildResult.pkg.kunkun.shortDescription,
+      long_description: buildResult.pkg.kunkun.longDescription,
       icon: iconClone,
       readme,
     })
-    .eq("identifier", buildResult.pkg.jarvis.identifier)
+    .eq("identifier", buildResult.pkg.kunkun.identifier)
     .select();
 
   /* ----------------------------- Upload Tarball ----------------------------- */
   const supabasePath = await uploadTarballToSupabaseStorage(
     buildResult.tarballPath,
-    buildResult.pkg.jarvis.identifier,
+    buildResult.pkg.kunkun.identifier,
     buildResult.pkg.version,
     buildResult.tarballFilename,
   );
   const s3Path = await uploadTarballToS3(
     buildResult.tarballPath,
-    buildResult.pkg.jarvis.identifier,
+    buildResult.pkg.kunkun.identifier,
     buildResult.pkg.version,
     buildResult.tarballFilename,
   );
-  const cmdCount = buildResult.pkg.jarvis.uiCmds.length + buildResult.pkg.jarvis.inlineCmds.length;
+  const cmdCount = buildResult.pkg.kunkun.customUiCmds.length + buildResult.pkg.kunkun.templateUiCmds.length;
   const { data, error } = await supabase.from("ext_publish").insert([
     {
       name: buildResult.pkg.name,
       version: buildResult.pkg.version,
-      manifest: buildResult.pkg.jarvis,
+      manifest: buildResult.pkg.kunkun,
       shasum: buildResult.shasum,
       size: fs.statSync(buildResult.tarballPath).size,
       tarball_path: supabasePath,
       cmd_count: cmdCount,
-      identifier: buildResult.pkg.jarvis.identifier,
+      identifier: buildResult.pkg.kunkun.identifier,
       downloads: 0,
       demo_images: demoImgsDBPaths,
     },
