@@ -22,6 +22,8 @@ jobs:
         with:
           bun-version: 1.1.10
       - run: pnpm i
+      - run: pnpm i
+        working-directory: ci
       - name: Docker Build and Uplad Extensions
         env:
           SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
