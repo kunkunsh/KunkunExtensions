@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.kunkun.sh/",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "name": "hacker-news",
   "module": "index.ts",
   "type": "module",
@@ -15,7 +15,17 @@
     "longDescription": "",
     "demoImages": [],
     "permissions": [
-      "shell:open"
+      {
+        "permission": "open:url",
+        "allow": [
+          {
+            "url": "https://**"
+          },
+          {
+            "url": "http://**"
+          }
+        ]
+      }
     ],
     "templateUiCmds": [
       {
