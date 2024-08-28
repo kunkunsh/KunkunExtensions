@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schema.kunkun.sh/",
 	"name": "kunkun-ext-jwt",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"private": true,
 	"kunkun": {
 		"name": "JWT Inspector",
@@ -53,7 +53,7 @@
 		"templateUiCmds": []
 	},
 	"files": [
-		"files"
+		"build"
 	],
 	"scripts": {
 		"dev": "vite dev",
