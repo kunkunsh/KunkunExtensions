@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schema.kunkun.sh/",
 	"name": "qrcode",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Jarvis QRCode Extension",
 	"private": true,
 	"kunkun": {
