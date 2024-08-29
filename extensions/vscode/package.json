@@ -1,69 +1,81 @@
 {
-	"$schema": "https://schema.kunkun.sh/",
-	"name": "vscode",
-	"version": "0.0.2",
-	"type": "module",
-	"kunkun": {
-		"name": "VSCode",
-		"shortDescription": "Open projects quickly with VSCode.",
-		"longDescription": "This extension reads data from VSCode Project Manager extension and list the projects. Pick one from the list and it will be opened with VSCode.",
-		"identifier": "vscode",
-		"permissions": [
-			"os:all",
-			"shell:open",
-			"shell:execute",
-			{
-				"permission": "fs:read",
-				"allow": [
-					{
-						"path": "$HOME/Library/Application Support/Code/User/globalStorage/alefragnani.project-manager/projects.json"
-					},
-					{
-						"path": "$HOME/.config/Code/User/globalStorage/alefragnani.project-manager/projects.json"
-					},
-					{
-						"path": "$APPDATA/Code/User/globalStorage/alefragnani.project-manager/projects.json"
-					}
-				]
-			}
-		],
-		"demoImages": [],
-		"icon": {
-			"type": "iconify",
-			"value": "vscode-icons:file-type-vscode"
-		},
-		"customUiCmds": [],
-		"templateUiCmds": [
-			{
-				"name": "Search VSCode Project Manager",
-				"main": "dist/index.js",
-				"cmds": []
-			}
-		]
-	},
-	"files": [
-		"./dist"
-	],
-	"scripts": {
-		"dev": "rollup -c --watch",
-		"build": "rimraf dist && rollup -c"
-	},
-	"dependencies": {
-		"@kksh/api": "0.0.4-beta.0",
-		"valibot": "^0.39.0"
-	},
-	"devDependencies": {
-		"@rollup/plugin-commonjs": "^26.0.1",
-		"@rollup/plugin-node-resolve": "^15.2.3",
-		"@rollup/plugin-terser": "^0.4.4",
-		"@rollup/plugin-typescript": "^11.1.6",
-		"@types/bun": "latest",
-		"rimraf": "^6.0.1",
-		"rollup": "^4.18.1",
-		"rollup-plugin-visualizer": "^5.12.0"
-	},
-	"peerDependencies": {
-		"typescript": "^5.0.0"
-	},
-	"packageManager": "pnpm@9.8.0+sha512.8e4c3550fb500e808dbc30bb0ce4dd1eb614e30b1c55245f211591ec2cdf9c611cabd34e1364b42f564bd54b3945ed0f49d61d1bbf2ec9bd74b866fcdc723276"
+  "$schema": "https://schema.kunkun.sh/",
+  "name": "vscode",
+  "version": "0.0.2",
+  "type": "module",
+  "kunkun": {
+    "name": "VSCode",
+    "shortDescription": "Open projects quickly with VSCode.",
+    "longDescription": "This extension reads data from VSCode Project Manager extension and list the projects. Pick one from the list and it will be opened with VSCode.",
+    "identifier": "vscode",
+    "permissions": [
+      "os:all",
+      {
+        "permission": "shell:execute",
+        "allow": [
+          {
+            "cmd": {
+              "program": "code",
+              "args": [
+                ".+"
+              ]
+            }
+          }
+        ]
+      },
+      "shell:execute",
+      {
+        "permission": "fs:read",
+        "allow": [
+          {
+            "path": "$HOME/Library/Application Support/Code/User/globalStorage/alefragnani.project-manager/projects.json"
+          },
+          {
+            "path": "$HOME/.config/Code/User/globalStorage/alefragnani.project-manager/projects.json"
+          },
+          {
+            "path": "$APPDATA/Code/User/globalStorage/alefragnani.project-manager/projects.json"
+          }
+        ]
+      }
+    ],
+    "demoImages": [],
+    "icon": {
+      "type": "iconify",
+      "value": "vscode-icons:file-type-vscode"
+    },
+    "customUiCmds": [],
+    "templateUiCmds": [
+      {
+        "name": "Search VSCode Project Manager",
+        "main": "dist/index.js",
+        "cmds": []
+      }
+    ]
+  },
+  "files": [
+    "./dist"
+  ],
+  "scripts": {
+    "dev": "rollup -c --watch",
+    "build": "rimraf dist && rollup -c"
+  },
+  "dependencies": {
+    "@kksh/api": "0.0.4-beta.0",
+    "valibot": "^0.39.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/bun": "latest",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.18.1",
+    "rollup-plugin-visualizer": "^5.12.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "packageManager": "pnpm@9.8.0+sha512.8e4c3550fb500e808dbc30bb0ce4dd1eb614e30b1c55245f211591ec2cdf9c611cabd34e1364b42f564bd54b3945ed0f49d61d1bbf2ec9bd74b866fcdc723276"
 }
