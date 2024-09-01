@@ -1,4 +1,3 @@
-import { proxy } from "@huakunshen/comlink"
 import {
 	clipboard,
 	expose,

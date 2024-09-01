@@ -1,8 +1,6 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
-const isProduction = process.env.KK_NODE_ENV === 'production';
-
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
@@ -23,11 +21,6 @@ const config = {
 			precompress: false,
 			strict: true
 		}),
-		paths: {
-			base: isProduction
-				? '/extensions/jwt/build'
-				: '/dev-extensions/jwt/build'
-		},
 		alias: {
 			'@/*': './src/lib/*'
 		}

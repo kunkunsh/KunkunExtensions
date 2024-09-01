@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.kunkun.sh/",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "name": "hacker-news",
   "module": "index.ts",
   "type": "module",
@@ -38,22 +38,14 @@
     "customUiCmds": []
   },
   "scripts": {
-    "dev": "rollup -c --watch",
-    "build": "rimraf dist && rollup -c"
+    "dev": "bun build.ts dev",
+    "build": "bun build.ts"
   },
   "dependencies": {
-    "@kksh/api": "0.0.4-beta.0",
-    "valibot": "^0.36.0"
+    "@kksh/api": "0.0.7"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "rimraf": "^6.0.1",
-    "rollup": "^4.18.1",
-    "rollup-plugin-typescript2": "^0.36.0",
-    "rollup-plugin-visualizer": "^5.12.0"
+    "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

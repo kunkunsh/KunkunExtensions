@@ -2,7 +2,7 @@
 	"$schema": "https://schema.kunkun.sh/",
 	"name": "kunkun-ext-git-skyline",
 	"private": true,
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
@@ -10,7 +10,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@kksh/api": "0.0.4-beta.0",
+		"@kksh/api": "0.0.7",
 		"@kksh/vue": "0.1.2",
 		"@radix-icons/vue": "^1.0.0",
 		"class-variance-authority": "^0.7.0",
@@ -46,7 +46,8 @@
 		],
 		"customUiCmds": [
 			{
-				"main": "dist",
+				"main": "/",
+				"dist": "dist",
 				"devMain": "http://localhost:5173",
 				"name": "Git Skyline",
 				"cmds": [],
