@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.kunkun.sh/",
   "name": "ip-info",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "module": "index.ts",
   "type": "module",
   "kunkun": {

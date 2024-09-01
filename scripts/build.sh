@@ -9,5 +9,5 @@ for ext in $(ls extensions); do
         -v $(pwd)/extensions/$ext:/workspace \
         -w /workspace --rm \
         --platform=linux/amd64 \
-        node:20 /entrypoint.sh
+        huakunshen/kunkun-ext-builder:latest /entrypoint.sh
 done
