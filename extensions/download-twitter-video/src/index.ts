@@ -2,8 +2,8 @@ import {
 	clipboard,
 	expose,
 	Form,
+	open,
 	path,
-	shell,
 	toast,
 	ui,
 	updownload,
@@ -26,7 +26,7 @@ async function handleDownload(username: string, tweetID: string) {
 			actionLabel: "Open Folder"
 		},
 		async () => {
-			shell.open(await path.downloadDir())
+			open.folder(await path.downloadDir())
 		}
 	)
 }

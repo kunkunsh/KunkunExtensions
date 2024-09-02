@@ -61,7 +61,7 @@
     "build": "bun build.ts"
   },
   "dependencies": {
-    "@kksh/api": "0.0.7",
+    "@kksh/api": "0.0.9",
     "valibot": "^0.40.0"
   },
   "devDependencies": {

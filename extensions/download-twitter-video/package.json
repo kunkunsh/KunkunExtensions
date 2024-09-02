@@ -1,47 +1,54 @@
 {
-  "$schema": "https://schema.kunkun.sh",
-  "name": "download-twitter-video",
-  "version": "0.0.4",
-  "type": "module",
-  "kunkun": {
-    "name": "Download Twitter Video",
-    "shortDescription": "Download Twitter Video",
-    "longDescription": "Prodivde a Tweet URL, the video in the given tweet will be downloaded for you",
-    "identifier": "download-twitter-video",
-    "permissions": [
-      "clipboard:read-text",
-      "updownload:download",
-      "shell:open"
-    ],
-    "demoImages": [],
-    "icon": {
-      "type": "iconify",
-      "value": "skill-icons:twitter"
-    },
-    "customUiCmds": [],
-    "templateUiCmds": [
-      {
-        "name": "Download Twitter/X Video",
-        "main": "dist/index.js",
-        "cmds": []
-      }
-    ]
-  },
-  "files": [
-    "./dist"
-  ],
-  "scripts": {
-    "dev": "bun build.ts dev",
-    "build": "bun build.ts"
-  },
-  "dependencies": {
-    "@kksh/api": "0.0.7"
-  },
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "packageManager": "pnpm@9.9.0"
+	"$schema": "https://schema.kunkun.sh",
+	"name": "download-twitter-video",
+	"version": "0.0.5",
+	"type": "module",
+	"kunkun": {
+		"name": "Download Twitter Video",
+		"shortDescription": "Download Twitter Video",
+		"longDescription": "Prodivde a Tweet URL, the video in the given tweet will be downloaded for you",
+		"identifier": "download-twitter-video",
+		"permissions": [
+			"clipboard:read-text",
+			"updownload:download",
+			{
+				"permission": "open:folder",
+				"allow": [
+					{
+						"path": "$DOWNLOAD"
+					}
+				]
+			}
+		],
+		"demoImages": [],
+		"icon": {
+			"type": "iconify",
+			"value": "skill-icons:twitter"
+		},
+		"customUiCmds": [],
+		"templateUiCmds": [
+			{
+				"name": "Download Twitter/X Video",
+				"main": "dist/index.js",
+				"cmds": []
+			}
+		]
+	},
+	"files": [
+		"./dist"
+	],
+	"scripts": {
+		"dev": "bun build.ts dev",
+		"build": "bun build.ts"
+	},
+	"dependencies": {
+		"@kksh/api": "0.0.9"
+	},
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"packageManager": "pnpm@9.9.0"
 }

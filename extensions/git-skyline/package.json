@@ -10,7 +10,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@kksh/api": "0.0.7",
+		"@kksh/api": "0.0.9",
 		"@kksh/vue": "0.1.2",
 		"@radix-icons/vue": "^1.0.0",
 		"class-variance-authority": "^0.7.0",

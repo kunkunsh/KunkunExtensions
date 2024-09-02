@@ -18,3 +18,4 @@ if [ $(ls -1 *.tgz 2>/dev/null | wc -l) -gt 1 ]; then
     exit 1
 fi
 cp *.tgz /workspace
+rm -rf node_modules
