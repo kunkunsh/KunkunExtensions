@@ -141,7 +141,7 @@ export function buildWithDocker(extPath: string): Promise<{
 		// console.log(pkg);
 		// console.log(REPO_ROOT);
 		const dockerCmd = `
-    run -v ${DOCKER_BUILD_ENTRYPOINT}:/entrypoint.sh -v ${extPath}:/workspace -w /workspace --rm --platform=linux/amd64 node:20 /entrypoint.sh`
+    run -v ${DOCKER_BUILD_ENTRYPOINT}:/entrypoint.sh -v ${extPath}:/workspace -w /workspace --rm --platform=linux/amd64 huakunshen/kunkun-ext-builder:latest /entrypoint.sh`
 		// console.log(dockerCmd);
 		const args = dockerCmd
 			.split(" ")

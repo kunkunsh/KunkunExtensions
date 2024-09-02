@@ -10,7 +10,6 @@ for ext in $(ls extensions); do
         -w /workspace/$ext --rm \
         --platform=linux/amd64 \
         huakunshen/kunkun-ext-builder:latest /entrypoint.sh
-        # node:20 /entrypoint.sh
     exit_code=$?
     if [ $exit_code -eq 0 ]; then
         echo "Build successful"
