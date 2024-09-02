@@ -6,8 +6,16 @@ for ext in $(ls extensions); do
     fi
     echo "Building $ext"
     docker run -v $(pwd)/scripts/docker/entrypoint.sh:/entrypoint.sh \
-        -v $(pwd)/extensions/$ext:/workspace \
-        -w /workspace --rm \
+        -v $(pwd)/extensions/$ext:/workspace/$ext \
+        -w /workspace/$ext --rm \
         --platform=linux/amd64 \
         huakunshen/kunkun-ext-builder:latest /entrypoint.sh
+        # node:20 /entrypoint.sh
+    exit_code=$?
+    if [ $exit_code -eq 0 ]; then
+        echo "Build successful"
+    else
+        echo "Build $ext failed with exit code $exit_code"
+        exit $exit_code
+    fi
 done

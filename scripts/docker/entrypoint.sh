@@ -1,11 +1,15 @@
-cd /workspace
-rm *.tgz
+set -e
+# cd /workspace
+
+if [ -e *.tgz ]; then
+    rm *.tgz
+fi
 rm -rf node_modules
-cp -r /workspace /workspace-copy
-cd /workspace-copy
+export PATH=/root/.bun/bin:$PATH
 corepack enable pnpm
-pnpm i
+pnpm install
 pnpm run build
+npx @kksh/cli@latest verify --publish
 npm pack
 # check number of *.tgz file in current directory
 # if more than 1, then exit with error
