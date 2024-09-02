@@ -10,10 +10,13 @@ importers:
     dependencies:
       '@kksh/api':
         specifier: 0.0.7
-        version: 0.0.7(typescript@5.5.4)
+        version: 0.0.7(tslib@2.7.0)(typescript@5.5.4)
       typescript:
         specifier: ^5.0.0
         version: 5.5.4
+      valibot:
+        specifier: ^0.40.0
+        version: 0.40.0(typescript@5.5.4)
     devDependencies:
       '@types/bun':
         specifier: latest
@@ -701,10 +704,10 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@kksh/api@0.0.7(typescript@5.5.4)':
+  '@kksh/api@0.0.7(tslib@2.7.0)(typescript@5.5.4)':
     dependencies:
       '@huakunshen/comlink': 4.4.1
-      '@rollup/plugin-typescript': 11.1.6(rollup@4.21.2)(typescript@5.5.4)
+      '@rollup/plugin-typescript': 11.1.6(rollup@4.21.2)(tslib@2.7.0)(typescript@5.5.4)
       '@tauri-apps/api': 2.0.0-rc.3
       '@tauri-apps/plugin-dialog': 2.0.0-rc.1
       '@tauri-apps/plugin-fs': 2.0.0-rc.1
@@ -721,7 +724,7 @@ snapshots:
       pretty-bytes: 6.1.1
       rollup: 4.21.2
       rollup-plugin-typescript2: 0.36.0(rollup@4.21.2)(typescript@5.5.4)
-      tauri-api-adapter: 0.3.4(typescript@5.5.4)
+      tauri-api-adapter: 0.3.4(tslib@2.7.0)(typescript@5.5.4)
       tauri-plugin-network-api: 2.0.3-beta.2
       tauri-plugin-shellx-api: 2.0.8
       tauri-plugin-system-info-api: 2.0.3
@@ -748,15 +751,18 @@ snapshots:
 
   '@rollup/plugin-alias@5.1.0(rollup@4.21.2)':
     dependencies:
-      rollup: 4.21.2
       slash: 4.0.0
+    optionalDependencies:
+      rollup: 4.21.2
 
-  '@rollup/plugin-typescript@11.1.6(rollup@4.21.2)(typescript@5.5.4)':
+  '@rollup/plugin-typescript@11.1.6(rollup@4.21.2)(tslib@2.7.0)(typescript@5.5.4)':
     dependencies:
       '@rollup/pluginutils': 5.1.0(rollup@4.21.2)
       resolve: 1.22.8
-      rollup: 4.21.2
       typescript: 5.5.4
+    optionalDependencies:
+      rollup: 4.21.2
+      tslib: 2.7.0
 
   '@rollup/pluginutils@4.2.1':
     dependencies:
@@ -768,6 +774,7 @@ snapshots:
       '@types/estree': 1.0.5
       estree-walker: 2.0.2
       picomatch: 2.3.1
+    optionalDependencies:
       rollup: 4.21.2
 
   '@rollup/rollup-android-arm-eabi@4.21.2':
@@ -1279,11 +1286,11 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  tauri-api-adapter@0.3.4(typescript@5.5.4):
+  tauri-api-adapter@0.3.4(tslib@2.7.0)(typescript@5.5.4):
     dependencies:
       '@huakunshen/comlink': 4.4.1
       '@rollup/plugin-alias': 5.1.0(rollup@4.21.2)
-      '@rollup/plugin-typescript': 11.1.6(rollup@4.21.2)(typescript@5.5.4)
+      '@rollup/plugin-typescript': 11.1.6(rollup@4.21.2)(tslib@2.7.0)(typescript@5.5.4)
       '@tauri-apps/api': 2.0.0-rc.4
       '@tauri-apps/plugin-dialog': 2.0.0-rc.1
       '@tauri-apps/plugin-fs': 2.0.0-rc.1
@@ -1296,7 +1303,7 @@ snapshots:
       rimraf: 5.0.10
       rollup: 4.21.2
       shx: 0.3.4
-      tauri-plugin-clipboard-api: 2.1.6(valibot@0.40.0)
+      tauri-plugin-clipboard-api: 2.1.6(valibot@0.40.0(typescript@5.5.4))
       tauri-plugin-network-api: 2.0.3-beta.2
       tauri-plugin-shellx-api: 2.0.8
       tauri-plugin-system-info-api: 2.0.3
@@ -1306,7 +1313,7 @@ snapshots:
     transitivePeerDependencies:
       - tslib
 
-  tauri-plugin-clipboard-api@2.1.6(valibot@0.40.0):
+  tauri-plugin-clipboard-api@2.1.6(valibot@0.40.0(typescript@5.5.4)):
     dependencies:
       '@tauri-apps/api': 2.0.0-beta.11
       valibot: 0.40.0(typescript@5.5.4)
@@ -1349,7 +1356,7 @@ snapshots:
   valibot@0.36.0: {}
 
   valibot@0.40.0(typescript@5.5.4):
-    dependencies:
+    optionalDependencies:
       typescript: 5.5.4
 
   vue-sonner@1.1.5: {}
