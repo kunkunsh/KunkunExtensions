@@ -19,7 +19,7 @@ import {
 import { getMacBatteryInfo } from "./mac-ioreg"
 
 async function parseBatteryInfo(
-	batteries: Awaited<ReturnType<typeof sysInfo.batteries>>[]
+	batteries: Awaited<ReturnType<typeof sysInfo.batteries>>
 ): Promise<List.Section[]> {
 	const platform = await os.platform()
 	return batteries.map((battery) => {

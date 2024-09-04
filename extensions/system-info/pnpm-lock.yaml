@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@kksh/api':
-        specifier: 0.0.10
-        version: 0.0.10(tslib@2.7.0)(typescript@5.5.4)
+        specifier: 0.0.11
+        version: 0.0.11(tslib@2.7.0)(typescript@5.5.4)
       typescript:
         specifier: ^5.0.0
         version: 5.5.4
@@ -28,8 +28,8 @@ packages:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
 
-  '@kksh/api@0.0.10':
-    resolution: {integrity: sha512-D5sNshBrTJKo8nK9nO5DOPrnQFJdQQb6VTyw20UQ8KfiEgk3ZzfOfgz8k6MuwxpN2U1guEAK72raoENPokacsQ==}
+  '@kksh/api@0.0.11':
+    resolution: {integrity: sha512-auBpBUsGZCSlD5/Uq+4/puPS3hRsg5QF6zHl8fptYXMXG9Ky5LzJwdUppjR8qgPGIndrRrej7iZdexGdMwkjzA==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -626,8 +626,8 @@ packages:
   tauri-plugin-shellx-api@2.0.9:
     resolution: {integrity: sha512-0vjE7dPgKzNA2bzW5unc5rkpJCbL0brio8xCNKuZKrRe3V3BpXES52du1HyZgCyk3T+bYPDIQ+Ou8xnOuiu3VQ==}
 
-  tauri-plugin-system-info-api@2.0.4:
-    resolution: {integrity: sha512-wlB4Da1KkfBazP6BT8UDH0t3I504kX24HJC+YQNoWWgFZyKynoFFl82wXIJdSB//IwuKxCv08BCvvliPNh1EkQ==}
+  tauri-plugin-system-info-api@2.0.6:
+    resolution: {integrity: sha512-7q8ieMK1bweMiLDbIWNNX3Dy7KNNwiB+WNEqKQutl0TKEGAb+efpy2SAzVLGu+i9tjDagCai8fZNuLLIpoQ9TA==}
 
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
@@ -692,7 +692,7 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@kksh/api@0.0.10(tslib@2.7.0)(typescript@5.5.4)':
+  '@kksh/api@0.0.11(tslib@2.7.0)(typescript@5.5.4)':
     dependencies:
       '@huakunshen/comlink': 4.4.1
       '@rollup/plugin-typescript': 11.1.6(rollup@4.21.2)(tslib@2.7.0)(typescript@5.5.4)
@@ -714,7 +714,7 @@ snapshots:
       tauri-api-adapter: 0.3.6(tslib@2.7.0)(typescript@5.5.4)
       tauri-plugin-network-api: 2.0.3(typescript@5.5.4)
       tauri-plugin-shellx-api: 2.0.9
-      tauri-plugin-system-info-api: 2.0.4(typescript@5.5.4)
+      tauri-plugin-system-info-api: 2.0.6(typescript@5.5.4)
       valibot: 0.40.0(typescript@5.5.4)
       vue-sonner: 1.1.5
     transitivePeerDependencies:
@@ -1291,7 +1291,7 @@ snapshots:
       tauri-plugin-clipboard-api: 2.1.8(typescript@5.5.4)
       tauri-plugin-network-api: 2.0.3(typescript@5.5.4)
       tauri-plugin-shellx-api: 2.0.9
-      tauri-plugin-system-info-api: 2.0.4(typescript@5.5.4)
+      tauri-plugin-system-info-api: 2.0.6(typescript@5.5.4)
       tsc-alias: 1.8.10
       typescript: 5.5.4
       valibot: 0.40.0(typescript@5.5.4)
@@ -1316,7 +1316,7 @@ snapshots:
     dependencies:
       '@tauri-apps/api': 2.0.0-rc.4
 
-  tauri-plugin-system-info-api@2.0.4(typescript@5.5.4):
+  tauri-plugin-system-info-api@2.0.6(typescript@5.5.4):
     dependencies:
       '@tauri-apps/api': 2.0.0-rc.4
       valibot: 0.40.0(typescript@5.5.4)
