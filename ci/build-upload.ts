@@ -1,5 +1,6 @@
 import fs from "fs"
 import { join } from "path"
+import { sendNewExtensionNotification } from "./src/discord"
 import { supabase } from "./src/supabase"
 import {
 	buildWithDockerAndValidate,
@@ -194,6 +195,12 @@ for (const buildResult of buildResults) {
 			demo_images: demoImgsDBPaths
 		}
 	])
+	sendNewExtensionNotification(
+		buildResult.pkg.name,
+		buildResult.pkg.kunkun.identifier,
+		buildResult.pkg.version,
+		buildResult.pkg.kunkun.shortDescription
+	)
 	if (error) {
 		console.error("Unexpected Error: Error inserting into database", error)
 		process.exit(1)
