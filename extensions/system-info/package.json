@@ -45,7 +45,7 @@
 		"build": "bun build.ts"
 	},
 	"dependencies": {
-		"@kksh/api": "0.0.10"
+		"@kksh/api": "0.0.11"
 	},
 	"devDependencies": {
 		"@types/bun": "latest"
