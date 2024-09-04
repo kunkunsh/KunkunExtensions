@@ -47,7 +47,11 @@ async function parseBatteryInfo(
 			new List.Item({
 				title: "Voltage",
 				value: "voltage",
-				subTitle: `${battery.voltage.toFixed(2).toString()}V`
+				subTitle: `${battery.voltage.toFixed(2).toString()}V`,
+				icon: new Icon({
+					type: IconEnum.Iconify,
+					value: "openmoji:high-voltage"
+				})
 			})
 		)
 		if (battery.temperature_kelvin) {
@@ -56,7 +60,11 @@ async function parseBatteryInfo(
 				new List.Item({
 					title: "Temperature",
 					value: "temperature",
-					subTitle: `${battery.temperature_celsius?.toFixed(2)}°C / ${battery.temperature_fahrenheit?.toFixed(2)}°F`
+					subTitle: `${battery.temperature_celsius?.toFixed(2)}°C / ${battery.temperature_fahrenheit?.toFixed(2)}°F`,
+					icon: new Icon({
+						type: IconEnum.Iconify,
+						value: "uil:temperature-half"
+					})
 				})
 			)
 		}
@@ -64,14 +72,22 @@ async function parseBatteryInfo(
 			new List.Item({
 				title: "State",
 				value: "state",
-				subTitle: battery.state.toString()
+				subTitle: battery.state.toString(),
+				icon: new Icon({
+					type: IconEnum.Iconify,
+					value: "emojione:battery"
+				})
 			})
 		)
 		items.push(
 			new List.Item({
 				title: "Cycle Count",
 				value: "cycle-count",
-				subTitle: battery.cycle_count?.toString() ?? "--"
+				subTitle: battery.cycle_count?.toString() ?? "--",
+				icon: new Icon({
+					type: IconEnum.Iconify,
+					value: "material-symbols:cycle"
+				})
 			})
 		)
 		if (platform !== "macos") {
@@ -87,7 +103,11 @@ async function parseBatteryInfo(
 			new List.Item({
 				title: "Health",
 				value: "health",
-				subTitle: `${(battery.state_of_health * 100).toFixed(2)}%`
+				subTitle: `${(battery.state_of_health * 100).toFixed(2)}%`,
+				icon: new Icon({
+					type: IconEnum.Iconify,
+					value: "map:health"
+				})
 			})
 		)
 		return new List.Section({
@@ -99,7 +119,7 @@ async function parseBatteryInfo(
 class ExtensionTemplate extends WorkerExtension {
 	async load() {
 		const platform = await os.platform()
-		
+
 		const batteries = await sysInfo.batteries()
 		console.log(await sysInfo.cpus())
 		const sections: List.Section[] = await parseBatteryInfo(batteries)
@@ -111,32 +131,56 @@ class ExtensionTemplate extends WorkerExtension {
 					new List.Item({
 						title: "Percentage",
 						value: "percentage",
-						subTitle: `${macInfo.CurrentCapacity.toString()}%`
+						subTitle: `${macInfo.CurrentCapacity.toString()}%`,
+						icon: new Icon({
+							type: IconEnum.Iconify,
+							value: "ic:outline-percentage"
+						})
 					}),
 					new List.Item({
 						title: "Time Remaining",
 						value: "time-remaining",
-						subTitle: macInfo.timeRemainingFormatted
+						subTitle: macInfo.timeRemainingFormatted,
+						icon: new Icon({
+							type: IconEnum.Iconify,
+							value: "mdi:clock-outline"
+						})
 					}),
 					new List.Item({
 						title: "Power Source",
 						value: "power-source",
-						subTitle: macInfo.formattedPowerSource
+						subTitle: macInfo.formattedPowerSource,
+						icon: new Icon({
+							type: IconEnum.Iconify,
+							value: "ic:outline-power"
+						})
 					}),
 					new List.Item({
 						title: "Condition",
 						value: "condition",
-						subTitle: macInfo.formattedCondition
+						subTitle: macInfo.formattedCondition,
+						icon: new Icon({
+							type: IconEnum.Iconify,
+							value: "emojione:battery"
+						})
 					}),
 					new List.Item({
 						title: "Charge",
 						value: "charge",
-						subTitle: macInfo.formattedCurrentCapacity
+						subTitle: macInfo.formattedCurrentCapacity,
+						icon: new Icon({
+							type: IconEnum.Iconify,
+							value: "emojione:battery"
+						})
 					}),
 					new List.Item({
 						title: "Power Usage",
 						value: "power-usage",
-						subTitle: macInfo.powerUsage
+						subTitle: macInfo.powerUsage,
+						icon: new Icon({
+							type: IconEnum.Iconify,
+							value: "emojione:battery"
+						})
 					}),
 					...sections[0].items
 				]
