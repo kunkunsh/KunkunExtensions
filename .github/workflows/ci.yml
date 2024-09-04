@@ -30,4 +30,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
       - run: pnpm i
-      - run: bun ci/build-every-extension.ts
+      - name: Build Every Extension
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: bun build-every-extension.ts
+        working-directory: ci
