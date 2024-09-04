@@ -116,92 +116,94 @@ async function parseBatteryInfo(
 	})
 }
 
-class ExtensionTemplate extends WorkerExtension {
-	async load() {
-		const platform = await os.platform()
-
-		const batteries = await sysInfo.batteries()
-		console.log(await sysInfo.cpus())
-		const sections: List.Section[] = await parseBatteryInfo(batteries)
-		if (platform === "macos") {
-			// mac is expected to have only one battery
-			const macInfo = await getMacBatteryInfo()
-			if (macInfo) {
-				sections[0].items = [
-					new List.Item({
-						title: "Percentage",
-						value: "percentage",
-						subTitle: `${macInfo.CurrentCapacity.toString()}%`,
-						icon: new Icon({
-							type: IconEnum.Iconify,
-							value: "ic:outline-percentage"
-						})
-					}),
-					new List.Item({
-						title: "Time Remaining",
-						value: "time-remaining",
-						subTitle: macInfo.timeRemainingFormatted,
-						icon: new Icon({
-							type: IconEnum.Iconify,
-							value: "mdi:clock-outline"
-						})
-					}),
-					new List.Item({
-						title: "Power Source",
-						value: "power-source",
-						subTitle: macInfo.formattedPowerSource,
-						icon: new Icon({
-							type: IconEnum.Iconify,
-							value: "ic:outline-power"
-						})
-					}),
-					new List.Item({
-						title: "Condition",
-						value: "condition",
-						subTitle: macInfo.formattedCondition,
-						icon: new Icon({
-							type: IconEnum.Iconify,
-							value: "emojione:battery"
-						})
-					}),
-					new List.Item({
-						title: "Charge",
-						value: "charge",
-						subTitle: macInfo.formattedCurrentCapacity,
-						icon: new Icon({
-							type: IconEnum.Iconify,
-							value: "emojione:battery"
-						})
-					}),
-					new List.Item({
-						title: "Power Usage",
-						value: "power-usage",
-						subTitle: macInfo.powerUsage,
-						icon: new Icon({
-							type: IconEnum.Iconify,
-							value: "emojione:battery"
-						})
-					}),
-					...sections[0].items
-				]
-			}
+async function getBatteryInSections(): Promise<List.Section[]> {
+	const platform = await os.platform()
+	const batteries = await sysInfo.batteries()
+	const sections: List.Section[] = await parseBatteryInfo(batteries)
+	if (platform === "macos") {
+		// mac is expected to have only one battery
+		const macInfo = await getMacBatteryInfo()
+		if (macInfo) {
+			sections[0].items = [
+				new List.Item({
+					title: "Percentage",
+					value: "percentage",
+					subTitle: `${macInfo.CurrentCapacity.toString()}%`,
+					icon: new Icon({
+						type: IconEnum.Iconify,
+						value: "ic:outline-percentage"
+					})
+				}),
+				new List.Item({
+					title: "Time Remaining",
+					value: "time-remaining",
+					subTitle: macInfo.timeRemainingFormatted,
+					icon: new Icon({
+						type: IconEnum.Iconify,
+						value: "mdi:clock-outline"
+					})
+				}),
+				new List.Item({
+					title: "Power Source",
+					value: "power-source",
+					subTitle: macInfo.formattedPowerSource,
+					icon: new Icon({
+						type: IconEnum.Iconify,
+						value: "ic:outline-power"
+					})
+				}),
+				new List.Item({
+					title: "Condition",
+					value: "condition",
+					subTitle: macInfo.formattedCondition,
+					icon: new Icon({
+						type: IconEnum.Iconify,
+						value: "emojione:battery"
+					})
+				}),
+				new List.Item({
+					title: "Charge",
+					value: "charge",
+					subTitle: macInfo.formattedCurrentCapacity,
+					icon: new Icon({
+						type: IconEnum.Iconify,
+						value: "emojione:battery"
+					})
+				}),
+				new List.Item({
+					title: "Power Usage",
+					value: "power-usage",
+					subTitle: macInfo.powerUsage,
+					icon: new Icon({
+						type: IconEnum.Iconify,
+						value: "emojione:battery"
+					})
+				}),
+				...sections[0].items
+			]
 		}
-		ui.setSearchBarPlaceholder("Search...")
-		return ui.render(
+	}
+	return sections
+}
+
+async function run() {
+	getBatteryInSections().then((sections) => {
+		ui.render(
 			new List.List({
 				sections
 			})
 		)
-	}
+	})
+}
 
-	onSearchTermChange(term: string): Promise<void> {
-		console.log("Search term changed to:", term)
-		return Promise.resolve()
-	}
-
-	onItemSelected(value: string): Promise<void> {
-		console.log("Item selected:", value)
-		return Promise.resolve()
+class ExtensionTemplate extends WorkerExtension {
+	load() {
+		ui.setSearchBarPlaceholder("Search...")
+		setInterval(() => {
+			console.log("Battery info updated")
+			run()
+		}, 10_000)
+		return run()
 	}
 }
 
