@@ -26,7 +26,6 @@ export async function getMacBatteryInfo() {
 	const batteryInfoStdout = batteryInfoRet.stdout
 
 	const ioreg: any = await utils.plist.parse(batteryInfoStdout)
-	console.log(ioreg)
 
 	// check if ioreg is an array
 	if (!Array.isArray(ioreg)) {
@@ -48,20 +47,6 @@ export async function getMacBatteryInfo() {
 		AdapterDetails,
 		Temperature
 	} = batteryInfo
-	console.log({
-		TimeRemaining,
-		Voltage,
-		Amperage,
-		PermanentFailureStatus,
-		AppleRawCurrentCapacity,
-		CurrentCapacity,
-		AppleRawMaxCapacity,
-		MaxCapacity,
-		CycleCount,
-		ExternalConnected,
-		AdapterDetails,
-		Temperature
-	})
 	/* -------------------------------------------------------------------------- */
 	/*                               Time Remaining                               */
 	/* -------------------------------------------------------------------------- */
