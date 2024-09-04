@@ -29,7 +29,7 @@
 		"demoImages": [],
 		"icon": {
 			"type": "iconify",
-			"value": "tabler:battery-3"
+			"value": "material-symbols:monitor-heart"
 		},
 		"customUiCmds": [],
 		"templateUiCmds": [

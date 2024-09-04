@@ -75,7 +75,7 @@ async function parseBatteryInfo(
 				subTitle: battery.state.toString(),
 				icon: new Icon({
 					type: IconEnum.Iconify,
-					value: "emojione:battery"
+					value: "tabler:plug"
 				})
 			})
 		)
@@ -197,9 +197,17 @@ async function run() {
 }
 
 class ExtensionTemplate extends WorkerExtension {
+	intervalId: NodeJS.Timer | null = null
+	async onBeforeGoBack() {
+		if (this.intervalId) {
+			clearInterval(this.intervalId)
+			this.intervalId = null
+		}
+		this.intervalId = null
+	}
 	load() {
 		ui.setSearchBarPlaceholder("Search...")
-		setInterval(() => {
+		this.intervalId = setInterval(() => {
 			console.log("Battery info updated")
 			run()
 		}, 10_000)
