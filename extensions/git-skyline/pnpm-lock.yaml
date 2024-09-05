@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@kksh/api':
-        specifier: 0.0.9
-        version: 0.0.9(tslib@2.7.0)(typescript@5.5.4)
+        specifier: 0.0.11
+        version: 0.0.11(tslib@2.7.0)(typescript@5.5.4)
       '@kksh/vue':
         specifier: 0.1.2
         version: 0.1.2(@popperjs/core@2.11.8)(@vue/devtools-api@6.6.3)(tailwindcss@3.4.10)(vue@3.4.38(typescript@5.5.4))
@@ -329,8 +329,8 @@ packages:
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
 
-  '@kksh/api@0.0.9':
-    resolution: {integrity: sha512-91Ca6MA6jPTN6cBC6A0UHrIf0NU6NqpyIQrU4PmV0xCWE2easF4npWyWZ9wgbJNllhUVRmqzMEWmZ77wv7KfOA==}
+  '@kksh/api@0.0.11':
+    resolution: {integrity: sha512-auBpBUsGZCSlD5/Uq+4/puPS3hRsg5QF6zHl8fptYXMXG9Ky5LzJwdUppjR8qgPGIndrRrej7iZdexGdMwkjzA==}
 
   '@kksh/vue@0.1.2':
     resolution: {integrity: sha512-QV5urOO7o92CY7QEFRYckxgkdIXPlYm8+GIOMKkBOUr93sYRKn2OUBcZ2X8urupcTk+vpVDb3SIq++KJwxFSrw==}
@@ -1849,25 +1849,22 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
-  tauri-api-adapter@0.3.5:
-    resolution: {integrity: sha512-FN4mjTDgEEk9NQL9NKB9pJ8FMuLMGDajNT4bUM5U89KYeQiYXSkM1m3bekdOHOO0KnuU+r3UXIBnbEkxVpKqtQ==}
+  tauri-api-adapter@0.3.6:
+    resolution: {integrity: sha512-kHh42oNRUnQq+NyraLmPazgzIIHBlnwY1AcxjRRz1onP8ZJos276p/0CnXfCd2iiiBfImZx4fzOD2Xxf82145Q==}
     peerDependencies:
       typescript: ^5.0.0
 
-  tauri-plugin-clipboard-api@2.1.7:
-    resolution: {integrity: sha512-A5RZezNB01t2bzL7OvN5X8Mh0vri4qzqLD8LX5CEsXxjR6Gn+70dS9hJrXTWqayeAo1JlAI4kCww9qAC55WTYw==}
+  tauri-plugin-clipboard-api@2.1.8:
+    resolution: {integrity: sha512-oXqiEc03Xxv6eHrlvG+0JUlKaEQLZO3IaczEAfEJH0jiCXlw+P6VsV0juYiT6S/gPfm/gdTH0bLKwB3qOv2ePA==}
 
   tauri-plugin-network-api@2.0.3:
     resolution: {integrity: sha512-aj/o315shIntam+vxVlgRJE8NnKcf0d93CQBK6zOb3Ia4V4HM+kYdFxg8Ji5jM5Yay8nq1HEJaqNIOIv7R1NpA==}
 
-  tauri-plugin-shellx-api@2.0.8:
-    resolution: {integrity: sha512-N2Xv5JOyEw8Mqh29rDmIUzZaluB8zhG18jcbTrXj0bTBNqWyeO0mAlVi2WPb6y4VCz7t4hpmoddwtXaPI1dc+g==}
-
   tauri-plugin-shellx-api@2.0.9:
     resolution: {integrity: sha512-0vjE7dPgKzNA2bzW5unc5rkpJCbL0brio8xCNKuZKrRe3V3BpXES52du1HyZgCyk3T+bYPDIQ+Ou8xnOuiu3VQ==}
 
-  tauri-plugin-system-info-api@2.0.4:
-    resolution: {integrity: sha512-wlB4Da1KkfBazP6BT8UDH0t3I504kX24HJC+YQNoWWgFZyKynoFFl82wXIJdSB//IwuKxCv08BCvvliPNh1EkQ==}
+  tauri-plugin-system-info-api@2.0.6:
+    resolution: {integrity: sha512-7q8ieMK1bweMiLDbIWNNX3Dy7KNNwiB+WNEqKQutl0TKEGAb+efpy2SAzVLGu+i9tjDagCai8fZNuLLIpoQ9TA==}
 
   thenify-all@1.6.0:
     resolution: {integrity: sha512-RNxQH/qI8/t3thXJDwcstUO4zeqo64+Uy/+sNVRBx4Xn2OX+OZ9oP+iJnNFqplFra2ZUVeKCSa2oVWi3T4uVmA==}
@@ -2310,7 +2307,7 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@kksh/api@0.0.9(tslib@2.7.0)(typescript@5.5.4)':
+  '@kksh/api@0.0.11(tslib@2.7.0)(typescript@5.5.4)':
     dependencies:
       '@huakunshen/comlink': 4.4.1
       '@rollup/plugin-typescript': 11.1.6(rollup@4.21.0)(tslib@2.7.0)(typescript@5.5.4)
@@ -2329,10 +2326,10 @@ snapshots:
       minimatch: 10.0.1
       rollup: 4.21.0
       rollup-plugin-typescript2: 0.36.0(rollup@4.21.0)(typescript@5.5.4)
-      tauri-api-adapter: 0.3.5(tslib@2.7.0)(typescript@5.5.4)
+      tauri-api-adapter: 0.3.6(tslib@2.7.0)(typescript@5.5.4)
       tauri-plugin-network-api: 2.0.3(typescript@5.5.4)
-      tauri-plugin-shellx-api: 2.0.8
-      tauri-plugin-system-info-api: 2.0.4(typescript@5.5.4)
+      tauri-plugin-shellx-api: 2.0.9
+      tauri-plugin-system-info-api: 2.0.6(typescript@5.5.4)
       valibot: 0.40.0(typescript@5.5.4)
       vue-sonner: 1.1.5
     transitivePeerDependencies:
@@ -3955,7 +3952,7 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
-  tauri-api-adapter@0.3.5(tslib@2.7.0)(typescript@5.5.4):
+  tauri-api-adapter@0.3.6(tslib@2.7.0)(typescript@5.5.4):
     dependencies:
       '@huakunshen/comlink': 4.4.1
       '@rollup/plugin-alias': 5.1.0(rollup@4.21.0)
@@ -3972,17 +3969,17 @@ snapshots:
       rimraf: 5.0.10
       rollup: 4.21.0
       shx: 0.3.4
-      tauri-plugin-clipboard-api: 2.1.7(typescript@5.5.4)
+      tauri-plugin-clipboard-api: 2.1.8(typescript@5.5.4)
       tauri-plugin-network-api: 2.0.3(typescript@5.5.4)
       tauri-plugin-shellx-api: 2.0.9
-      tauri-plugin-system-info-api: 2.0.4(typescript@5.5.4)
+      tauri-plugin-system-info-api: 2.0.6(typescript@5.5.4)
       tsc-alias: 1.8.10
       typescript: 5.5.4
       valibot: 0.40.0(typescript@5.5.4)
     transitivePeerDependencies:
       - tslib
 
-  tauri-plugin-clipboard-api@2.1.7(typescript@5.5.4):
+  tauri-plugin-clipboard-api@2.1.8(typescript@5.5.4):
     dependencies:
       '@tauri-apps/api': 2.0.0-beta.11
       valibot: 0.40.0(typescript@5.5.4)
@@ -3996,15 +3993,11 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  tauri-plugin-shellx-api@2.0.8:
-    dependencies:
-      '@tauri-apps/api': 2.0.0-rc.4
-
   tauri-plugin-shellx-api@2.0.9:
     dependencies:
       '@tauri-apps/api': 2.0.0-rc.4
 
-  tauri-plugin-system-info-api@2.0.4(typescript@5.5.4):
+  tauri-plugin-system-info-api@2.0.6(typescript@5.5.4):
     dependencies:
       '@tauri-apps/api': 2.0.0-rc.4
       valibot: 0.40.0(typescript@5.5.4)

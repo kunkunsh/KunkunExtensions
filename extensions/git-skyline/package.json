@@ -10,7 +10,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@kksh/api": "0.0.9",
+		"@kksh/api": "0.0.11",
 		"@kksh/vue": "0.1.2",
 		"@radix-icons/vue": "^1.0.0",
 		"class-variance-authority": "^0.7.0",
@@ -48,7 +48,7 @@
 			{
 				"main": "/",
 				"dist": "dist",
-				"devMain": "http://localhost:5173",
+				"devMain": "http://localhost:5173/git-skyline/dist",
 				"name": "Git Skyline",
 				"cmds": [],
 				"window": {

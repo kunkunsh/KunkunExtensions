@@ -40,14 +40,14 @@
 			{
 				"main": "/",
 				"dist": "build",
-				"devMain": "http://localhost:5173/dev-extensions/jwt/build",
+				"devMain": "http://localhost:5173/jwt-inspector/build",
 				"name": "View Decoded JWT",
 				"cmds": []
 			},
 			{
 				"main": "/search",
 				"dist": "build",
-				"devMain": "http://localhost:5173/dev-extensions/jwt/build/search",
+				"devMain": "http://localhost:5173/jwt-inspector/build/search",
 				"name": "Search Decoded JWT",
 				"cmds": []
 			}
@@ -67,7 +67,7 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
-		"@kksh/api": "0.0.9",
+		"@kksh/api": "0.0.11",
 		"@kksh/svelte": "0.1.4",
 		"clsx": "^2.1.1",
 		"dayjs": "^1.11.11",
