@@ -4,11 +4,11 @@
   "description": "Public repo containing all jarvis extensions",
   "main": "index.js",
   "scripts": {
-    "build": "turbo build",
+    "build": "bun ci/build-every-extension.ts",
     "build-upload": "pnpm --filter ci build-upload",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,md,svelte,js,jsx}\"",
     "clean": "./scripts/clean.sh",
     "build:docker": "./scripts/build.sh"
   },
@@ -22,16 +22,14 @@
   },
   "homepage": "https://github.com/HuakunTech/JarvisExtensions#readme",
   "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "prettier": "^3.2.5",
+    "prettier-plugin-svelte": "^3.2.6",
+    "prettier-plugin-tailwindcss": "^0.6.6",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@8.9.0",
+  "packageManager": "pnpm@9.9.0",
   "engines": {
     "node": ">=18"
-  },
-  "workspaces": [
-    "extensions/*",
-    "extension-templates/*",
-    "ci"
-  ]
+  }
 }

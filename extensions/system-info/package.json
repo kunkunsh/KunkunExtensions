@@ -1,0 +1,60 @@
+{
+	"$schema": "https://schema.kunkun.sh",
+	"name": "system-info",
+	"version": "0.0.2",
+	"type": "module",
+	"kunkun": {
+		"name": "System Info",
+		"shortDescription": "Get system information (battery, cpu, memory, etc.)",
+		"longDescription": "Get system information (battery, cpu, memory, etc.)",
+		"identifier": "system-info",
+		"permissions": [
+			{
+				"permission": "shell:execute",
+				"allow": [
+					{
+						"cmd": {
+							"program": "ioreg",
+							"args": [
+								"-arn",
+								"AppleSmartBattery"
+							]
+						}
+					}
+				]
+			},
+			"system-info:battery",
+			"system-info:cpu"
+		],
+		"demoImages": [],
+		"icon": {
+			"type": "iconify",
+			"value": "material-symbols:monitor-heart"
+		},
+		"customUiCmds": [],
+		"templateUiCmds": [
+			{
+				"name": "Battery Info",
+				"main": "dist/index.js",
+				"cmds": []
+			}
+		]
+	},
+	"scripts": {
+		"dev": "bun build.ts dev",
+		"build": "bun build.ts"
+	},
+	"dependencies": {
+		"@kksh/api": "0.0.11"
+	},
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"files": [
+		"./dist",
+		".gitignore"
+	]
+}

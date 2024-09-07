@@ -4,6 +4,7 @@ import {
 	Icon,
 	IconEnum,
 	List,
+	log,
 	os,
 	path,
 	shell,
@@ -31,6 +32,17 @@ function mapProjectToItem(project: Project): List.Item {
 		value: project.rootPath,
 		icon: new Icon({ type: IconEnum.Iconify, value: "ri:folder-open-fill" })
 	})
+}
+
+function openWithVSCode(path: string) {
+	return shell.Command.create("code", [path])
+		.execute()
+		.then((res) => {
+			toast.success(`Opened with VSCode`)
+		})
+		.catch((err) => {
+			toast.error(`Failed to open with VSCode: ${err}`)
+		})
 }
 
 class VSCodeProjectManager extends WorkerExtension {
@@ -88,13 +100,16 @@ class VSCodeProjectManager extends WorkerExtension {
 	}
 
 	async onListItemSelected(value: string): Promise<void> {
+		log.info(`Selected project: ${value}`)
 		const platform = await os.platform()
 		if (platform === "macos") {
-			shell.executeBashScript(`open -a "Visual Studio Code" "${value}"`)
+			openWithVSCode(value)
+			//   shell.Command.create("code", [value]).execute();
+			// shell.executeBashScript(`open -a "Visual Studio Code" "${value}"`)
 		} else if (platform === "windows") {
-			// TODO
+			openWithVSCode(value)
 		} else if (platform === "linux") {
-			// TODO
+			openWithVSCode(value)
 		} else {
 			toast.error(`Unsupported platform: ${platform}).then(() => Promise.resolve()`)
 		}

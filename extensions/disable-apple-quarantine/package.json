@@ -1,0 +1,65 @@
+{
+	"$schema": "https://schema.kunkun.sh",
+	"name": "disable-apple-quarantine",
+	"version": "0.0.1",
+	"type": "module",
+	"kunkun": {
+		"name": "Disable Apple Quarantine",
+		"shortDescription": "Remove .app is damaged error",
+		"longDescription": "Mac apps created by developer who didn't pay Apple developer program fees will be displayed as damaged. This extension helps your bypass the error with xattr command.",
+		"identifier": "disable-apple-quarantine",
+		"permissions": [
+			"clipboard:read-files",
+			{
+				"permission": "shell:execute",
+				"allow": [
+					{
+						"cmd": {
+							"program": "xattr",
+							"args": [
+								"-cr",
+								".+"
+							]
+						}
+					}
+				]
+			},
+			"system:fs",
+			"event:drag-drop",
+			"dialog:all"
+		],
+		"demoImages": [],
+		"icon": {
+			"type": "iconify",
+			"value": "openmoji:hacker-cat"
+		},
+		"customUiCmds": [],
+		"templateUiCmds": [
+			{
+				"name": "Disable Apple Quarantine",
+				"main": "dist/index.js",
+				"cmds": [],
+				"platforms": [
+					"macos"
+				]
+			}
+		]
+	},
+	"scripts": {
+		"dev": "bun build.ts dev",
+		"build": "bun build.ts"
+	},
+	"dependencies": {
+		"@kksh/api": "0.0.9"
+	},
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"files": [
+		"./dist",
+		".gitignore"
+	]
+}

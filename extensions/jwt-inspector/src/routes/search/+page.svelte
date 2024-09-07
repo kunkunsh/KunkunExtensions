@@ -97,7 +97,7 @@
 							<span class="flex items-center">
 								<Calendar class="mr-2 h-4 w-4" />
 								<span>{key}</span>
-								<span class="text-muted-foreground ml-3">{val}</span>
+								<span class="ml-3 text-muted-foreground">{val}</span>
 							</span>
 							<span class="text-muted-foreground">{claimsDef[key]}</span>
 						</Command.Item>
@@ -112,9 +112,9 @@
 								<Calendar class="mr-2 h-4 w-4" />
 								<span>{key}</span>
 								{#if ['iat', 'exp'].includes(key)}
-									<span class="text-muted-foreground ml-3">{displayDate(val)}</span>
+									<span class="ml-3 text-muted-foreground">{displayDate(val)}</span>
 								{:else}
-									<span class="text-muted-foreground ml-3">{val}</span>
+									<span class="ml-3 text-muted-foreground">{val}</span>
 								{/if}
 							</span>
 							{#if claimsDef[key]}

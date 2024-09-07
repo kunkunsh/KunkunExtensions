@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.kunkun.sh/",
   "name": "ip-info",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "module": "index.ts",
   "type": "module",
   "kunkun": {
@@ -31,27 +31,21 @@
     "customUiCmds": []
   },
   "scripts": {
-    "dev": "rollup -c --watch",
-    "build": "rimraf dist && rollup -c"
+    "dev": "bun build.ts dev",
+    "build": "bun build.ts"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "@kksh/api": "0.0.4-beta.0",
-    "valibot": "^0.36.0"
+    "@kksh/api": "0.0.9",
+    "valibot": "^0.40.0"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "rimraf": "^6.0.1",
-    "rollup": "^4.18.1",
-    "rollup-plugin-visualizer": "^5.12.0"
+    "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  }
+  },
+  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
 }
