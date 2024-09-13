@@ -38,7 +38,7 @@
     "dist"
   ],
   "dependencies": {
-    "@kksh/api": "0.0.9",
+    "@kksh/api": "0.0.12-beta.2",
     "valibot": "^0.40.0"
   },
   "devDependencies": {

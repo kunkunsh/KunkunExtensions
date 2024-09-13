@@ -35,13 +35,27 @@ function mapProjectToItem(project: Project): List.Item {
 }
 
 function openWithVSCode(path: string) {
-	return shell.Command.create("code", [path])
-		.execute()
-		.then((res) => {
-			toast.success(`Opened with VSCode`)
+	return shell
+		.hasCommand("code")
+		.then((hasCommand) => {
+			if (!hasCommand) {
+				return toast.error(
+					"code command not installed to PATH, please install it the 'code' command."
+				)
+			} else {
+				return shell
+					.createCommand("code", [path])
+					.execute()
+					.then((res) => {
+						toast.success(`Opened with VSCode`)
+					})
+					.catch((err) => {
+						toast.error(`Failed to open with VSCode: ${err}`)
+					})
+			}
 		})
 		.catch((err) => {
-			toast.error(`Failed to open with VSCode: ${err}`)
+			toast.error(`${err}`)
 		})
 }
 

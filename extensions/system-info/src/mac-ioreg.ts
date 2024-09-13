@@ -16,7 +16,7 @@ import {
 } from "@kksh/api/ui/worker"
 
 export async function getMacBatteryInfo() {
-	const batteryInfoRet = await shell.Command.create("ioreg", [
+	const batteryInfoRet = await shell.createCommand("ioreg", [
 		"-arn",
 		"AppleSmartBattery"
 	]).execute()

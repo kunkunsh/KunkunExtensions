@@ -7,7 +7,6 @@ import {
 	IconEnum,
 	List,
 	log,
-	shell,
 	toast,
 	ui,
 	WorkerExtension,
@@ -62,7 +61,8 @@ function mapIpInfoToListItem(ip: IpListItem): List.Item {
 			items: [
 				new Action.Action({
 					title: Actions.CopyToClipboard,
-					icon: new Icon({ type: IconEnum.Iconify, value: "tabler:copy" })
+					icon: new Icon({ type: IconEnum.Iconify, value: "tabler:copy" }),
+					value: Actions.CopyToClipboard,
 				})
 			]
 		})

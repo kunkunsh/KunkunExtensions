@@ -4,7 +4,7 @@
 	import QR from '$lib/components/QR.svelte';
 	import QRCode from 'easyqrcodejs';
 	import { onMount } from 'svelte';
-	import { clipboard, fs, dialog, open, event } from '@kksh/api/ui/iframe';
+	import { clipboard, fs, dialog, open, event, ui } from '@kksh/api/ui/iframe';
 	import * as v from 'valibot';
 	import {
 		ClipboardCopyIcon,
@@ -31,6 +31,12 @@
 
 	onMount(async () => {
 		loadFromClipboard();
+		document.addEventListener('keydown', (e) => {
+			console.log(e);
+			if (e.key === 'Escape') {
+				ui.goBack();
+			}
+		});
 	});
 
 	function getQRCodePngBase64(): Promise<string> {
@@ -106,7 +112,7 @@
 				<pre
 					on:click={() => {
 						if (url.startsWith('http')) {
-							open.openUrl(url);
+							open.url(url);
 						}
 					}}
 					class="cursor-pointer text-wrap px-3">{url}</pre>

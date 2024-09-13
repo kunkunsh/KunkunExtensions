@@ -30,9 +30,15 @@
 	onMount(async () => {
 		pasteJwt();
 		ui.showBackButton('bottom-right');
-		document.addEventListener('keydown', () => {
-			ui.goBack();
+		document.addEventListener('keydown', (event) => {
+			console.log(event);
+			if (event.key === 'Escape') {
+				ui.goBack();
+			}
 		});
+		// document.querySelectorAll('.kunkun-drag-region').forEach((el) => {
+		// 	(el as HTMLElement).click();
+		// });
 	});
 
 	function pasteJwt() {

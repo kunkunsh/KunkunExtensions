@@ -26,7 +26,7 @@ async function disableAppleQuarantine(path: string) {
 	if (!confirm) {
 		return
 	}
-	const ret = await shell.Command.create("xattr", ["-cr", path]).execute()
+	const ret = await shell.createCommand("xattr", ["-cr", path]).execute()
 	if (ret.code === 0) {
 		toast.success(`Disabled Apple Quarantine on ${path}`)
 	} else {

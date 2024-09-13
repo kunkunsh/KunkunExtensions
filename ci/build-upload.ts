@@ -132,7 +132,8 @@ for (const buildResult of buildResults) {
 					long_description: buildResult.pkg.kunkun.longDescription,
 					identifier: buildResult.pkg.kunkun.identifier,
 					readme: readme,
-					downloads: 0
+					downloads: 0,
+					api_version: buildResult.apiVersion
 				}
 			])
 			.select()

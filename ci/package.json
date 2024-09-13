@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/semver": "^7.5.8",
     "supabase": ">=1.8.1"
   },
   "peerDependencies": {
@@ -17,10 +18,11 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.583.0",
-    "@kksh/api": "0.0.11",
+    "@kksh/api": "0.0.12-beta.2",
     "@supabase/supabase-js": "^2.43.4",
     "discord.js": "^14.16.1",
     "jarvis-api": "0.0.2-alpha.16",
+    "semver": "^7.6.3",
     "sharp": "^0.33.4",
     "valibot": "^0.39.0",
     "zod": "^3.23.8"

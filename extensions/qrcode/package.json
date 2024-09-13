@@ -35,14 +35,14 @@
 			{
 				"main": "/",
 				"dist": "build",
-				"devMain": "http://localhost:5173/dev-extensions/qrcode/build",
+				"devMain": "http://localhost:5173/qrcode/build",
 				"name": "Generate QRCode",
 				"cmds": []
 			},
 			{
 				"main": "/detect",
 				"dist": "build",
-				"devMain": "http://localhost:5173/dev-extensions/qrcode/build/detect",
+				"devMain": "http://localhost:5173/qrcode/build/detect",
 				"name": "Detect QRCode",
 				"cmds": []
 			}
@@ -62,7 +62,7 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
-		"@kksh/api": "0.0.9",
+		"@kksh/api": "0.0.12-beta.2",
 		"@kksh/svelte": "0.1.4",
 		"clsx": "^2.1.1",
 		"easyqrcodejs": "^4.6.1",

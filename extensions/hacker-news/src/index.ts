@@ -40,7 +40,8 @@ function hackerNewsItemToListItem(item: HackerNewsItem, idx: number): List.Item 
 			items: [
 				new Action.Action({
 					title: "Open",
-					icon: new Icon({ type: IconEnum.Iconify, value: "ion:open-outline" })
+					icon: new Icon({ type: IconEnum.Iconify, value: "ion:open-outline" }),
+					value: "open"
 				})
 			]
 		})
@@ -62,7 +63,7 @@ class HackerNews extends WorkerExtension {
 
 	onActionSelected(actionValue: string): Promise<void> {
 		switch (actionValue) {
-			case "Open":
+			case "open":
 				const target = this.items.find((item) => item.title === this.value)
 				if (target) {
 					if (target.url) {

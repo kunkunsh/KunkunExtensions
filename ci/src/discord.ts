@@ -1,16 +1,19 @@
 import { WebhookClient } from "discord.js"
 import { DISCORD_WEBHOOK_URL } from "./constant"
 
-const webhookClient = new WebhookClient({
-	url: DISCORD_WEBHOOK_URL
-})
-
 export function sendNewExtensionNotification(
 	name: string,
 	identifier: string,
 	version: string,
 	shortDescription: string
 ) {
+	if (!DISCORD_WEBHOOK_URL) {
+		console.log("Discord webhook URL is not set, skipping notification")
+		return
+	}
+	const webhookClient = new WebhookClient({
+		url: DISCORD_WEBHOOK_URL
+	})
 	webhookClient.send({
 		content: `New extension "${name}" v${version} is released!`,
 		embeds: [

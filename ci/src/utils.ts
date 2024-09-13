@@ -118,6 +118,12 @@ export function computeFileSha512(filePath: string): Promise<string> {
 	return computeFileHash(filePath, "sha512")
 }
 
+export function parseExtensionApiVersion(pkgJsonPath: string) {
+	const pkgJsonContent = JSON.parse(fs.readFileSync(pkgJsonPath, "utf8"))
+	const pkg = v.parse(v.object({ dependencies: v.record(v.string(), v.string()) }), pkgJsonContent)
+	return pkg.dependencies["@kksh/api"]
+}
+
 /**
  * Docker is used to build each individual extension for safety
  * Packages could potentially modify other extensions if they share environment.
@@ -134,10 +140,13 @@ export function buildWithDocker(extPath: string): Promise<{
 	stderrShasum: string
 	stderrTarballFilename: string
 	pkg: ExtPackageJson
+	apiVersion: string
 }> {
 	console.log(`Building ${extPath}`)
 	return new Promise((resolve, reject) => {
-		const pkg = parsePackageJson(join(extPath, "package.json"))
+		const pkgJsonPath = join(extPath, "package.json")
+		const pkg = parsePackageJson(pkgJsonPath)
+		const apiVersion = parseExtensionApiVersion(pkgJsonPath)
 		// get folder name of extPath
 		const extFolderName = path.basename(extPath)
 		const dockerCmd = `
@@ -191,7 +200,7 @@ export function buildWithDocker(extPath: string): Promise<{
 			if (code !== 0) {
 				return reject(`child process exited with code ${code}`)
 			} else {
-				return resolve({ stderrShasum, stderrTarballFilename, pkg })
+				return resolve({ stderrShasum, stderrTarballFilename, pkg, apiVersion })
 			}
 		})
 	})
@@ -203,6 +212,7 @@ export type BuildResult = {
 	tarballPath: string
 	extPath: string
 	pkg: ExtPackageJson
+	apiVersion: string
 }
 
 /**
@@ -233,7 +243,8 @@ export function buildWithDockerAndValidate(extPath: string): Promise<BuildResult
 					tarballFilename: res.stderrTarballFilename,
 					tarballPath: parsedTarballPath,
 					extPath: extPath,
-					pkg: res.pkg
+					pkg: res.pkg,
+					apiVersion: res.apiVersion
 				}
 			})
 		})

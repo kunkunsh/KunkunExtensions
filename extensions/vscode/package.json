@@ -20,10 +20,25 @@
                 ".+"
               ]
             }
+          },
+          {
+            "cmd": {
+              "program": "which",
+              "args": [
+                "[a-z0-9-_]+"
+              ]
+            }
+          },
+          {
+            "cmd": {
+              "program": "where",
+              "args": [
+                "[a-z0-9-_]+"
+              ]
+            }
           }
         ]
       },
-      "shell:execute",
       {
         "permission": "fs:read",
         "allow": [
@@ -61,7 +76,7 @@
     "build": "bun build.ts"
   },
   "dependencies": {
-    "@kksh/api": "0.0.9",
+    "@kksh/api": "0.0.12-beta.2",
     "valibot": "^0.40.0"
   },
   "devDependencies": {
