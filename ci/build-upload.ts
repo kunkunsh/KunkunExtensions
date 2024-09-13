@@ -133,7 +133,6 @@ for (const buildResult of buildResults) {
 					identifier: buildResult.pkg.kunkun.identifier,
 					readme: readme,
 					downloads: 0,
-					api_version: buildResult.apiVersion
 				}
 			])
 			.select()
@@ -193,7 +192,8 @@ for (const buildResult of buildResults) {
 			cmd_count: cmdCount,
 			identifier: buildResult.pkg.kunkun.identifier,
 			downloads: 0,
-			demo_images: demoImgsDBPaths
+			demo_images: demoImgsDBPaths,
+			api_version: buildResult.apiVersion
 		}
 	])
 	sendNewExtensionNotification(
