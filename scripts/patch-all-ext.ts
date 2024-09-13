@@ -15,5 +15,5 @@ for (const ext of fs.readdirSync(EXTENSIONS_DIR)) {
 	}
 	const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, "utf-8"))
 	pkgJson.version = inc(pkgJson.version, 'patch')
-	fs.writeFileSync(pkgJsonPath, JSON.stringify(pkgJson, null, "\t"))
+	fs.writeFileSync(pkgJsonPath, JSON.stringify(pkgJson, null, "\t") + "\n")
 }

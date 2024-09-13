@@ -1,51 +1,51 @@
 {
-  "$schema": "https://schema.kunkun.sh/",
-  "name": "ip-info",
-  "version": "0.0.6",
-  "module": "index.ts",
-  "type": "module",
-  "kunkun": {
-    "name": "IP Info",
-    "shortDescription": "Show your current IP Info and Search for IP Address",
-    "longDescription": "Will display you IP Address and more information about this IP address, including Geo Location, ASN, ISP. You can also search for a specific IP.",
-    "identifier": "ip-info",
-    "permissions": [
-      "clipboard:write-text",
-      "fetch:all"
-    ],
-    "demoImages": [
-      "./demo/ip-info.png"
-    ],
-    "icon": {
-      "type": "iconify",
-      "value": "mdi:ip-network"
-    },
-    "templateUiCmds": [
-      {
-        "name": "IP Info",
-        "main": "dist/index.js",
-        "description": "Display your current IP addres and detailed information. Search for other IP address.",
-        "cmds": []
-      }
-    ],
-    "customUiCmds": []
-  },
-  "scripts": {
-    "dev": "bun build.ts dev",
-    "build": "bun build.ts"
-  },
-  "files": [
-    "dist"
-  ],
-  "dependencies": {
-    "@kksh/api": "0.0.12-beta.2",
-    "valibot": "^0.40.0"
-  },
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
+	"$schema": "https://schema.kunkun.sh/",
+	"name": "ip-info",
+	"version": "0.0.7",
+	"module": "index.ts",
+	"type": "module",
+	"kunkun": {
+		"name": "IP Info",
+		"shortDescription": "Show your current IP Info and Search for IP Address",
+		"longDescription": "Will display you IP Address and more information about this IP address, including Geo Location, ASN, ISP. You can also search for a specific IP.",
+		"identifier": "ip-info",
+		"permissions": [
+			"clipboard:write-text",
+			"fetch:all"
+		],
+		"demoImages": [
+			"./demo/ip-info.png"
+		],
+		"icon": {
+			"type": "iconify",
+			"value": "mdi:ip-network"
+		},
+		"templateUiCmds": [
+			{
+				"name": "IP Info",
+				"main": "dist/index.js",
+				"description": "Display your current IP addres and detailed information. Search for other IP address.",
+				"cmds": []
+			}
+		],
+		"customUiCmds": []
+	},
+	"scripts": {
+		"dev": "bun build.ts dev",
+		"build": "bun build.ts"
+	},
+	"files": [
+		"dist"
+	],
+	"dependencies": {
+		"@kksh/api": "0.0.12-beta.2",
+		"valibot": "^0.40.0"
+	},
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
 }

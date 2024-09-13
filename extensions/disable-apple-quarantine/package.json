@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schema.kunkun.sh",
 	"name": "disable-apple-quarantine",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"type": "module",
 	"kunkun": {
 		"name": "Disable Apple Quarantine",

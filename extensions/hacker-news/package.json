@@ -1,58 +1,58 @@
 {
-  "$schema": "https://schema.kunkun.sh/",
-  "version": "0.0.5",
-  "name": "hacker-news",
-  "module": "index.ts",
-  "type": "module",
-  "kunkun": {
-    "name": "Hacker News",
-    "identifier": "hacker-news",
-    "shortDescription": "List latest top hacker news",
-    "icon": {
-      "type": "iconify",
-      "value": "fa:hacker-news"
-    },
-    "longDescription": "",
-    "demoImages": [],
-    "permissions": [
-      {
-        "permission": "open:url",
-        "allow": [
-          {
-            "url": "https://**"
-          },
-          {
-            "url": "http://**"
-          }
-        ]
-      }
-    ],
-    "templateUiCmds": [
-      {
-        "name": "Hacker News",
-        "main": "dist/index.js",
-        "description": "Read the latest Hacker News stories",
-        "cmds": []
-      }
-    ],
-    "customUiCmds": []
-  },
-  "scripts": {
-    "dev": "bun build.ts dev",
-    "build": "bun build.ts"
-  },
-  "dependencies": {
-    "@kksh/api": "0.0.12-beta.2",
-    "valibot": "^0.40.0"
-  },
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "files": [
-    "dist"
-  ],
-  "packageManager": "pnpm@9.9.0"
+	"$schema": "https://schema.kunkun.sh/",
+	"version": "0.0.6",
+	"name": "hacker-news",
+	"module": "index.ts",
+	"type": "module",
+	"kunkun": {
+		"name": "Hacker News",
+		"identifier": "hacker-news",
+		"shortDescription": "List latest top hacker news",
+		"icon": {
+			"type": "iconify",
+			"value": "fa:hacker-news"
+		},
+		"longDescription": "",
+		"demoImages": [],
+		"permissions": [
+			{
+				"permission": "open:url",
+				"allow": [
+					{
+						"url": "https://**"
+					},
+					{
+						"url": "http://**"
+					}
+				]
+			}
+		],
+		"templateUiCmds": [
+			{
+				"name": "Hacker News",
+				"main": "dist/index.js",
+				"description": "Read the latest Hacker News stories",
+				"cmds": []
+			}
+		],
+		"customUiCmds": []
+	},
+	"scripts": {
+		"dev": "bun build.ts dev",
+		"build": "bun build.ts"
+	},
+	"dependencies": {
+		"@kksh/api": "0.0.12-beta.2",
+		"valibot": "^0.40.0"
+	},
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"files": [
+		"dist"
+	],
+	"packageManager": "pnpm@9.9.0"
 }
