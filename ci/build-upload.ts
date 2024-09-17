@@ -128,6 +128,8 @@ for (const buildResult of buildResults) {
 			.insert([
 				{
 					name: buildResult.pkg.name,
+					version: buildResult.pkg.version,
+					api_version: buildResult.apiVersion,
 					short_description: buildResult.pkg.kunkun.shortDescription,
 					long_description: buildResult.pkg.kunkun.longDescription,
 					identifier: buildResult.pkg.kunkun.identifier,
@@ -158,6 +160,8 @@ for (const buildResult of buildResults) {
 		.from("extensions")
 		.update({
 			name: buildResult.pkg.kunkun.name,
+			version: buildResult.pkg.version,
+			api_version: buildResult.apiVersion,
 			short_description: buildResult.pkg.kunkun.shortDescription,
 			long_description: buildResult.pkg.kunkun.longDescription,
 			icon: iconClone,

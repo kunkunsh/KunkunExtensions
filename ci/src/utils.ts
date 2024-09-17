@@ -206,14 +206,16 @@ export function buildWithDocker(extPath: string): Promise<{
 	})
 }
 
-export type BuildResult = {
-	shasum: string
-	tarballFilename: string
-	tarballPath: string
-	extPath: string
-	pkg: ExtPackageJson
-	apiVersion: string
-}
+export const BuildResult = v.object({
+	shasum: v.string(),
+	tarballFilename: v.string(),
+	tarballPath: v.string(),
+	extPath: v.string(),
+	pkg: ExtPackageJson,
+	apiVersion: v.string()
+})
+
+export type BuildResult = v.InferOutput<typeof BuildResult>
 
 /**
  * Use this function to build an extension with docker and validate the tarball
@@ -238,14 +240,14 @@ export function buildWithDockerAndValidate(extPath: string): Promise<BuildResult
 				} else {
 					console.log("Shasum matches")
 				}
-				return {
+				return v.parse(BuildResult, {
 					shasum: computedShasum,
 					tarballFilename: res.stderrTarballFilename,
 					tarballPath: parsedTarballPath,
 					extPath: extPath,
 					pkg: res.pkg,
 					apiVersion: res.apiVersion
-				}
+				})
 			})
 		})
 		.catch((err) => {
