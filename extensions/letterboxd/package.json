@@ -1,0 +1,53 @@
+{
+  "$schema": "https://schema.kunkun.sh",
+  "name": "letterboxd",
+  "version": "0.0.2",
+  "type": "module",
+  "kunkun": {
+    "name": "Letterboxd",
+    "shortDescription": "Letterboxd Integration for Kunkun",
+    "longDescription": "Search for movies on Letterboxd, add it to your watchlist, and more.",
+    "identifier": "letterboxd",
+    "permissions": [
+      "fetch:all",
+      {
+        "permission": "open:url",
+        "allow": [
+          {
+            "url": "https://letterboxd.com/**"
+          }
+        ]
+      }
+    ],
+    "demoImages": [],
+    "icon": {
+      "type": "iconify",
+      "value": "simple-icons:letterboxd"
+    },
+    "customUiCmds": [],
+    "templateUiCmds": [
+      {
+        "name": "Letterboxd",
+        "main": "dist/index.js",
+        "cmds": []
+      }
+    ]
+  },
+  "scripts": {
+    "dev": "bun build.ts dev",
+    "build": "bun build.ts"
+  },
+  "dependencies": {
+    "@kksh/api": "0.0.12-beta.2"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "./dist",
+    ".gitignore"
+  ]
+}
