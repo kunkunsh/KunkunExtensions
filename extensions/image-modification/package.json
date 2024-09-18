@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.kunkun.sh",
   "name": "image-modification",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "type": "module",
   "kunkun": {
     "name": "Image Modification",

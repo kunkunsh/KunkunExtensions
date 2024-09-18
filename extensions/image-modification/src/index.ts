@@ -31,11 +31,6 @@ class ConvertImage extends WorkerExtension {
 		)
 	}
 
-	// async onEnterPressedOnSearchBar(): Promise<void> {
-	// 	console.log(thi)
-
-	// }
-
 	async onSearchTermChange(term: string): Promise<void> {}
 
 	async onListItemSelected(value: string): Promise<void> {
