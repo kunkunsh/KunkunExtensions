@@ -122,15 +122,8 @@ class ExtensionTemplate extends WorkerExtension {
 	}
 
 	async onEnterPressedOnSearchBar(): Promise<void> {
-		const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(this.searchTerm)}&include_adult=false&language=en-US&page=1`;
-		const options = {
-		method: 'GET',
-		headers: {
-			accept: 'application/json',
-			Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMDA3MWRhNzJmZDYxNmJhODFkZDBhMWYxZDdiNjk5YSIsIm5iZiI6MTcyNTc0MDQwOS4wOTg1NjcsInN1YiI6IjVlZjY2NGNlMTNhZjVmMDAzNDUzNzg1YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fntcyR0fqs6lDfOTC27ZLMqlKL7b2rerJEV10IIet6c'
-		}
-		};
-		const searchData = await (await fetch(url, options)).json();
+		const url = `https://tmdb-kunkun.jackyklai.workers.dev/?search=${encodeURIComponent(this.searchTerm)}`;
+		const searchData = await (await fetch(url)).json();
 		let actions = convertActions(generalActions)
 		if (this.currentLetterboxdUsername) {
 			actions = actions.concat(convertActions(friendsActions))
