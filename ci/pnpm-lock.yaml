@@ -12,8 +12,8 @@ importers:
         specifier: ^3.583.0
         version: 3.637.0
       '@kksh/api':
-        specifier: 0.0.12-beta.2
-        version: 0.0.12-beta.2(tslib@2.7.0)(typescript@5.5.4)
+        specifier: 0.0.12-beta.5
+        version: 0.0.12-beta.5(tslib@2.7.0)(typescript@5.5.4)
       '@supabase/supabase-js':
         specifier: ^2.43.4
         version: 2.45.2
@@ -361,8 +361,8 @@ packages:
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
     engines: {node: '>=18.0.0'}
 
-  '@kksh/api@0.0.12-beta.2':
-    resolution: {integrity: sha512-091un+rKWiCqvVDrBqCMVB9uBnTW9/r3SiqAGk9b9a3DXF8wwtCGtlcuUEb4EL/zo1H/+MJWyOItVfJBfq0sGw==}
+  '@kksh/api@0.0.12-beta.5':
+    resolution: {integrity: sha512-W2749UExjFlRYiWVrqUsdg8r9UUHKdCu9WEiEltjCnsnIL7r88x3vsm40JZ36q/o9pg6qCOHYwy/Mn/MdATGug==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2062,7 +2062,7 @@ snapshots:
     dependencies:
       minipass: 7.1.2
 
-  '@kksh/api@0.0.12-beta.2(tslib@2.7.0)(typescript@5.5.4)':
+  '@kksh/api@0.0.12-beta.5(tslib@2.7.0)(typescript@5.5.4)':
     dependencies:
       '@huakunshen/comlink': 4.4.1
       '@rollup/plugin-typescript': 11.1.6(rollup@4.21.0)(tslib@2.7.0)(typescript@5.5.4)
@@ -2081,6 +2081,7 @@ snapshots:
       lodash: 4.17.21
       minimatch: 10.0.1
       rollup: 4.21.0
+      semver: 7.6.3
       tauri-api-adapter: 0.3.8(tslib@2.7.0)(typescript@5.5.4)
       tauri-plugin-network-api: 2.0.3(typescript@5.5.4)
       tauri-plugin-shellx-api: 2.0.10
