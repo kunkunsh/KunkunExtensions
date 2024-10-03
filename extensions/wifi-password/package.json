@@ -1,0 +1,74 @@
+{
+	"$schema": "https://schema.kunkun.sh",
+	"name": "wifi-password",
+	"version": "0.0.1",
+	"type": "module",
+	"kunkun": {
+		"name": "Wifi Password",
+		"shortDescription": "Show Wifi Password",
+		"longDescription": "Show Wifi Password",
+		"identifier": "wifi-password",
+		"permissions": [
+			"clipboard:write-text",
+			{
+				"permission": "shell:execute",
+				"allow": [
+					{
+						"cmd": {
+							"program": "networksetup",
+							"args": [
+								"-listpreferredwirelessnetworks",
+								"en0"
+							]
+						}
+					},
+					{
+						"cmd": {
+							"program": "security",
+							"args": [
+								"find-generic-password",
+								"-D",
+								"AirPort network password",
+								"-a",
+								".+",
+								"-w"
+							]
+						}
+					}
+				]
+			}
+		],
+		"demoImages": [],
+		"icon": {
+			"type": "iconify",
+			"value": "material-symbols:extension"
+		},
+		"customUiCmds": [],
+		"templateUiCmds": [
+			{
+				"name": "Show Wifi Password",
+				"main": "dist/index.js",
+				"cmds": []
+			}
+		]
+	},
+	"scripts": {
+		"dev": "bun build.ts dev",
+		"build": "bun build.ts"
+	},
+	"dependencies": {
+		"@kksh/api": "0.0.12-beta.5",
+		"qrcode": "^1.5.4"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"@types/qrcode": "^1.5.5"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"files": [
+		"./dist",
+		".gitignore"
+	]
+}
