@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@kksh/api':
-        specifier: 0.0.12-beta.2
-        version: 0.0.12-beta.2(tslib@2.7.0)(typescript@5.5.4)
+        specifier: 0.0.12-beta.5
+        version: 0.0.12-beta.5(tslib@2.7.0)(typescript@5.5.4)
       '@kksh/vue':
         specifier: 0.1.4
         version: 0.1.4(@popperjs/core@2.11.8)(@vue/devtools-api@6.6.3)(tailwindcss@3.4.10)(vue@3.4.38(typescript@5.5.4))
@@ -329,8 +329,8 @@ packages:
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
 
-  '@kksh/api@0.0.12-beta.2':
-    resolution: {integrity: sha512-091un+rKWiCqvVDrBqCMVB9uBnTW9/r3SiqAGk9b9a3DXF8wwtCGtlcuUEb4EL/zo1H/+MJWyOItVfJBfq0sGw==}
+  '@kksh/api@0.0.12-beta.5':
+    resolution: {integrity: sha512-W2749UExjFlRYiWVrqUsdg8r9UUHKdCu9WEiEltjCnsnIL7r88x3vsm40JZ36q/o9pg6qCOHYwy/Mn/MdATGug==}
 
   '@kksh/vue@0.1.4':
     resolution: {integrity: sha512-1HVAItjSlckqpYmmN4pQRMDA+mIPmWoE2NsUn1nxMJgtb0Pu3cyplZ1YoL0UzrPO5Mj07e+uHOb+zd7JHYezyA==}
@@ -2245,7 +2245,7 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@kksh/api@0.0.12-beta.2(tslib@2.7.0)(typescript@5.5.4)':
+  '@kksh/api@0.0.12-beta.5(tslib@2.7.0)(typescript@5.5.4)':
     dependencies:
       '@huakunshen/comlink': 4.4.1
       '@rollup/plugin-typescript': 11.1.6(rollup@4.21.0)(tslib@2.7.0)(typescript@5.5.4)
@@ -2264,6 +2264,7 @@ snapshots:
       lodash: 4.17.21
       minimatch: 10.0.1
       rollup: 4.21.0
+      semver: 7.6.3
       tauri-api-adapter: 0.3.8(tslib@2.7.0)(typescript@5.5.4)
       tauri-plugin-network-api: 2.0.3(typescript@5.5.4)
       tauri-plugin-shellx-api: 2.0.10

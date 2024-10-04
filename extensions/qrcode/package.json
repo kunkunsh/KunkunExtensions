@@ -62,7 +62,7 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
-		"@kksh/api": "0.0.12-beta.2",
+		"@kksh/api": "0.0.12-beta.5",
 		"@kksh/svelte": "0.1.4",
 		"clsx": "^2.1.1",
 		"easyqrcodejs": "^4.6.1",

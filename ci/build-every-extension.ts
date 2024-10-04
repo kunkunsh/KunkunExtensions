@@ -12,6 +12,11 @@ for (const dir of fs.readdirSync(ExtensionsDir)) {
 	// skip if not a directory
 	if (!fs.statSync(extPath).isDirectory()) continue
 	// verfiy extension with latest @kksh/cli
+	console.log(`Building ${extPath}`)
+	if (!fs.existsSync(path.join(extPath, "package.json"))) {
+		console.log(`Skipping ${extPath} because it's not a valid extension`)
+		continue
+	}
 	await $`npx @kksh/cli@latest verify ${extPath}`
 	await $`pnpm install`.cwd(extPath)
 	await $`pnpm build`.cwd(extPath)

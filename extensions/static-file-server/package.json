@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schema.kunkun.sh",
+  "name": "static-file-server",
+  "version": "0.0.2",
+  "type": "module",
+  "kunkun": {
+    "name": "TODO: Extension Display Name",
+    "shortDescription": "A Worker Extension Template",
+    "longDescription": "A Worker Extension Template",
+    "identifier": "static-file-server",
+    "permissions": [
+      "fetch:all",
+      "clipboard:read-all"
+    ],
+    "demoImages": [],
+    "icon": {
+      "type": "iconify",
+      "value": "material-symbols:extension"
+    },
+    "customUiCmds": [],
+    "templateUiCmds": [
+      {
+        "name": "Static File Server",
+        "main": "dist/index.js",
+        "cmds": []
+      }
+    ]
+  },
+  "scripts": {
+    "dev": "bun build.ts dev",
+    "build": "bun build.ts"
+  },
+  "dependencies": {
+    "@kksh/api": "0.0.12-beta.4"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "./dist",
+    ".gitignore"
+  ]
+}

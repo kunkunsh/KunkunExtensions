@@ -12,8 +12,8 @@ importers:
         specifier: 0.0.12-beta.4
         version: 0.0.12-beta.4(tslib@2.7.0)(typescript@5.6.2)
       '@kksh/svelte':
-        specifier: 0.1.4
-        version: 0.1.4(@sveltejs/kit@2.6.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8))(svelte@4.2.19)(vite@5.4.8))(@types/json-schema@7.0.15)(svelte@4.2.19)(tailwindcss@3.4.13)
+        specifier: 0.1.5
+        version: 0.1.5(@sveltejs/kit@2.6.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8))(svelte@4.2.19)(vite@5.4.8))(@types/json-schema@7.0.15)(svelte@4.2.19)(tailwindcss@3.4.13)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -413,8 +413,8 @@ packages:
   '@kksh/api@0.0.12-beta.4':
     resolution: {integrity: sha512-khhOqYOxDxNigBBsup6DUPYDsh8uKyvU7MTrQGy5gMBZtCmjnyfhJt4e1UdZBj/HHoRiScgdvt5FmxWQmn3dBg==}
 
-  '@kksh/svelte@0.1.4':
-    resolution: {integrity: sha512-JX1oIYGkNdr9sxRp7mavVuVKRV6AHsrBou7LXcx+cTTxXlf1RVN1+DQKT80cph4RXyktN87SRB8XWHZy3Zef7w==}
+  '@kksh/svelte@0.1.5':
+    resolution: {integrity: sha512-TQ/EeiSzcYkD5psRi6fY4wpV2W2JOp+Cpklu/lZYqN7NJpvIvp9ZVtIPqWGE1S2u7hoWHCr/a7Lv6shlKTQs3g==}
     peerDependencies:
       svelte: ^4.0.0
 
@@ -1955,7 +1955,7 @@ snapshots:
       - tslib
       - typescript
 
-  '@kksh/svelte@0.1.4(@sveltejs/kit@2.6.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8))(svelte@4.2.19)(vite@5.4.8))(@types/json-schema@7.0.15)(svelte@4.2.19)(tailwindcss@3.4.13)':
+  '@kksh/svelte@0.1.5(@sveltejs/kit@2.6.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8))(svelte@4.2.19)(vite@5.4.8))(@types/json-schema@7.0.15)(svelte@4.2.19)(tailwindcss@3.4.13)':
     dependencies:
       '@internationalized/date': 3.5.6
       bits-ui: 0.21.16(svelte@4.2.19)
