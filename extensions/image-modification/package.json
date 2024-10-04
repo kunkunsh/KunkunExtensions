@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schema.kunkun.sh",
+  "name": "image-modification",
+  "version": "0.0.1",
+  "type": "module",
+  "kunkun": {
+    "name": "Image Modification",
+    "shortDescription": "Image Modification",
+    "longDescription": "Image Modification",
+    "identifier": "image-modification",
+    "permissions": [
+      {
+        "permission": "shell:deno:spawn",
+        "allow": [
+          {
+            "path": "$EXTENSION/src/convert.ts",
+            "ffi": "*",
+            "read": "*"
+          }
+        ]
+      },
+      "shell:stdin-write",
+      "system:fs",
+      {
+        "permission": "shell:deno:execute",
+        "allow": [
+          {
+            "path": "$EXTENSION/src/convert.ts"
+          }
+        ]
+      }
+    ],
+    "demoImages": [],
+    "icon": {
+      "type": "iconify",
+      "value": "ph:image-bold"
+    },
+    "customUiCmds": [],
+    "templateUiCmds": [
+      {
+        "name": "Convert Image Format",
+        "main": "dist/index.js",
+        "cmds": []
+      }
+    ]
+  },
+  "scripts": {
+    "dev": "bun build.ts dev",
+    "build": "bun build.ts"
+  },
+  "dependencies": {
+    "@kksh/api": "0.0.12-beta.5"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "./src",
+    "./dist",
+    ".gitignore"
+  ],
+  "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c"
+}
