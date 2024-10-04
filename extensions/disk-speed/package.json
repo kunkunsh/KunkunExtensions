@@ -54,6 +54,7 @@
 	},
 	"files": [
 		"dist",
-		".gitignore"
+		".gitignore",
+		"deno-scripts"
 	]
 }
