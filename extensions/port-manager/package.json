@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schema.kunkun.sh",
+  "name": "port-manager",
+  "version": "0.0.1",
+  "type": "module",
+  "kunkun": {
+    "name": "Port Manager",
+    "shortDescription": "Manage ports on your machine",
+    "longDescription": "Manage ports on your machine. You can easily find out which process is using a port, and kill it.",
+    "identifier": "port-manager",
+    "permissions": [
+      "fetch:all",
+      "clipboard:read-all"
+    ],
+    "demoImages": [],
+    "icon": {
+      "type": "iconify",
+      "value": "lucide:ethernet-port"
+    },
+    "customUiCmds": [],
+    "templateUiCmds": [
+      {
+        "name": "Open Ports",
+        "main": "dist/index.js",
+        "cmds": []
+      }
+    ]
+  },
+  "scripts": {
+    "dev": "bun build.ts dev",
+    "build": "bun build.ts"
+  },
+  "dependencies": {
+    "@kksh/api": "0.0.12-beta.5"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "./dist",
+    ".gitignore"
+  ]
+}

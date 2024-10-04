@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"@kksh/api": "0.0.12-beta.2",
-		"@kksh/vue": "0.1.2",
+		"@kksh/vue": "0.1.5",
 		"@radix-icons/vue": "^1.0.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
