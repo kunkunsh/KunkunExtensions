@@ -89,7 +89,7 @@ class ExtensionTemplate extends WorkerExtension {
 	async onFormSubmit(value: Record<string, any>): Promise<void> {
 		await setLetterboxdUsername(value['clear-username'] ? '' : value.username)
 		this.currentLetterboxdUsername = value.username
-		toast.success("Letterboxd username " + value['clear-username'] ? 'removed.' : `set to: ${value.username}`)
+		toast.success(`Letterboxd username ${value['clear-username'] ? 'removed.' : "set to: " + value.username}`)
 		this.load()
 	}
 	async load() {
@@ -101,7 +101,7 @@ class ExtensionTemplate extends WorkerExtension {
 				items: [
 				new List.Item({
 					title: 'Search for a movie',
-					subTitle: 'Type the name of the movie you want to search for in the search bar above',
+					subTitle: 'Type the a movie name in the search bar above and press enter to search.',
 					icon: new Icon({
 						type: IconEnum.Iconify,
 						value: 'mdi:movie-search'
@@ -138,9 +138,13 @@ class ExtensionTemplate extends WorkerExtension {
 					if (movie.release_date && movie.release_date.includes('-')) {
 						movieTitle += ` (${movie.release_date.split('-')[0]})`
 					}
+					let subTitle: string = movie.overview
+					if (movie.overview.length + movieTitle.length > 100) {
+						subTitle = subTitle.substring(0, 100 - movieTitle.length).trim() + "..."
+					}
 					return new List.Item({
 						title: movieTitle,
-						subTitle: movie.overview.substring(0, 100 - movie.title.length) + "...",
+						subTitle: subTitle,
 						icon: movie.poster_path ? new Icon({
 							type: IconEnum.RemoteUrl,
 							value: `https://image.tmdb.org/t/p/w500${movie.poster_path}`
