@@ -1,3 +1,17 @@
+import { parseArgs } from "jsr:@std/cli/parse-args"
+import { DiskSpeedTestInput, DiskSpeedTestOutput } from "../src/model.ts"
+
+const args = parseArgs(Deno.args)
+
+if (args._.length !== 1) {
+	console.error("Missing Arguments")
+	Deno.exit(1)
+}
+const encodedArgs = args._[0]
+const base64Decoded = atob(encodedArgs as string)
+
+const decodedJsonArgs: DiskSpeedTestInput = JSON.parse(base64Decoded)
+
 // Pre-fill file with zeros to a given size (in MB)
 async function initializeFile(filePath: string, sizeInMB: number) {
 	const file = await Deno.open(filePath, { write: true, create: true })
@@ -9,8 +23,8 @@ async function initializeFile(filePath: string, sizeInMB: number) {
 	}
 
 	file.close()
-	const duration = (performance.now() - start) / 1000
-	console.log(`File Initialization: ${sizeInMB}MB took ${duration.toFixed(3)} seconds`)
+	return (performance.now() - start) / 1000
+	// console.log(`File Initialization: ${sizeInMB}MB took ${duration.toFixed(3)} seconds`)
 }
 
 // Random Write
@@ -30,13 +44,15 @@ async function randomWrite(filePath: string, iterations: number, blockSize: numb
 
 	file.close()
 	const duration = (performance.now() - start) / 1000
-	const speed = totalDataMB / duration // Speed in MB/s
-	console.log(
-		`Random Write: ${iterations} iterations (${totalDataMB.toFixed(
-			3
-		)}MB) took ${duration.toFixed(3)} seconds`
-	)
-	console.log(`Write Speed: ${speed.toFixed(3)} MB/s`)
+	return totalDataMB / duration
+
+	// const speed = totalDataMB / duration // Speed in MB/s
+	// console.log(
+	// 	`Random Write: ${iterations} iterations (${totalDataMB.toFixed(
+	// 		3
+	// 	)}MB) took ${duration.toFixed(3)} seconds`
+	// )
+	// console.log(`Write Speed: ${speed.toFixed(3)} MB/s`)
 }
 
 // Random Read
@@ -56,17 +72,26 @@ async function randomRead(filePath: string, iterations: number, blockSize: numbe
 	file.close()
 	const duration = (performance.now() - start) / 1000
 	const speed = totalDataMB / duration
-	console.log(
-		`Random Read: ${iterations} iterations (${totalDataMB.toFixed(
-			3
-		)}MB) took ${duration.toFixed(3)} seconds`
-	)
-	console.log(`Read Speed: ${speed.toFixed(3)} MB/s`)
+	return speed
+	// console.log(
+	// 	`Random Read: ${iterations} iterations (${totalDataMB.toFixed(
+	// 		3
+	// 	)}MB) took ${duration.toFixed(3)} seconds`
+	// )
+	// console.log(`Read Speed: ${speed.toFixed(3)} MB/s`)
 }
 
 // Example Usage
 await initializeFile("./testfile.dat", 1000) // Pre-fill the file with 100MB of data
-await randomWrite("./testfile.dat", 10000, 4096) // Perform 1000 random writes (4KB blocks)
-await randomRead("./testfile.dat", 10000, 4096) // Perform 1000 random reads (4KB blocks)
+const writeSpeed = await randomWrite("./testfile.dat", 10000, 4096) // Perform 1000 random writes (4KB blocks)
+const readSpeed = await randomRead("./testfile.dat", 10000, 4096) // Perform 1000 random reads (4KB blocks)
+
+const output: DiskSpeedTestOutput = {
+	writeSpeedMBps: writeSpeed,
+	readSpeedMBps: readSpeed
+}
+
+console.log(JSON.stringify(output))
+
 // remove the file
 await Deno.remove("./testfile.dat")

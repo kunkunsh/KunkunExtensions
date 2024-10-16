@@ -1,3 +1,17 @@
+import { parseArgs } from "jsr:@std/cli/parse-args"
+import { DiskSpeedTestInput, DiskSpeedTestOutput } from "../src/model.ts"
+
+const args = parseArgs(Deno.args)
+
+if (args._.length !== 1) {
+	console.error("Missing Arguments")
+	Deno.exit(1)
+}
+const encodedArgs = args._[0]
+const base64Decoded = atob(encodedArgs as string)
+
+const decodedJsonArgs: DiskSpeedTestInput = JSON.parse(base64Decoded)
+
 // Sequential Write
 async function sequentialWrite(filePath: string, sizeInMB: number) {
 	const file = await Deno.open(filePath, { write: true, create: true })
@@ -11,8 +25,7 @@ async function sequentialWrite(filePath: string, sizeInMB: number) {
 	}
 
 	file.close()
-	const duration = (performance.now() - start) / 1000
-	console.log(`Sequential Write: ${sizeInMB}MB took ${duration.toFixed(3)} seconds`)
+	return (performance.now() - start) / 1000
 }
 
 // Sequential Read
@@ -24,12 +37,19 @@ async function sequentialRead(filePath: string) {
 	while ((await file.read(buffer)) !== null) {}
 
 	file.close()
-	const duration = (performance.now() - start) / 1000
-	console.log(`Sequential Read took ${duration.toFixed(3)} seconds`)
+	return (performance.now() - start) / 1000
 }
 
 // Example Usage
-await sequentialWrite("./testfile.dat", 5000) // Write 100MB sequentially
-await sequentialRead("./testfile.dat") // Read the same 100MB file sequentially
+const writeDuration = await sequentialWrite(
+	decodedJsonArgs.targetPath,
+	decodedJsonArgs.sequential.stressFileSizeMB
+) // Write 100MB sequentially
+const readDuration = await sequentialRead(decodedJsonArgs.targetPath) // Read the same 100MB file sequentially
 // remove the file
-await Deno.remove("./testfile.dat")
+await Deno.remove(decodedJsonArgs.targetPath)
+const result: DiskSpeedTestOutput = {
+	writeSpeedMBps: decodedJsonArgs.sequential.stressFileSizeMB / writeDuration,
+	readSpeedMBps: decodedJsonArgs.sequential.stressFileSizeMB / readDuration
+}
+console.log(JSON.stringify(result))
