@@ -2,5 +2,6 @@
 FROM node:22.5.1-bullseye-slim
 RUN corepack enable pnpm
 # install bun and deno
-RUN curl -fsSL https://bun.sh/install | bash -s "bun-v1.1.30"
+RUN apt update && apt install curl unzip -y
+RUN curl -fsSL https://bun.sh/install | bash
 RUN curl -fsSL https://deno.land/install.sh | sh
